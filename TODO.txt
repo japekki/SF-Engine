@@ -1,0 +1,8 @@
+- Don't link GL libraries when compiled for cpu renderer only
+- Optimize EXE for size, don't link excessive stuff statically
+- Make library (sfengine.dll / libsfengine.so)
+- Makefile
+- Source from Finnish into English
+- Bezier
+- When paused, don't run mainloop but sleep until event (0% cpu usage while paused)
+- Include all needed headers in all files
