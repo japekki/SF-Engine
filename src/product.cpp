@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has demo/game specific routines.
+*/
+
 #include <math.h>
 
 #include "product.hpp"
@@ -9,13 +15,8 @@
 #include "graph.hpp"
 #include "timeline.hpp"
 
-#include "effux_archive.hpp"
-
-
-
 // Include some old archived demo routines:
-	#include "demo_collection.hpp"
-
+	#include "effux_archive.hpp"
 
 	// Variables from the engine we want direct access from our demo code:
 		Timeline timeline;
@@ -106,7 +107,7 @@ bool demo_init() {
 		}
 		*/
 
-	if (!sound.load_trackersong(FILENAME_TRACKERSONG)) with_sound = false;
+	//if (!sound.load_trackersong(FILENAME_TRACKERSONG)) with_sound = false;
 	//if (demo_restarts) FMUSIC_SetLooping(tracker_song, FSOUND_LOOP_OFF);
 
 	return result;

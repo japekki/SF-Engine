@@ -6,6 +6,8 @@
 
 	using namespace std;
 
+	// TODO: Check what is already done in standard library
+
 	vector<string> split(string string_, char delimiter);
 	string lowercase(string arg);
 	string uppercase(string arg);

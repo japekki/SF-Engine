@@ -2,11 +2,10 @@
 	#define ENTITY_HPP
 
 	#include <vector>
+	#include <string>
 	#include "graph.hpp"
 	#include "graph3d.hpp"
 	#include "options.hpp"
-
-	#include <string>
 
 	using namespace std;
 
@@ -77,10 +76,8 @@
 			bool disconnectfromentity(Entity Entiteetti);
 			void react(Entity entiteetti);
 
-		// TODO:
-		//  Joku dna/konekieli/joku mika maarittelee entiteetin kayttaytymisen
 			void effux_sine(Uint32 time);
-		#ifdef DEBUGMSG
+		#ifdef WITH_DEBUG
 			void printvertexarray();
 		#endif
 

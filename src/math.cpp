@@ -1,4 +1,9 @@
-//#include "vakiot.hpp"
+/*
+	SF-Engine
+
+	This file has mathematical routines.
+*/
+
 //#include "options.hpp"
 #include "math.hpp"
 #include <math.h>
@@ -8,7 +13,7 @@
 // - Ympyröiden leikkauspisteet
 // - Ympyrän ja suoran leikkauspisteet
 // - Onko piste ympyrän sisällä
-// - Onko piste suoralla/janalla
+// - Onko piste suoralla/linesegmentlla
 // - Vektorien yhteenlasku, pistetulo yms.
 
 /*
@@ -76,17 +81,17 @@ bool Suora::leikkaa(Point Piste) {
 bool Suora::leikkaa(Suora Suora) {
 }
 
-bool Suora::leikkaa(Jana Jana) {
+bool Suora::leikkaa(Linesegment Linesegment) {
 }
 
 bool Suora::leikkaa(Ball Ball) {
 }
 */
 
-Jana::Jana() {
+Linesegment::Linesegment() {
 }
 /*
-bool Jana::leikkaa(Point Piste) {
+bool Linesegment::leikkaa(Point Piste) {
 }
 */
 float circle_area(float radius) {
@@ -107,7 +112,7 @@ float ball_volume(float radius) {
 	return (4 * PI * radius*radius*radius) / 3;
 }
 
-float kulmakerroin(point2d a, point2d b) {
+float slope(point2d a, point2d b) {
 	// Kuinka paljon Y muuttuu, kun X muuttuu yhdellä
 	// K = delta_y / delta_x
 	return (b.y - a.y) / (b.x - a.x);   // Ei huomioi Z-koordinaatteja

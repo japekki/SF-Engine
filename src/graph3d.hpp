@@ -2,54 +2,54 @@
 	#define GRAPH3D_HPP
 
 	#include <vector>
-	//#include "options.hpp"
 	#include <SDL/SDL.h>
 	#include "graph.hpp"
+	//#include "options.hpp"
 
-struct pixel3d {
-	float r, g, b;
-	Uint32 color;
-};
-
-class Pixel3d {
-	public:
+	struct pixel3d {
 		float r, g, b;
 		Uint32 color;
-		float x, y, z, a;
-		Pixel3d();
-		void setcolor(Uint32 color);
-		void setcolor(float r, float g, float b);
-		Uint32 getcolor(SDL_Surface *sdlsurface);
-		//float getcolor();
-};
+	};
 
-struct vertex3d_struct {
-	float x, y, z;
-	float r, g, b;
-	Uint32 color;
-};
-
-/*    #ifdef WITH_OPENGL
-		class Vertex3d {
+	class Pixel3d {
 		public:
-			GLfloat x,y,z;
-			GLfloat r,g,b;
-			Vertex3d();
-		};
-*/
-		class Vertex3d {
+			float r, g, b;
+			Uint32 color;
+			float x, y, z, a;
+			Pixel3d();
+			void setcolor(Uint32 color);
+			void setcolor(float r, float g, float b);
+			Uint32 getcolor(SDL_Surface *sdlsurface);
+			//float getcolor();
+	};
+
+	struct vertex3d_struct {
+		float x, y, z;
+		float r, g, b;
+		Uint32 color;
+	};
+
+	/*    #ifdef WITH_OPENGL
+			class Vertex3d {
+			public:
+				GLfloat x,y,z;
+				GLfloat r,g,b;
+				Vertex3d();
+			};
+	*/
+	class Vertex3d {
 		public:
 			float x,y,z;
 			float r,g,b;
 			Vertex3d();
 			Uint32 colorint(SDL_Surface *sdlsurface);
-		};
+	};
 
 
-//    struct triangle3d {
-//        Pixel3d a, b, c;
-//        Uint32 color;
-//    };
+	//    struct triangle3d {
+	//        Pixel3d a, b, c;
+	//        Uint32 color;
+	//    };
 
 	struct boundingbox  {
 	// TODO: Class, avaruuslävistäjä, ...
@@ -59,11 +59,11 @@ struct vertex3d_struct {
 
 	class Zbuf {
 		public:
-		std::vector<float> z;
-		Zbuf();
-		Zbuf(Uint16 size_x, Uint16 size_y);
-		void resize(Uint32 newsize);
-		void reset();
+			std::vector<float> z;
+			Zbuf();
+			Zbuf(Uint16 size_x, Uint16 size_y);
+			void resize(Uint32 newsize);
+			void reset();
 	};
 
 	class Triangle3d {

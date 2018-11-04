@@ -10,7 +10,6 @@
 	#include <vector>
 	#include <string>
 
-
 	// INCLUDE FMOD:
 	#if defined(WIN32) || defined(__WATCOMC__)
 		#include <windows.h>
@@ -29,7 +28,6 @@
 			FMUSIC_MODULE *tracker_song;
 			std::vector<int> channels;
 		public:
-			//bool with_sound;
 			Sound();
 			~Sound();
 			bool init();

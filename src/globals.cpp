@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has global variables and routines to calculate them, generate lookup tables etc.
+*/
+
 #include <vector>
 #include <SDL/SDL.h>
 #include <math.h>

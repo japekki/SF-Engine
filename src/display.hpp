@@ -1,12 +1,12 @@
 #ifndef DISPLAY_HPP
 	#define DISPLAY_HPP
 
-	#include "graph3d.hpp"
 	#include <SDL/SDL.h>
+	#include "graph3d.hpp"
 
 	// TODO:
 	// - Support for multiple displays (like, demo running on big screen and settings panel on monitor)
-	// - Polar coordinate system (angle and distance)
+	// - Polar coordinate system (angle and radius)
 
 	class Display {
 		private:
@@ -26,7 +26,7 @@
 			Uint8 fps_max;
 			Uint8 bpp;  // Bits per pixel: 8, 16, 24, 32
 			bool fullscreen;
-			SDL_Surface *sdlsurface;  // turha jos sama ku screen?
+			SDL_Surface *sdlsurface;
 			Zbuf z_buf;
 			Uint32 clearcolor;
 			bool centered;

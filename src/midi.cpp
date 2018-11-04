@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for MIDI devices.
+*/
+
 #include "midi.hpp"
 
 
@@ -18,7 +24,7 @@
 			while (1)
 			{
 				read(seqfd, &inpacket, sizeof(inpacket));
-				//#ifdef DEBUGMSG
+				//#ifdef WITH_DEBUG
 					// print the MIDI byte if this input packet contains one
 					if (inpacket[0] == SEQ_MIDIPUTC) {
 						printf("MIDI: received byte: %d\n", inpacket[1]);

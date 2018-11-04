@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for 2D graphics.
+*/
+
 #include "options.hpp"
 #include "math.hpp"
 #include "graph.hpp"

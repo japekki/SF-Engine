@@ -49,7 +49,6 @@
 			void stop();  // Pause?
 			int time_until_next_action();
 			//Action[] get_actions_between(int time_from, int time_to)
-			//
 	};
 
 #endif // TIMELINE_HPP

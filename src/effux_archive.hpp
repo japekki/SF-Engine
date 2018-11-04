@@ -1,5 +1,5 @@
-#ifndef EFFUX_HPP
-	#define EFFUX_HPP
+#ifndef EFFUX_ARCHIVE_HPP
+	#define EFFUX_ARCHIVE_HPP
 
 	#include <SDL/SDL.h>
 
@@ -44,4 +44,4 @@
 				void draw(Uint32 time, bool both, SDL_Surface *sdlsurface);
 		};
 
-#endif // EFFUX_HPP
+#endif // EFFUX_ARCHIVE_HPP

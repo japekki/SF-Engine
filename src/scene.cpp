@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for making different scenes.
+*/
+
 #include "scene.hpp"
 
 Camera::Camera() {

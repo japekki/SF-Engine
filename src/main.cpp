@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This is the main file where the program starts.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream>

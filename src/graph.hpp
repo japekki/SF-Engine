@@ -29,18 +29,18 @@
 
 	class Sprite {
 		public:
-		Sprite();
-		// Opengl:
-			//std::vector<char> pixeldata:
-			//draw(int x, int y);
+			Sprite();
+			// Opengl:
+				//std::vector<char> pixeldata:
+				//draw(int x, int y);
 
-			SDL_Surface *sdlsurface;
-			Sprite(SDL_Surface *sdlsurface);
-			//draw(int x, int y);   // for to global default or something
-			void draw(int x, int y, SDL_Surface *sdlsurface_);
-			void draw(int x, int y, Sprite another);
+				SDL_Surface *sdlsurface;
+				Sprite(SDL_Surface *sdlsurface);
+				//draw(int x, int y);   // for to global default or something
+				void draw(int x, int y, SDL_Surface *sdlsurface_);
+				void draw(int x, int y, Sprite another);
 
-		bool collide(Sprite another);
+			bool collide(Sprite another);
 		// TODO:
 		//void scale(float factor);
 		//void scale(float xfactor, float yfactor);
@@ -64,10 +64,10 @@
 	*/
 		class Vertex2d {
 			public:
-			float x,y;
-			float r,g,b;
-			Vertex2d();
-			Uint32 colorint(SDL_Surface *sdlsurface);
+				float x,y;
+				float r,g,b;
+				Vertex2d();
+				Uint32 colorint(SDL_Surface *sdlsurface);
 		};
 
 
@@ -98,11 +98,11 @@
 	};
 
 	class Triangle2d {
-	public:
-		Point a, b, c;
-		Uint32 color;
-		Triangle2d();
-		void draw();
+		public:
+			Point a, b, c;
+			Uint32 color;
+			Triangle2d();
+			void draw();
 	};
 
 	class Color {
@@ -122,7 +122,7 @@
 			Uint32 getsdlcolor(SDL_Surface *sdlsurface);
 	};
 
-	// FUNKTIOT:
+	// FUNCTIONS:
 		SDL_Surface* scale_surface(int new_x, int new_y, SDL_Surface *bitmap);
 		SDL_Surface *load_image(string filename);
 		ColorRGB HSLtoRGB(float h, float s, float l);
@@ -146,10 +146,10 @@
 			void draw_circle(point2d c, float r, Uint8 slices, Uint8 width, Uint32 color, SDL_Surface *sdlsurface);
 			void draw_circle(Point P, float r, Uint8 slices, Uint8 width, Uint32 color, SDL_Surface *sdlsurface);
 
-	// MUUTTUJAT:
+	// VARIABLES:
 		extern bool gpuvertexbuffer;
 
-	// VAKIOT:
+	// CONSTANTS:
 		extern Uint32 colorRed;
 		extern Uint32 colorGreen;
 		extern Uint32 colorBlue;

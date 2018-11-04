@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for sound / music.
+*/
+
 #include <stdio.h>
 #include <iostream>
 

@@ -13,7 +13,9 @@
 		#include "include/fmod/fmod_errors.h"
 
 
-	#include <SDL/SDL.h>
+	#ifdef WITH_SDL
+		#include <SDL/SDL.h>
+	#endif
 
 	#include "options.hpp"
 	#include "graph.hpp"
@@ -21,7 +23,7 @@
 	#include "control.hpp"
 
 	// CONSTANTS:
-	#define MSG_QUITERROR "Program aborted due to an error."
+		#define MSG_QUITERROR "Program aborted due to an error."
 
 	// FUNCTIONS:
 		//void setup_opengl();

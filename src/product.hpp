@@ -26,16 +26,16 @@
 		//#define DATAPATH "../data/"
 		#define DATAPATH ""
 		// Pictures:
-		//#define FILENAME_PIC DATAPATH "tunapa_small.png"
+			//#define FILENAME_PIC1 DATAPATH "picture.png"
 
 		// 3D models:
-		#define FILENAME_OLIO1 DATAPATH "cube.obj"
+			//#define FILENAME_OBJECT1 DATAPATH "model.obj"
 
 		// Sounds:
-		#define FILENAME_TRACKERSONG DATAPATH "megashwe.mod"
-		#define FILENAME_AUDIO "../data/snd/kummitustalo.ogg"
+			#define FILENAME_TRACKERSONG1 DATAPATH "tracker.mod"
+			#define FILENAME_AUDIO1 "../data/snd/audio.ogg"
 
-		// Entitys:
-		#define FILENAME_ENTITEETTI1 DATAPATH "ukko1.ent"
+		// Entities:
+			//#define FILENAME_ENTITY1 DATAPATH "entity.ent"
 
 #endif // DEMO_HPP

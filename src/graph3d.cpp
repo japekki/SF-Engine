@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for 3D graphics.
+*/
+
 #include <math.h>
 #include <iostream>
 #include "display.hpp"
@@ -33,7 +39,7 @@ Triangle3d::Triangle3d() {
 }
 
 Triangle3d::~Triangle3d() {
-#ifdef DEBUGMSG
+#ifdef WITH_DEBUG
   printf("Triangle3d destructor\n");
 #endif
 }

@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for handling complex objects.
+*/
+
 #include "entity.hpp"
 
 #ifdef __cplusplus
@@ -275,7 +281,7 @@ void Entity::draw2d_polygon() {
 }
 
 
-#ifdef DEBUGMSG
+#ifdef WITH_DEBUG
 void Entity::printvertexarray()
 // FOR DEBUG PURPOSES
 {
@@ -373,7 +379,7 @@ void Entity::draw3d_polygon() {
 			tmp_tri.c.b = tmp_vert.b;
 			//tmp_tri.c.setcolor(tmp_vert.r, tmp_vert.g, tmp_vert.b);
 			/*
-			#ifdef DEBUGMSG
+			#ifdef WITH_DEBUG
 				printf("Trying to draw triangle: %f %f %f\n", tmp_vert.x, tmp_vert.y, tmp_vert.z);
 				printvertexarray();
 			#endif
@@ -446,7 +452,7 @@ bool Entity::loadfromfile(string filename_) {
 						vert.b = 1.0;   // TODO
 						vertex3darray.push_back(vert);
 						/*
-						#ifdef DEBUGMSG
+						#ifdef WITH_DEBUG
 							cout << endl;
 							cout << "x: " << x << " y: " << y << " z: " << z << endl;
 							cout << "x: " << vert.x <<  " y: " << vert.y << " z: " << vert.z << endl;
@@ -493,7 +499,7 @@ bool Entity::loadfromfile(string filename_) {
 						face3darray.push_back(int_a-1);
 						face3darray.push_back(int_b-1);
 						face3darray.push_back(int_c-1);
-						#ifdef DEBUGMSG
+						#ifdef WITH_DEBUG
 							cout << "a: " << int_a << " b: " << int_b << " c: " << int_c << endl;
 						#endif
 					}

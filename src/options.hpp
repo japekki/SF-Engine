@@ -13,13 +13,14 @@
 		//#include <gl\glaux.h>		// Header File For The GLaux Library
 		//#include "NeHeGL.h"
 
-	//#define DEBUGMSG  // For console debug messages (TODO: define from targets softrender_debug and opengl_debug)
+	//#define WITH_DEBUG  // For console debug messages (TODO: define from targets softrender_debug and opengl_debug)
 
 	// For interactive input:
-	//#define WITH_MIDI
-	//#define WITH_MOUSE
-	//#define WITH_JOYSTICK
-	//#define WITH_VIDEOCAPTURE
-	//#define WITH_OPENGL  // Don't touch, defined by targets opengl and opengl_debug in IDE/Make/build scripts
+		//#define WITH_MIDI
+		//#define WITH_MOUSE
+		//#define WITH_JOYSTICK
+		//#define WITH_VIDEOCAPTURE
+		//#define WITH_DIRECTX
+		//#define WITH_OPENGL  // Don't touch, defined by targets opengl and opengl_debug in IDE/Make/build scripts
 
 #endif // OPTIONS_HPP

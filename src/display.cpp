@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for handling the display/monitor.
+*/
+
 #include "display.hpp"
 #include "globals.hpp"
 

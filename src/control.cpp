@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for user interaction, like reading input devices such as keyboard, mouse, joystick etc.
+*/
+
 #include "control.hpp"
 
 	// INCLUDE FMOD:
@@ -126,19 +132,19 @@ using namespace std;
 					#endif // #ifdef WITH_MOUSE
 					#ifdef WITH_JOYSTICK
 						case SDL_JOYBUTTONDOWN: {
-							#ifdef DEBUGMSG
+							#ifdef WITH_DEBUG
 								cout << "Peliohjaimen nappi painettu pohjaan." << endl;
 							#endif
 							break;
 						}
 						case SDL_JOYBUTTONUP: {
-							#ifdef DEBUGMSG
+							#ifdef WITH_DEBUG
 								cout << "Peliohjaimen nappi irrotettu." << endl;
 							#endif
 							break;
 						}
 						case SDL_JOYAXISMOTION: {
-							#ifdef DEBUGMSG
+							#ifdef WITH_DEBUG
 								cout << ("Joystick: %i\n", event.jaxis.value) << endl;
 							#endif
 							extern Joystick joystick;

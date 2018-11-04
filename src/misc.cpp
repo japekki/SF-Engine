@@ -1,10 +1,16 @@
-//#include "misc.hpp"
+/*
+	SF-Engine
+
+	This file has miscellaneous routines.
+*/
+
 #include <string>
 #include <vector>
+#include "misc.hpp"
 
 using namespace std;
 
-vector<string> split(string string_, char delimiter)    // TODO: Ei toimi
+vector<string> split(string string_, char delimiter)    // FIXME
 {
 	vector<string> results;
 	int wordcount = 0;
@@ -20,18 +26,17 @@ vector<string> split(string string_, char delimiter)    // TODO: Ei toimi
 }
 
 string lowercase(string arg) {
-	   for (int x=0; x<arg.length(); x++)
-	   {
-		   if (arg[x] >= 'A' && arg[x] <= 'Z') arg[x]-= ('A'-'a');
-	   }
-	   return arg;
+	for (int x=0; x<arg.length(); x++) {
+		if (arg[x] >= 'A' && arg[x] <= 'Z') arg[x]-= ('A'-'a');
+	}
+	return arg;
 }
 
 string uppercase(string arg) {
-	   for (int x=0; x<arg.length(); x++) {
-		   if (arg[x] >= 'a' && arg[x] <= 'z') arg[x]+= ('A'-'a');
-	   }
-	   return arg;
+	for (int x=0; x<arg.length(); x++) {
+		if (arg[x] >= 'a' && arg[x] <= 'z') arg[x]+= ('A'-'a');
+	}
+	return arg;
 }
 
 string reverse(string fullname) {
@@ -43,11 +48,11 @@ string reverse(string fullname) {
 }
 
 string togglecase(string arg) {
-	   for (int x=0; x<arg.length(); x++) {
-		   if (arg[x] >= 'A' && arg[x] <= 'Z') arg[x]-= ('A'-'a');
-		   else if (arg[x] >= 'a' && arg[x] <= 'z') arg[x]+= ('A'-'a');
-	   }
-	   return arg;
+	for (int x=0; x<arg.length(); x++) {
+		if (arg[x] >= 'A' && arg[x] <= 'Z') arg[x]-= ('A'-'a');
+		else if (arg[x] >= 'a' && arg[x] <= 'z') arg[x]+= ('A'-'a');
+	}
+	return arg;
 }
 
 /*

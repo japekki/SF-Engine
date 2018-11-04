@@ -1,7 +1,6 @@
 #ifndef CONTROL_HPP
 	#define CONTROL_HPP
 	#include <vector>
-
 	#include <SDL/SDL.h>
 
 	#include "options.hpp"
@@ -10,19 +9,6 @@
 	// - Lower level keyboard handling (polling states may miss key presses when running slow)
 
 	void poll_events();
-
-	/*
-										  ############### iobox1 ###############
-			  control.joystick.x()--------INPUT CH 1                 OUTPUT CH 1----------iobox1.read(1)
-			control.midi.knob1.value()----INPUT CH 2                 OUTPUT CH 2----------iobox1.read(2)
-	 control.keyboard.plusminusvalue()----INPUT CH 3                 OUTPUT CH 3----------iobox1.read(3)
-					 control.mouse.x()----INPUT CH 4                 OUTPUT CH 4----------iobox1.read(4)
-						iobox2.read(1)----INPUT CH 5                 OUTPUT CH 5----------iobox1.read(5)
-				 videocamera.capture()----INPUT CH 6                 OUTPUT CH 6----------iobox1.read(6)
-					   networkpacket()----INPUT CH 7                 OUTPUT CH 7----------iobox1.read(7)
-					  Plugin_X.value()----INPUT CH 8                 OUTPUT CH 8----------iobox1.read(8)
-										  ######################################
-	*/
 
 	class IOBox {
 		IOBox();
