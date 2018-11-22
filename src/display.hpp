@@ -1,56 +1,58 @@
 #ifndef DISPLAY_HPP
 	#define DISPLAY_HPP
 
-	#include <SDL/SDL.h>
-	#include "graph3d.hpp"
+	#include <SDL.h>
+	#include <string>
+	#include "geom.hpp"
+	#include "grapher.hpp"
 
-	// TODO:
-	// - Support for multiple displays (like, demo running on big screen and settings panel on monitor)
-	// - Polar coordinate system (angle and radius)
-
-	class Display {
+	class Display : public Grapher {
 		private:
-			int x_min;
-			int x_max;
-			int y_min;
-			int y_max;
-			int width;
-			int height;
+			std::string title;
+			bool fullscreen = false;
+			bool vsync = false;
+			unsigned int timestamp_initial;	// when the display was initialized
+			unsigned int timestamp_start = 0;   // timestamp at mainloop begin
+			unsigned int timestamp_end;     // timestamp at mainloop end
+			unsigned int framecounter = 0;
+			unsigned char fps_desired = 1;	// Don't draw faster than this
+			unsigned char fps_max;			// Highest FPS momentarily achieved
 		public:
-			unsigned int framecounter;
-			int delay;
-			Uint32 timestamp_atstart;   // mainloop
-			Uint32 timestamp_atend;     // mainloop
-			bool resizable;
-			Uint16 fps_lockto;
-			Uint8 fps_max;
-			Uint8 bpp;  // Bits per pixel: 8, 16, 24, 32
-			bool fullscreen;
-			SDL_Surface *sdlsurface;
-			Zbuf z_buf;
-			Uint32 clearcolor;
-			bool centered;
+		// Variables:
+			bool works = true;			// Change to false if something goes wrong
+			SDL_Window *sdlwindow;
+			SDL_Renderer *sdlrenderer;
+			//SDL_Surface* sdlsurface;	// Inherited from class Grapher
+			SDL_Texture *sdltexture;
+			//int delay;
+			//bool resizable;
+			//unsigned int clearcolor;
+		// Functions:
 			Display();
 			~Display();
-			void set_name(char* name);
-			int get_x_min();
-			int get_x_max();
-			int get_y_min();
-			int get_y_max();
+			void set_timestamp_start(unsigned int timestamp);
+			void set_timestamp_end(unsigned int timestamp);
+			unsigned int get_timestamp_start();
+			unsigned int get_timestamp_end();
+			void set_title(std::string title);
+			void set_width(int width);
+			void set_height(int height);
+			void set_desiredfps(unsigned char fps);
 			int get_width();
 			int get_height();
-			void set_x_min(int new_x_min);
-			void set_x_max(int new_x_max);
-			void set_y_min(int new_y_min);
-			void set_y_max(int new_y_max);
-			void set_width(int new_width);
-			void set_height(int new_height);
+			bool set_fullscreen(bool fullscreen);
+			bool toggle_fullscreen();
+			bool set_vsync(bool vsync);
 			void clearscreen();
 			bool refresh();
 			bool setup();
-			//#ifdef WITH_OPENGL
-				// bool load_GLSL(string filename); // Load and compile a shader file
-			//#endif
+			float get_totalfps();		// Total average fps from init to deinit
+			float get_lastfps();		// Fps during last frame refresh
+			unsigned char get_desiredfps();
+			unsigned int get_runtime();
+			unsigned int get_framecount();
+			Coordinate2D apply_coordinategrid(Coordinate2D coordinate);
+			Coordinate3D apply_coordinategrid(Coordinate3D coordinate);
 	};
 
 #endif // DISPLAY_HPP

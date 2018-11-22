@@ -1,13 +1,12 @@
 #ifndef ENTITY_HPP
 	#define ENTITY_HPP
 
+/*
 	#include <vector>
 	#include <string>
-	#include "graph.hpp"
-	#include "graph3d.hpp"
+	#include "geom.hpp"
 	#include "options.hpp"
-
-	using namespace std;
+*/
 
 	struct elements {
 		float a,b,c,d,e,f,g;
@@ -17,22 +16,22 @@
 	public:
 		Entity();
 		~Entity();
-		SDL_Surface *surface;    // tanne piirretaan
+		SDL_Surface *surface;
 
 		string filename;
 
 		// Physical properties:
-			Uint8 dimensions;   // 1, 2, 3 (or 4?)
+			unsigned char dimensions;   // 1, 2, 3 (or 4?)
 			point3d location;
 			vec3 direction;
-			vec3 rotation; // Kulmat X, Y ja Z -akselin suhteen
+			vec3 rotation; // Angles by X, Y and Z axis
 			elements balance;
 
 		// Interaction properties:
 
 		// Visual properties:
-			Uint32 color;
-			Uint8 polygonshadestyle;
+			unsigned int color;
+			unsigned char polygonshadestyle;
 
 		std::vector<Vertex2d> vertex2darray, vertex2darray_stored;
 		std::vector<vertex3d_struct> vertex3darray, vertex3darray_stored;
@@ -54,10 +53,7 @@
 			void rotatevertexarray();
 			void rotatevertexarray(float angle_x, float angle_y, float angle_z);
 			boundingbox getboundingbox();
-			//#ifdef WITH_OPENGL
-			//    bool ingpu; // Residing in gpu's vertex buffer
-			//    void togpu();
-			//#endif
+
 			void draw2d_polygon();
 			void draw3d_polygon();
 			void draw2d_wireframe();
@@ -69,15 +65,15 @@
 			bool savetofile();
 			void pushgeom();  // Store original geometry to avoid rounding inaccuracy during serial computation
 			void popgeom();   // Restore original geometry
-			void generate_3dball(float r, Uint16 corners);
+			void generate_3dball(float r, unsigned short corners);
 
 		// Interaction methods:
 			bool connecttoentity(Entity Entiteetti);    // TODO: "Ylempi" luokka hoitaa namat?
 			bool disconnectfromentity(Entity Entiteetti);
 			void react(Entity entiteetti);
 
-			void effux_sine(Uint32 time);
-		#ifdef WITH_DEBUG
+			void effux_sine(unsigned int time);
+		#ifdef WITH_DEBUGMSG
 			void printvertexarray();
 		#endif
 

@@ -4,197 +4,204 @@
 	This file has routines for handling the display/monitor.
 */
 
+#include <iostream>
+#include <string>
+
+#include "misc.hpp"
 #include "display.hpp"
-#include "globals.hpp"
+#include "program.hpp"
 
-Display::Display() {
-	framecounter = 0;
-}
+// TODO:
+	// - Set monitor Hz
 
-Display::~Display() {
-}
+	Display::Display() {
+		this->coordinategrid = new Coordinategrid();
+	}
 
-int Display::get_x_min() {
-	return x_min;
-}
+	Display::~Display() {
+		// FREE RESOURCES:
+			SDL_DestroyWindow(this->sdlwindow);
+			//delete this->sdlwindow;   // NOTE: Segfaults in Linux
+			SDL_DestroyRenderer(this->sdlrenderer);
+			//delete this->sdlrenderer;
+	}
 
-int Display::get_x_max() {
-	return x_max;
-}
-
-int Display::get_y_min() {
-	return y_min;
-}
-
-int Display::get_y_max() {
-	return y_max;
-}
-
-int Display::get_width() {
-	return width;
-}
-
-int Display::get_height() {
-	return height;
-}
-
-void Display::set_x_min(int new_x_min) {
-	x_min = new_x_min;
-	width = abs(x_max - x_min);
-}
-
-void Display::set_x_max(int new_x_max) {
-	x_max = new_x_max;
-	width = abs(x_max - x_min);
-}
-
-void Display::set_y_min(int new_y_min) {
-	y_min = new_y_min;
-	height = abs(y_max - y_min);
-}
-
-void Display::set_y_max(int new_y_max) {
-	y_max = new_y_max;
-	height = abs(y_max - y_min);
-}
-
-void Display::set_width(int new_width) {
-	width = new_width;
-}
-
-void Display::set_height(int new_height) {
-	height = new_height;
-}
-
-void Display::set_name(char* name) {
-	SDL_WM_SetCaption(name, NULL);
-}
-
-bool Display::setup() {
-	bool result = true; // Muutetaan falseksi jos jokin meni vikaan
-	// TODO:
-	// - Säädä monitorin hertzejä
-	// - Runtime fullscreen toggling
-	/* OPENGL
-			//const SDL_VideoInfo* info = NULL;   // Information about the current video settings.
-			if (fullscreen) {
-				sdlsurface = SDL_SetVideoMode(width, height, bpp, SDL_OPENGL | SDL_FULLSCREEN);
-			}
-			else {
-				sdlsurface = SDL_SetVideoMode(width, height, bpp, SDL_OPENGL );
-			}
-			if (!sdlsurface) {
-				printf("OPENGL: Unable to set video mode: %s\n", SDL_GetError());
-				result=false;
-			}
-			else {
-				printf("OPENGL: Set up video mode %ix%i %i bpp.\n", get_width(), get_height(), bpp);
+	bool Display::setup() {
+		// Call this when creating or altering a display window
+		// TODO: delete/modify old when calling this again (currently opens up a secondary window)
+		// Set up SDL video:
+			if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+				log("ERROR while initializing SDL video:");
+				log(SDL_GetError());
+				this->works = false;
 			}
 
-			glViewport(0, 0, get_width(), get_height());		// Reset The Current Viewport
-
-			glMatrixMode(GL_PROJECTION);		// Select The Projection Matrix
-			glLoadIdentity();					// Reset The Projection Matrix
-
-			// TODO: Aspect Ratio
-
-			glMatrixMode(GL_MODELVIEW);			// Select The Modelview Matrix
-			glLoadIdentity();					// Reset The Modelview Matrix
-
-			glShadeModel(GL_SMOOTH);				// Enable Smooth Shading
-			glClearColor(0.5f, 0.5f, 0.5f, 0.5f);	// Background
-			glClearDepth(1.0f);						// Depth Buffer Setup
-			glEnable(GL_DEPTH_TEST);				// Enables Depth Testing
-			glDepthFunc(GL_LEQUAL);					// The Type Of Depth Testing To Do
-			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
-
-			SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 8 );
-			SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 8 );
-			SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 8 );
-			SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 );
-			SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
-
-			//glEnableClientState(GL_VERTEX_ARRAY);
-			//glEnableClientState(GL_COLOR_ARRAY);
-	*/
-
-	if ( SDL_Init(SDL_INIT_VIDEO ) < 0 ) {
-		printf( "SDL: Unable to init: %s\n", SDL_GetError() );
-		result=false;
-	}
-	if (fullscreen) {
-		sdlsurface = SDL_SetVideoMode(get_width(), get_height(), bpp, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
-	}
-	else {
-		sdlsurface = SDL_SetVideoMode(get_width(), get_height(), bpp, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_ANYFORMAT);
-	}
-	if (!sdlsurface) {
-		printf("SDL: Unable to set video mode: %s\n", SDL_GetError());
-		result=false;
-	}
-	else {
-		set_width(sdlsurface->w);
-		set_height(sdlsurface->h);
-		bpp = sdlsurface->format->BitsPerPixel;
-		printf("SDL: Set up video mode %ix%i %i bpp.\n", get_width(), get_height(), bpp);
-		// Lock the screen for direct access to the pixels:
-		if ( SDL_MUSTLOCK(sdlsurface) )
-		{
-			if ( SDL_LockSurface(sdlsurface) < 0 )
-			{
-				fprintf(stderr, "SDL: Can't lock screen: %s\n", SDL_GetError());
-				result=false;
+		// Set up SDL display window:
+			/*
+			this->sdlwindow = SDL_CreateWindow(this->title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->width, this->height, SDL_WINDOW_SHOWN);
+				// TODO: Native desktop resolution:
+				// this->sdlwindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP);
+			if (this->sdlwindow == nullptr) {
+				log("ERROR while creating SDL surface:");
+				log(SDL_GetError());
+				SDL_Quit();
+				this->works = false;
 			}
-		}
+			*/
+			Uint32 flags = 0;
+			if (this->fullscreen) flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
+			if (SDL_CreateWindowAndRenderer(this->width, this->height, flags, &this->sdlwindow, &this->sdlrenderer) != 0) {
+                log("ERROR while creating SDL Window with Renderer:");
+                    log(SDL_GetError());
+                    SDL_Quit();
+                    this->works = false;
+                }
+
+			this->sdlsurface = SDL_GetWindowSurface(this->sdlwindow);
+
+			// Set up SDL renderer:
+			/*
+				this->sdlrenderer = SDL_CreateRenderer(this->sdlwindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+				if (this->sdlrenderer == nullptr){
+					SDL_DestroyWindow(this->sdlwindow);
+					log("ERROR while creating SDL renderer:");
+					log(SDL_GetError());
+					SDL_Quit();
+					this->works = false;
+				}
+				*/
+			this->sdltexture = SDL_CreateTexture(this->sdlrenderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, this->width, this->height);
+
+		//this->zbuf->set_size(width, height);
+		this->timestamp_initial = SDL_GetTicks();
+
+		//if (this->fullscreen) SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		//SDL_ShowCursor(SDL_DISABLE);
+		return true;	// TODO
 	}
-	//z_buf.resize(get_width()*get_height());
 
-	SDL_ShowCursor(SDL_DISABLE);
-	return result;
-}
+	void Display::set_title(std::string title) {
+		this->title = title;
+		// TODO:
+		// If window already exists:
+		SDL_SetWindowTitle(this->sdlwindow, title.c_str());
+	}
 
-void Display::clearscreen() {
-	// Clear screen:
+	void Display::set_width(int width) {
+		this->width = width;
+	}
 
-	// Opengl:
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		// Clear screen/Z-buffer
+	void Display::set_height(int height) {
+		this->height = height;
+	}
 
-	SDL_FillRect(sdlsurface, 0, clearcolor);
+	void Display::set_desiredfps(unsigned char fps) {
+		this->fps_desired = fps;
+	}
 
+	bool Display::set_fullscreen(bool fullscreen) {
+		this->fullscreen = fullscreen;
+		if (fullscreen)
+			SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		else
+			SDL_SetWindowFullscreen(this->sdlwindow, 0);
+		return true;	// TODO
+	}
+
+	bool Display::toggle_fullscreen() {
+		if (this->fullscreen)
+			SDL_SetWindowFullscreen(this->sdlwindow, 0);
+		else
+			SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		this->fullscreen =! this->fullscreen;
+		return true;	// TODO
+	}
+
+	int Display::get_width() {
+		return this->width;
+	}
+
+	int Display::get_height() {
+		return this->height;
+	}
+
+	void Display::set_timestamp_start(unsigned int timestamp) {
+		this->timestamp_start = timestamp;
+	}
+
+	void Display::set_timestamp_end(unsigned int timestamp) {
+		this->timestamp_end = timestamp;
+	}
+
+	unsigned int Display::get_timestamp_start() {
+		return this->timestamp_start;
+	}
+
+	unsigned int Display::get_timestamp_end() {
+		return this->timestamp_end;
+	}
+
+void Display::clearscreen() {	// FIXME: Does not clear the screen
+	SDL_RenderClear(this->sdlrenderer);
 }
 
 bool Display::refresh() {
-	bool result=true; // Change to false if something goes wrong
-	// Opengl:
-	//SDL_GL_SwapBuffers();
+	bool works = true; // Change to false if something goes wrong
+	SDL_UpdateTexture(this->sdltexture, NULL, this->sdlsurface->pixels, this->sdlsurface->pitch);
+	SDL_RenderCopy(this->sdlrenderer, this->sdltexture, NULL, NULL);
+	SDL_RenderPresent(this->sdlrenderer);
+	this->framecounter++;
 
-	if ( SDL_MUSTLOCK(sdlsurface) ) {
-		SDL_UnlockSurface(sdlsurface);
-	}
-	if( SDL_Flip( sdlsurface ) == -1 ) {
-	//SDL_UpdateRect(monitor.sdlsurface, 0, 0, 0, 0);
-		cerr << "SDL: Error while blitting to screen surface." << endl;
-		result=false;
-	}
 	//z_buf.reset();
-	// Lock the screen for direct access to the pixels:
-	if (result and SDL_MUSTLOCK(sdlsurface))
-		if ( SDL_LockSurface(sdlsurface) < 0 ) {
-			fprintf(stderr, "SDL: Can't lock screen: %s\n", SDL_GetError());
-			result=false;
-		}
-
-
-	framecounter++;
 
 	// Sleep and sync to desired FPS:
-	if (result) {
-		timestamp_atend = SDL_GetTicks();
+	if (works) {
+		this->timestamp_end = SDL_GetTicks();
 		//SDL_WM_SetCaption("DEMO | FPS: " << framecounter/((timestamp_atend - timestamp_atstart)/1000.0), NULL)
-		delay = (1000.0/fps_lockto) - (timestamp_atend - timestamp_atstart);
+		//SDL_SetWindowTitle(this->sdlwindow, 1000.0/(this->timestamp_end - this->timestamp_start)));
+		int delay = (1000.0/this->fps_desired) - (this->timestamp_end - this->timestamp_start);
 		if (delay > 0)
 			SDL_Delay(delay);
+		this->timestamp_start = SDL_GetTicks();
 	}
 
+	return works;
+}
+
+float Display::get_totalfps(){
+	return this->framecounter/((this->timestamp_end - this->timestamp_initial)/1000.0);
+}
+
+float Display::get_lastfps(){
+	return 1/((this->timestamp_end - this->timestamp_start)/1000.0);
+}
+
+unsigned char Display::get_desiredfps() {
+	return this->fps_desired;
+}
+
+unsigned int Display::get_runtime() {
+	// FIXME: This is not the same as total time program has been running
+	return this->timestamp_end - this->timestamp_initial;
+}
+
+unsigned int Display::get_framecount() {
+	return this->framecounter;
+}
+
+Coordinate2D Display::apply_coordinategrid(Coordinate2D coordinate) {
+	Coordinate2D result;
+	result.x = this->width / (this->coordinategrid->x_max - this->coordinategrid->x_min) * coordinate.x;
+	result.y = this->height / (this->coordinategrid->y_max - this->coordinategrid->y_min) * coordinate.y;
+	if (this->coordinategrid->centered) {
+		result.x += this->width/2;
+		result.y += this->height/2;
+	}
+	return result;
+}
+
+Coordinate3D Display::apply_coordinategrid(Coordinate3D coordinate) {
+	Coordinate3D result;
+	// TODO
 	return result;
 }

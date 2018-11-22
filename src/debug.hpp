@@ -1,15 +1,13 @@
-#ifdef WITH_DEBUG
+#ifndef DEBUG_HPP
+	#define DEBUG_HPP
+/*
+	#include <SDL.h>
 
-	#ifndef DEBUG_HPP
-		#define DEBUG_HPP
+	// Debugging messages:
+		//#define debug_errormsg_something "error"
 
-		#include <SDL/SDL.h>
+	void SDL_SurfaceInfo(char * name, SDL_Surface *sdlsurface);
+*/
+#endif // DEBUG_HPP
 
-		// Debugging messages:
-			//#define debug_errormsg_something "Something went wrong. Here's the debugging information:\n"
 
-		void SDL_SurfaceInfo(char * name, SDL_Surface *sdlsurface);
-
-	#endif // DEBUG_HPP
-
-#endif // WITH_DEBUG

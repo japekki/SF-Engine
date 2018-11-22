@@ -1,6 +1,6 @@
 #ifndef SCENE_HPP
 	#define SCENE_HPP
-
+/*
 	#include "math.hpp"
 	#include <vector>
 	#include "entity.hpp"
@@ -9,7 +9,7 @@
 		public:
 			vec3 location;
 			vec3 direction;
-			float angle_x, angle_y, angle_z;	// Viewport, "nakokentta"
+			float angle_x, angle_y, angle_z;	// Viewport
 			float zoom;
 			void rotate(float angle_x, float angle_y, float angle_z);
 			Camera();
@@ -20,13 +20,13 @@
 	class Scene {
 		public:
 			std::vector<Entity> entityarray;
-			Camera Kamera;
+			Camera camera;
 			Scene();
 			~Scene();
-			void add_entity(Entity &Entity_);  // TODO: Palautta kahva myohempaa poistoa (tms.) varten?
-			bool del_entity(Uint16 id);
+			void add_entity(Entity &Entity_);
+			bool del_entity(unsigned short id);
 			void draw(SDL_Surface *sdlsurface);
 			void apply_perspective();
 	};
-
+*/
 #endif // SCENE_HPP

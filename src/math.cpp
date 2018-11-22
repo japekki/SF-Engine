@@ -4,29 +4,33 @@
 	This file has mathematical routines.
 */
 
-//#include "options.hpp"
 #include "math.hpp"
-#include <math.h>
-
-// TODO:
-// Funktio, joka palauttaa:
-// - Ympyröiden leikkauspisteet
-// - Ympyrän ja suoran leikkauspisteet
-// - Onko piste ympyrän sisällä
-// - Onko piste suoralla/linesegmentlla
-// - Vektorien yhteenlasku, pistetulo yms.
 
 /*
-Class Vec3 {
-	float x,y,z;    // Location
-	float i,j,k;    // Direction
-}
-*/
+//#include "options.hpp"
 
-// Yksikköympyrässä:
+#include <math>
+
+// TODO:
+// Functions that return
+// - Intersections of circles
+// - Intersections of circle and line
+// - Is point inside a circle
+// - Is point at line or linesegment
+// - Vector addition, dot product etc.
+
+
+//Class Vec3 {
+//	float x,y,z;    // Location
+//	float i,j,k;    // Direction
+//}
+
+
+// In unit circle:
 // cos(a) = x
 // sin(a) = y
 
+*/
 Point::Point() {
 }
 
@@ -39,69 +43,67 @@ Point::Point(float x_, float y_, float z_) {
 void Point::draw() {
 }
 
+/*
 void Point::rotate(float angle_x, float angle_y, float angle_z) {
 	float new_x, new_y, new_z;
-	// Z-akselin suhteen:
+	// Z axis:
 	new_x = x * cos(angle_z) - y * sin(angle_z);
 	new_y = x * sin(angle_z) + y * cos(angle_z);
 	x = new_x;
 	y = new_y;
-	// X-akselin suhteen:
+	// X axis:
 	new_y = y * cos(angle_x) - z * sin(angle_x);
 	new_z = y * sin(angle_x) + z * cos(angle_x);
 	y = new_y;
 	z = new_z;
-	// Y-akselin suhteen:
+	// Y axis:
 	new_z = z * cos(angle_y) - x * sin(angle_y);
 	new_x = z * sin(angle_y) + x * cos(angle_y);
 	y = new_y;
 	x = new_x;
 }
 
-float Point::etaisyys_origosta() {
+float Point::distance_from_origo() {
 	return sqrt(x*x + y*y + z*z);
 };
 
-float Point::etaisyys_pisteesta(Point Piste) {
-	return sqrt(pow((x-Piste.x),2) + pow((y-Piste.y),2) + pow((z-Piste.z),2));
+float Point::distance_from_point(Point point) {
+	return sqrt(pow((x-point.x),2) + pow((y-point.y),2) + pow((z-point.z),2));
 }
 
-Suora::Suora() {
+Line::Line() {
 }
 
-Suora Suora::normaali() {
-	//Suora Normaali;
-	//Normaali = Suora;
-	//Normaali.
-}
-/*
-bool Suora::leikkaa(Point Piste) {
+Line Line::getnormal() {
 }
 
-bool Suora::leikkaa(Suora Suora) {
+bool Line::intersects(Point point) {
 }
 
-bool Suora::leikkaa(Linesegment Linesegment) {
+bool Line::intersects(Line Line) {
 }
 
-bool Suora::leikkaa(Ball Ball) {
+bool Line::intersects(Linesegment Linesegment) {
 }
-*/
+
+bool Line::intersects(Ball Ball) {
+}
+
 
 Linesegment::Linesegment() {
 }
-/*
-bool Linesegment::leikkaa(Point Piste) {
+
+//bool Linesegment::intersects(Point point) {
 }
-*/
+
 float circle_area(float radius) {
-	// Ympyrän pinta-ala
+	// Circle's area
 	// A = pi * r^2
 	return PI*radius*radius;
 }
 
 float ball_area(float radius) {
-	// Pallon pinta-ala
+	// Ball's area
 	// A = 4 * pi * r^2
 	return 4 * PI * radius*radius;
 }
@@ -113,22 +115,23 @@ float ball_volume(float radius) {
 }
 
 float slope(point2d a, point2d b) {
-	// Kuinka paljon Y muuttuu, kun X muuttuu yhdellä
+	// How much Y changes, when X changes by one
 	// K = delta_y / delta_x
-	return (b.y - a.y) / (b.x - a.x);   // Ei huomioi Z-koordinaatteja
+	return (b.y - a.y) / (b.x - a.x);   // ignores Z coordinates
 }
 
 float distance(point2d a, point2d b) {
-	// etaisyys = sqrt(delta_x^2 + delta_y^2)
+	// distance = sqrt(delta_x^2 + delta_y^2)
 	int delta_x = (b.x-a.x);
 	int delta_y = (b.y-a.y);
 	return sqrt( delta_x*delta_x + delta_y*delta_y );
 }
 
 float distance(point3d a, point3d b) {
-	// etaisyys = sqrt(delta_x^2 + delta_y^2 + delta_z^2)
+	// distance = sqrt(delta_x^2 + delta_y^2 + delta_z^2)
 	int delta_x = (b.x-a.x);
 	int delta_y = (b.y-a.y);
 	int delta_z = (b.z-a.z);
 	return sqrt( delta_x*delta_x + delta_y*delta_y + delta_z*delta_z);
 }
+*/

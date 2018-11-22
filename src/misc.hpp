@@ -1,10 +1,11 @@
 #ifndef MISC_HPP
 	#define MISC_HPP
 
-	//#include <iostream>
-	#include <string>
+	#include <iostream>
+	#include "options.hpp"
 
-	using namespace std;
+/*
+	#include <string>
 
 	// TODO: Check what is already done in standard library
 
@@ -13,5 +14,11 @@
 	string uppercase(string arg);
 	string reverse(string fullname);
 	string togglecase(string arg);
+*/
+
+	void log(const std::string &msg);
+	#ifdef WITH_DEBUGMSG
+		void debugmsg(const std::string &msg);
+	#endif // WITH_DEBUGMSG
 
 #endif // MISC_HPP

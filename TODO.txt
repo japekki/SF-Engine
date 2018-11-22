@@ -1,8 +1,31 @@
-- Don't link GL libraries when compiled for cpu renderer only
-- Optimize EXE for size, don't link excessive stuff statically
-- Make library (sfengine.dll / libsfengine.so)
+TODO:
+- Optimize executable file for size, don't link excessive stuff statically
+- Make library (sfe.dll / libsfe.so)
 - Makefile
-- Source from Finnish into English
-- Bezier
+- Compatibility for various compilers/IDEs (GNU GCC/G++, MS Visual Studio, Android Studio, Open Watcom)
 - When paused, don't run mainloop but sleep until event (0% cpu usage while paused)
-- Include all needed headers in all files
+- Threading
+- Include all needed headers in all files, remove unneeded header includes
+- Support for DirectX, OpenGL/GLES (make libSDL optional)
+- Support for MS-DOS and Android operating systems
+- Support for some gaming consoles (PlayStation, Xbox etc.)
+- Render demo/game into video file
+- Separate graphics engine and control client programs
+- Video editor style demo/game creator studio, similar to Unity and Demopaja
+- Realtime video/Audio input (camera, microphone, TV receiver, video file etc.)
+- Support for augmented reality and VR goggles
+- Documentation
+- Support for multiple displays (like, demo running on big screen and settings panel on monitor)
+- Polar coordinate system (angle and radius)
+- Consider using SDL_Texture instead of SDL_Surface
+- Transition effects
+- Camera
+- Exception handling
+- Better keyboard handling routines
+
+FIX:
+- Possible memory leaks
+- FPS limit does not give maximum FPS even if the system has enough performance
+
+OPTIMIZE:
+- Get rid of unneccessary pointers

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SFE Unix" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="SFE Debug">
+				<Option output="../../bin/sfe_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Debug_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="SFE Release">
+				<Option output="../../bin/sfe" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Release_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="CaveBombers Debug">
+				<Option output="../../bin/cavebombers_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Debug_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="CaveBombers Release">
+				<Option output="../../bin/cavebombers" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Release_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Foobar Debug">
+				<Option output="../../bin/foobar_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Debug_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Foobar Release">
+				<Option output="../../bin/foobar" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Release_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Pinball Debug">
+				<Option output="../../bin/pinball_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Debug_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Pinball Release">
+				<Option output="../../bin/pinball" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Release_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="PubLiippari Debug">
+				<Option output="../../bin/publiippari_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Debug_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="PubLiippari Release">
+				<Option output="../../bin/publiippari" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Release_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="RocketZ Debug">
+				<Option output="../../bin/rocketz_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Debug_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="RocketZ Release">
+				<Option output="../../bin/rocketz" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Release_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Tetrex Debug">
+				<Option output="../../bin/tetrex_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Debug_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Tetrex Release">
+				<Option output="../../bin/tetrex" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/" />
+				<Option object_output="obj/Release_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add library="SDL2main" />
+			<Add library="SDL2" />
+			<Add library="SDL2_mixer" />
+			<Add library="SDL2_image" />
+		</Linker>
+		<Unit filename="../audio.cpp" />
+		<Unit filename="../audio.hpp" />
+		<Unit filename="../color.cpp" />
+		<Unit filename="../color.hpp" />
+		<Unit filename="../config.cpp" />
+		<Unit filename="../config.hpp" />
+		<Unit filename="../constants.hpp" />
+		<Unit filename="../data.cpp" />
+		<Unit filename="../data.hpp" />
+		<Unit filename="../debug.cpp" />
+		<Unit filename="../debug.hpp" />
+		<Unit filename="../display.cpp" />
+		<Unit filename="../display.hpp" />
+		<Unit filename="../effux_circles.cpp" />
+		<Unit filename="../effux_circles.hpp" />
+		<Unit filename="../entity.cpp" />
+		<Unit filename="../entity.hpp" />
+		<Unit filename="../geom.cpp" />
+		<Unit filename="../geom.hpp" />
+		<Unit filename="../globals.cpp" />
+		<Unit filename="../globals.hpp" />
+		<Unit filename="../grapher.cpp" />
+		<Unit filename="../grapher.hpp" />
+		<Unit filename="../gui.cpp" />
+		<Unit filename="../gui.hpp" />
+		<Unit filename="../inputdevices.cpp" />
+		<Unit filename="../inputdevices.hpp" />
+		<Unit filename="../main.cpp" />
+		<Unit filename="../main.hpp" />
+		<Unit filename="../math.cpp" />
+		<Unit filename="../math.hpp" />
+		<Unit filename="../math_fp.cpp" />
+		<Unit filename="../midi.cpp" />
+		<Unit filename="../midi.hpp" />
+		<Unit filename="../misc.cpp" />
+		<Unit filename="../misc.hpp" />
+		<Unit filename="../network.cpp" />
+		<Unit filename="../network.hpp" />
+		<Unit filename="../options.hpp" />
+		<Unit filename="../program.cpp" />
+		<Unit filename="../program.hpp" />
+		<Unit filename="../program_cavebombers.cpp">
+			<Option target="CaveBombers Debug" />
+			<Option target="CaveBombers Release" />
+		</Unit>
+		<Unit filename="../program_cavebombers.hpp">
+			<Option target="CaveBombers Debug" />
+			<Option target="CaveBombers Release" />
+		</Unit>
+		<Unit filename="../program_foobar.cpp">
+			<Option target="Foobar Debug" />
+			<Option target="Foobar Release" />
+		</Unit>
+		<Unit filename="../program_foobar.hpp">
+			<Option target="Foobar Debug" />
+			<Option target="Foobar Release" />
+		</Unit>
+		<Unit filename="../program_pinball.cpp">
+			<Option target="Pinball Debug" />
+			<Option target="Pinball Release" />
+		</Unit>
+		<Unit filename="../program_pinball.hpp">
+			<Option target="Pinball Debug" />
+			<Option target="Pinball Release" />
+		</Unit>
+		<Unit filename="../program_publiippari.cpp">
+			<Option target="PubLiippari Debug" />
+			<Option target="PubLiippari Release" />
+		</Unit>
+		<Unit filename="../program_publiippari.hpp">
+			<Option target="PubLiippari Debug" />
+			<Option target="PubLiippari Release" />
+		</Unit>
+		<Unit filename="../program_rocketz.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../program_rocketz.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../program_template.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="../program_template.hpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="../program_tetrex.cpp">
+			<Option target="Tetrex Debug" />
+			<Option target="Tetrex Release" />
+		</Unit>
+		<Unit filename="../program_tetrex.hpp">
+			<Option target="Tetrex Debug" />
+			<Option target="Tetrex Release" />
+		</Unit>
+		<Unit filename="../projectile.cpp" />
+		<Unit filename="../projectile.hpp" />
+		<Unit filename="../scene.cpp" />
+		<Unit filename="../scene.hpp" />
+		<Unit filename="../timeline.cpp" />
+		<Unit filename="../timeline.hpp" />
+		<Unit filename="../types.hpp" />
+		<Unit filename="../water.cpp" />
+		<Unit filename="../water.hpp" />
+		<Unit filename="../zbuf.cpp" />
+		<Unit filename="../zbuf.hpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

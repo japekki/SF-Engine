@@ -4,10 +4,11 @@
 	This file has routines for making different scenes.
 */
 
+/*
 #include "scene.hpp"
 
 Camera::Camera() {
-	printf("Camera created.\n");
+	log("Camera created.");
 }
 
 Camera::Camera(vec3 location_, vec3 direction_) {
@@ -16,9 +17,7 @@ Camera::Camera(vec3 location_, vec3 direction_) {
 }
 
 void Camera::rotate(float angle_x, float angle_y, float angle_z) {
-	//#ifdef WITH_OPENGL
-		//glRotatef(-0.6f, 0.0f, 0.0f, 1.0f);
-	//#endif
+
 }
 
 Scene::Scene() {
@@ -33,10 +32,9 @@ void Scene::add_entity(Entity &Entity_) {
 	// return 0;
 }
 
-bool Scene::del_entity(Uint16 id) {
+bool Scene::del_entity(unsigned short id) {
 
 }
-
 
 void Scene::draw(SDL_Surface *sdlsurface) {
 	for (int i=0; i<entityarray.size(); i++) {
@@ -46,3 +44,5 @@ void Scene::draw(SDL_Surface *sdlsurface) {
 
 void Scene::apply_perspective() {
 }
+
+*/

@@ -6,6 +6,8 @@
 
 #include "timeline.hpp"
 
+/*
+
 Timeline::Timeline() {
 	position = 0;
 	previous_position = 0;
@@ -18,7 +20,7 @@ void Timeline::init() {
 	init_timestamp = SDL_GetTicks();
 }
 
-void Timeline::sync(Uint8 sync_type) {
+void Timeline::sync(unsigned char sync_type) {
 	switch (sync_type) {
 		case SYNC_CLOCK:
 			// Calibrate our starting timestamp to be zero:
@@ -44,11 +46,9 @@ void Timeline::set_speed(float new_speed) {
 	speed = new_speed;
 }
 
-/*
-void Timeline::add_action(Action action) {
-	actions.push_back(action);
-}
-*/
+//void Timeline::add_action(Action action) {
+//	actions.push_back(action);
+//}
 
 //void add_action(int time, void *function) {
 //    Action tmpact;
@@ -75,3 +75,5 @@ int Timeline::time_until_next_action() {
 		//if (actions.at(i). )
 	}
 }
+
+*/
