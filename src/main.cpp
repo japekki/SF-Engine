@@ -41,7 +41,6 @@ int main (int argc, char** argv) {
 			exit (EXIT_FAILURE);
 		}
 
-	//timestamp_demostart = SDL_GetTicks();
 	if (!program->mainloop()) {
 		log("Error in program mainloop.");
 		exit (EXIT_FAILURE);
@@ -58,4 +57,5 @@ int main (int argc, char** argv) {
 
 	log("Program finished.");
 	return exitcode;
+	//exit (EXIT_SUCCESS);
 }

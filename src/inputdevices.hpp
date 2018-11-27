@@ -12,23 +12,6 @@
 	// - Indicator / counter that a button has previously been pressed and released
 	// - Array for keyboard button states instead of separate named boolean variables
 
-	/*
-	void handle_events();
-
-	class IOBox {
-		IOBox();
-		std::vector<unsigned char> channels;
-		bool connect(IOBox io_box, unsigned char channel, void *methodcall);
-		void disconnect(IOBox io_box);
-		unsigned char read8bit(unsigned char channel);
-		unsigned short read16bit(unsigned char channel);
-		unsigned int read32bit(unsigned char channel);
-		bool write8bit(unsigned char channel, unsigned char data);
-		bool write16bit(unsigned char channel, unsigned short data);
-		bool write32bit(unsigned char channel, unsigned int data);
-	};
-	*/
-
 	class Keyboard {
 		public:
 			bool enabled;

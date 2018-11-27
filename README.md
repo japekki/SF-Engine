@@ -1,7 +1,21 @@
 # SF-Engine
-Multiplatform Demo / game engine.
+Demo / game engine.
 
-Version: 0.001
+Versions:
+
+Engine: 0.0001
+
+CaveBombers: 0.0001
+
+Foobar: 0.0001
+
+Pinball: 0.0001
+
+RocketZ: 0.0002
+
+PubLiippari: 0.0001
+
+Tetrex: 0.0001
 
 Features:
 
@@ -13,7 +27,7 @@ Includes a few sample programs that are supposed to be separate projects some da
 
 The music in RocketZ sample program is [a remix made by Nuggumath](https://www.youtube.com/watch?v=o3TkUdJ8NlA) of one of the original Wings game music tunes called [PELIMUSA.S3M, made by Jussi Huhtala](https://www.youtube.com/watch?v=XKs5mkEpWuU).
 
-I have a permission from Nuggumath to use his remix, but I decided not to include the original here in git since I have not asked for permission, and I'm probably not going to use it anyway since it already has been used in Wings.
+I have a permission from Nuggumath to use his remix, but I decided not to include the original here in git since I have not asked for permission, and I'm probably not going to use it anyway since it has already been used in Wings.
 
 But I've been using that tune while programming this, just to get into the mood. :) So you'll get an error message of that file missing, just ignore it.
 

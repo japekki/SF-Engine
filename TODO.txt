@@ -1,18 +1,17 @@
 TODO:
-- Optimize executable file for size, don't link excessive stuff statically
+- Concatenate text
 - Make library (sfe.dll / libsfe.so)
 - Makefile
 - Compatibility for various compilers/IDEs (GNU GCC/G++, MS Visual Studio, Android Studio, Open Watcom)
 - When paused, don't run mainloop but sleep until event (0% cpu usage while paused)
 - Threading
-- Include all needed headers in all files, remove unneeded header includes
 - Support for DirectX, OpenGL/GLES (make libSDL optional)
 - Support for MS-DOS and Android operating systems
 - Support for some gaming consoles (PlayStation, Xbox etc.)
 - Render demo/game into video file
 - Separate graphics engine and control client programs
 - Video editor style demo/game creator studio, similar to Unity and Demopaja
-- Realtime video/Audio input (camera, microphone, TV receiver, video file etc.)
+- Realtime video/audio input (camera, microphone, TV receiver, video file etc.)
 - Support for augmented reality and VR goggles
 - Documentation
 - Support for multiple displays (like, demo running on big screen and settings panel on monitor)
@@ -21,11 +20,17 @@ TODO:
 - Transition effects
 - Camera
 - Exception handling
+- Networking
 - Better keyboard handling routines
+- Save and load state (for games)
+- Close files after loading content
+- Configuration options in a file with a settings / launcher GUI
 
-FIX:
+FIX BUGS:
 - Possible memory leaks
+- Deleting some objects gives a segfault
 - FPS limit does not give maximum FPS even if the system has enough performance
 
-OPTIMIZE:
+OPTIMIZE / FINETUNE:
 - Get rid of unneccessary pointers
+- Check that all non-streamable files are closed after reading

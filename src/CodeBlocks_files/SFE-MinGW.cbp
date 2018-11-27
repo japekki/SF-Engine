@@ -30,8 +30,8 @@
 				</Linker>
 			</Target>
 			<Target title="CaveBombers Debug">
-				<Option output="../../bin/cavebombers_debug" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/CaveBombers/cavebombers_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/CaveBombers/" />
 				<Option object_output="obj/Debug_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -40,8 +40,8 @@
 				</Compiler>
 			</Target>
 			<Target title="Cavebombers Release">
-				<Option output="../../bin/cavebombers" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/CaveBombers/cavebombers" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/CaveBombers/" />
 				<Option object_output="obj/Release_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -53,8 +53,8 @@
 				</Linker>
 			</Target>
 			<Target title="Foobar Debug">
-				<Option output="../../bin/foobar_debug" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/Foobar/foobar_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/Foobar/" />
 				<Option object_output="obj/Debug_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -63,8 +63,8 @@
 				</Compiler>
 			</Target>
 			<Target title="Foobar Release">
-				<Option output="../../bin/foobar" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/Foobar/foobar" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/Foobar/" />
 				<Option object_output="obj/Release_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -76,8 +76,8 @@
 				</Linker>
 			</Target>
 			<Target title="Pinball Debug">
-				<Option output="../../bin/pinball_debug" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/Pinball/pinball_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/Pinball/" />
 				<Option object_output="obj/Debug_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -86,8 +86,8 @@
 				</Compiler>
 			</Target>
 			<Target title="Pinball Release">
-				<Option output="../../bin/pinball" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/Pinball/pinball" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/Pinball/" />
 				<Option object_output="obj/Release_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -99,8 +99,8 @@
 				</Linker>
 			</Target>
 			<Target title="PubLiippari Debug">
-				<Option output="../../bin/publiippari_debug" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/PubLiippari/publiippari_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/PubLiippari/" />
 				<Option object_output="obj/Debug_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -109,8 +109,8 @@
 				</Compiler>
 			</Target>
 			<Target title="PubLiippari Release">
-				<Option output="../../bin/publiippari" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/PubLiippari/publiippari" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/PubLiippari/" />
 				<Option object_output="obj/Release_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -122,8 +122,8 @@
 				</Linker>
 			</Target>
 			<Target title="RocketZ Debug">
-				<Option output="../../bin/rocketz_debug" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/RocketZ/rocketz_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/RocketZ/" />
 				<Option object_output="obj/Debug_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -132,8 +132,8 @@
 				</Compiler>
 			</Target>
 			<Target title="RocketZ Release">
-				<Option output="../../bin/rocketz" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/RocketZ/rocketz" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/RocketZ/" />
 				<Option object_output="obj/Release_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -145,8 +145,8 @@
 				</Linker>
 			</Target>
 			<Target title="Tetrex Debug">
-				<Option output="../../bin/tetrex_debug" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/Tetrex/tetrex_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/Tetrex/" />
 				<Option object_output="obj/Debug_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -155,8 +155,8 @@
 				</Compiler>
 			</Target>
 			<Target title="Tetrex Release">
-				<Option output="../../bin/tetrex" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/" />
+				<Option output="../../bin/Tetrex/tetrex" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/Tetrex/" />
 				<Option object_output="obj/Release_MinGW/" />
 				<Option type="1" />
 				<Option compiler="gnu_gcc_compiler_64_bit" />
@@ -184,7 +184,6 @@
 		<Unit filename="../color.hpp" />
 		<Unit filename="../config.cpp" />
 		<Unit filename="../config.hpp" />
-		<Unit filename="../constants.hpp" />
 		<Unit filename="../data.cpp" />
 		<Unit filename="../data.hpp" />
 		<Unit filename="../debug.cpp" />
@@ -193,12 +192,18 @@
 		<Unit filename="../display.hpp" />
 		<Unit filename="../effux_circles.cpp" />
 		<Unit filename="../effux_circles.hpp" />
+		<Unit filename="../effux_sky.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../effux_sky.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
 		<Unit filename="../entity.cpp" />
 		<Unit filename="../entity.hpp" />
 		<Unit filename="../geom.cpp" />
 		<Unit filename="../geom.hpp" />
-		<Unit filename="../globals.cpp" />
-		<Unit filename="../globals.hpp" />
 		<Unit filename="../grapher.cpp" />
 		<Unit filename="../grapher.hpp" />
 		<Unit filename="../gui.cpp" />
@@ -271,6 +276,20 @@
 		<Unit filename="../projectile.hpp" />
 		<Unit filename="../scene.cpp" />
 		<Unit filename="../scene.hpp" />
+		<Unit filename="../smoke.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../smoke.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../sprite.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="../sprite.hpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="../timeline.cpp" />
 		<Unit filename="../timeline.hpp" />
 		<Unit filename="../types.hpp" />

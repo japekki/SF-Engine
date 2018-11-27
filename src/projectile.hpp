@@ -5,22 +5,15 @@
 
 	class Projectile2D : public Vector2D {
 		public:
-		// Location:
-			float x = 0;
-			float y = 0;
-		// Heading
-		// Speed
+			float x, y;	// Location
+			void move();
 		// Mass
 	};
 
 	class Projectile3D : public Vector3D {
 		public:
-		// Location:
-			float x = 0;
-			float y = 0;
-			float z = 0;
-		// Heading
-		// Speed
+			float x, y, z;	// Location
+			void move();
 		// Mass
 	};
 

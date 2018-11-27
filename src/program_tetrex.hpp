@@ -4,7 +4,7 @@
 	#include "program.hpp"
 
 	// FILE NAMES:
-		#define DATAPATH ""
+		#define DATAPATH "data/"
 
 	class Tetrex : public Program {
 		public:

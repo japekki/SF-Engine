@@ -5,7 +5,6 @@
 */
 
 #include <iostream>
-//#include <SDL_image.h>
 #include "options.hpp"
 #include "program.hpp"
 #include "audio.hpp"

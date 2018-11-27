@@ -5,10 +5,12 @@
 	#include "projectile.hpp"
 
 	// FILE NAMES:
-		#define DATAPATH "../data/"
+		#define DATAPATH "data/"
 
 		// Pictures:
-			//#define FILENAME_PIC1 DATAPATH "picture.png"
+			// TODO: get rid of this test:
+				#define FILENAME_PIC_BALL DATAPATH "ball.png"
+				#define FILENAME_PIC_LEVEL1 DATAPATH "level1.png"
 
 		// Sounds:
 			#define FILENAME_MUSIC_LEVEL1 DATAPATH "kummitustalo.ogg"
@@ -30,26 +32,22 @@
 			#define FILENAME_SOUND_LAUNCH DATAPATH "launch.wav"
 			#define FILENAME_SOUND_RAMP1 DATAPATH "ramp1.wav"
 			#define FILENAME_SOUND_RAMP2 DATAPATH "ramp2.wav"
+			#define FILENAME_SOUND_RAMP3 DATAPATH "ramp3.wav"
 
-	/*
-		Texts in LCD:
-			Winners don't use drugs.
-			Launch...
-			JACKPOT!
-			TILT!
-	*/
+	// TODO: LCD FONT
 
 	class LcdPixel {
 	};
 
 	class Lcd {
 		// LcdPixel[]
+		// TODO: blink, scroll horizontally, scroll vertically, transition effects
 	};
 
 	class Bumber {
 	};
 
-	class Flipper {
+	class Flipper : public Polygon2D {
 	};
 
 	class Ball : public Projectile2D {
@@ -61,10 +59,29 @@
 	};
 
 	class Level {
-		//
+		/*
+		Texts in LCD:
+			Winners don't use drugs.
+			Launch...
+			JACKPOT!
+			TILT!
+			HAPPY HOUR!
+		*/
 	};
 
 	class Level_Halloween : public Level {
+		/*
+		Texts in LCD:
+			TRICK OR TREAT
+		*/
+	};
+
+	class Level_Robolab : public Level {
+		/*
+		Texts in LCD:
+			All systems activated
+			IT'S ALIVE!
+		*/
 	};
 
 	class Gameplay {
@@ -81,8 +98,8 @@
 			bool init() override;
 			bool mainloop() override;
 			// DATA:
-				Mix_Music *music_title;
-				SDL_Surface *pic_titlescreen;
+				//Mix_Music *music_title;
+				Audio *music_level1;
 	};
 
 #endif // PROGRAM_PINBALL_HPP

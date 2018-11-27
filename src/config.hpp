@@ -1,6 +1,10 @@
-#ifndef DATA_HPP
-	#define DATA_HPP
+#ifndef CONFIG_HPP
+	#define CONFIG_HPP
 
-	//bool read_configfile();
+	class Config {
+		//std::string filename;
+		//bool read();
+		//bool save();
+	};
 
-#endif // DATA_HPP
+#endif // CONFIG_HPP

@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has compile options what to include in the program and what not.
+*/
+
 #ifndef OPTIONS_HPP
 	#define OPTIONS_HPP
 

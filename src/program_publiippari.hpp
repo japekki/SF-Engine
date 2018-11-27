@@ -4,7 +4,7 @@
 	#include "program.hpp"
 
 	// FILE NAMES:
-		#define DATAPATH ""
+		#define DATAPATH "data/"
 		#define FILENAME_LOGO DATAPATH "logo.png"
 		//#define FILENAME_KANNIKALA1 DATAPATH "kannikala1.png"
 		//#define FILENAME_KANNIKALA2 DATAPATH "kannikala2.png"

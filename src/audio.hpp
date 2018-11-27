@@ -12,8 +12,6 @@
 		public:
 			Audio();
 			~Audio();
-			//bool load_trackersong(char *filename);
-			//bool play_trackersong();
 			bool works = true;	// Set to false if something goes wrong
 			bool load_file(char *filename);
 			void play();

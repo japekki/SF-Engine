@@ -1,8 +1,13 @@
 #ifndef NETWORK_HPP
 	#define NETWORK_HPP
-/*
-	// For controlling SF-Engine remotely over sockets
 
-	// TODO: Networking/linking trough null-modem cable
-*/
+	// TODO: null-modem cable support
+
+	class Server {
+		unsigned short port;
+	};
+
+	class Client {
+	};
+
 #endif // NETWORK_HPP

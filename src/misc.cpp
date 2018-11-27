@@ -8,7 +8,7 @@
 //#include <sstream>
 //#include <ctime>
 #include "options.hpp"
-//#include "misc.hpp"
+#include "misc.hpp"
 
 void log(const std::string &msg) {
 	// Print timestamp

@@ -3,6 +3,9 @@
 
 	#include "types.hpp"
 
+	// TODO:
+	// - Optimize: Use only certain color format(s), do not always store and convert everything to everything
+
 	struct ColorRGB {
 		float r;
 		float g;
@@ -28,6 +31,10 @@
 			unsigned int rgb_to_int();
 			ColorRGB int_to_rgb();
 			ColorHSL int_to_hsl();
+			// void blend(Color* color);
+			// void invert();
 	};
+
+	//void generate_hsl_table(SDL_Surface *sdlsurface);
 
 #endif // COLOR_HPP

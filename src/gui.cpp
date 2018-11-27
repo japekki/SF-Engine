@@ -6,8 +6,9 @@
 
 // TODO: Threaded dialogs for changing or watching parameters
 
-/*
 #include "gui.hpp"
+
+/*
 
 void startup_dialog() {
 	// Ask for resolution / color depth / hertzes

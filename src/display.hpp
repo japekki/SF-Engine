@@ -10,24 +10,22 @@
 		private:
 			std::string title;
 			bool fullscreen = false;
-			bool vsync = false;
-			unsigned int timestamp_initial;	// when the display was initialized
+			bool vsync = false;					// TODO
+			unsigned int timestamp_initial;		// when the display was initialized
 			unsigned int timestamp_start = 0;   // timestamp at mainloop begin
-			unsigned int timestamp_end;     // timestamp at mainloop end
+			unsigned int timestamp_end;     	// timestamp at mainloop end
 			unsigned int framecounter = 0;
-			unsigned char fps_desired = 1;	// Don't draw faster than this
-			unsigned char fps_max;			// Highest FPS momentarily achieved
+			unsigned char fps_desired = 1;		// Don't draw faster than this, 0 = unlimited
+			unsigned char fps_max;				// Highest FPS momentarily achieved
 		public:
-		// Variables:
-			bool works = true;			// Change to false if something goes wrong
+		// VARIABLES:
+			bool works = true;					// Change to false if something goes wrong
 			SDL_Window *sdlwindow;
-			SDL_Renderer *sdlrenderer;
-			//SDL_Surface* sdlsurface;	// Inherited from class Grapher
-			SDL_Texture *sdltexture;
-			//int delay;
+			//SDL_Renderer *sdlrenderer;		// Inherited from class Grapher (?)
+			//SDL_Texture *sdltexture;			// Inherited from class Grapher (?)
 			//bool resizable;
-			//unsigned int clearcolor;
-		// Functions:
+			//Color clearcolor;
+		// FUNCTIONS:
 			Display();
 			~Display();
 			void set_timestamp_start(unsigned int timestamp);
@@ -46,8 +44,8 @@
 			void clearscreen();
 			bool refresh();
 			bool setup();
-			float get_totalfps();		// Total average fps from init to deinit
-			float get_lastfps();		// Fps during last frame refresh
+			float get_totalfps();				// Total average fps from init to deinit
+			float get_lastfps();				// Fps during last frame refresh
 			unsigned char get_desiredfps();
 			unsigned int get_runtime();
 			unsigned int get_framecount();

@@ -37,7 +37,7 @@
 	void init() {
 	}
 
-	void test() {
+	void test() {	// some example code ripped from the Internet
 	//
 	//	#include <stdio.h>     // for printf() function
 

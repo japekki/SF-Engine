@@ -30,6 +30,13 @@ bool Tetrex::init() {
 bool Tetrex::mainloop() {
 	while (!this->mainloop_done and this->works) {
 		handle_events();
+		// If space, drop block immediately
+		// If down, drop block faster
+		// If left, move block left
+		// If right, move block right
+		// If V, rotate block right
+		// If F, rotate block left
+		// If Esc, quit/pause
 		this->display->refresh();
 	}
 	return this->works;

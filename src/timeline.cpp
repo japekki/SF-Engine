@@ -6,15 +6,13 @@
 
 #include "timeline.hpp"
 
-/*
-
 Timeline::Timeline() {
-	position = 0;
-	previous_position = 0;
 }
 
 Timeline::~Timeline() {
 }
+
+/*
 
 void Timeline::init() {
 	init_timestamp = SDL_GetTicks();

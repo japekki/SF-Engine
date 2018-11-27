@@ -1,13 +1,12 @@
 #ifndef DEBUG_HPP
 	#define DEBUG_HPP
+
 /*
-	#include <SDL.h>
-
 	// Debugging messages:
-		//#define debug_errormsg_something "error"
-
-	void SDL_SurfaceInfo(char * name, SDL_Surface *sdlsurface);
+		#define debug_errormsg_something "error"
+		#define MSG_QUITERROR "Program aborted due to an error."
 */
+
 #endif // DEBUG_HPP
 
 

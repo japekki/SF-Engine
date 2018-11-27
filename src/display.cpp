@@ -37,19 +37,8 @@
 			}
 
 		// Set up SDL display window:
-			/*
-			this->sdlwindow = SDL_CreateWindow(this->title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->width, this->height, SDL_WINDOW_SHOWN);
-				// TODO: Native desktop resolution:
-				// this->sdlwindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP);
-			if (this->sdlwindow == nullptr) {
-				log("ERROR while creating SDL surface:");
-				log(SDL_GetError());
-				SDL_Quit();
-				this->works = false;
-			}
-			*/
 			Uint32 flags = 0;
-			if (this->fullscreen) flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
+			if (this->fullscreen) flags = SDL_WINDOW_FULLSCREEN;
 			if (SDL_CreateWindowAndRenderer(this->width, this->height, flags, &this->sdlwindow, &this->sdlrenderer) != 0) {
                 log("ERROR while creating SDL Window with Renderer:");
                     log(SDL_GetError());
@@ -57,20 +46,14 @@
                     this->works = false;
                 }
 
-			this->sdlsurface = SDL_GetWindowSurface(this->sdlwindow);
+			//this->sdlsurface = SDL_GetWindowSurface(this->sdlwindow);
 
 			// Set up SDL renderer:
-			/*
-				this->sdlrenderer = SDL_CreateRenderer(this->sdlwindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-				if (this->sdlrenderer == nullptr){
-					SDL_DestroyWindow(this->sdlwindow);
-					log("ERROR while creating SDL renderer:");
-					log(SDL_GetError());
-					SDL_Quit();
-					this->works = false;
-				}
-				*/
-			this->sdltexture = SDL_CreateTexture(this->sdlrenderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, this->width, this->height);
+				// this->sdlrenderer = SDL_CreateRenderer(this->sdlwindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+			//this->sdltexture = SDL_CreateTexture(this->sdlrenderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, this->width, this->height);
+			//SDL_SetRenderTarget(this->sdlrenderer, this->sdltexture);
+			//SDL_SetRenderTarget(this->sdlrenderer, 0);
 
 		//this->zbuf->set_size(width, height);
 		this->timestamp_initial = SDL_GetTicks();
@@ -102,7 +85,7 @@
 	bool Display::set_fullscreen(bool fullscreen) {
 		this->fullscreen = fullscreen;
 		if (fullscreen)
-			SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
+			SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN);
 		else
 			SDL_SetWindowFullscreen(this->sdlwindow, 0);
 		return true;	// TODO
@@ -112,7 +95,7 @@
 		if (this->fullscreen)
 			SDL_SetWindowFullscreen(this->sdlwindow, 0);
 		else
-			SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
+			SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN);
 		this->fullscreen =! this->fullscreen;
 		return true;	// TODO
 	}
@@ -146,16 +129,13 @@ void Display::clearscreen() {	// FIXME: Does not clear the screen
 }
 
 bool Display::refresh() {
-	bool works = true; // Change to false if something goes wrong
-	SDL_UpdateTexture(this->sdltexture, NULL, this->sdlsurface->pixels, this->sdlsurface->pitch);
-	SDL_RenderCopy(this->sdlrenderer, this->sdltexture, NULL, NULL);
 	SDL_RenderPresent(this->sdlrenderer);
 	this->framecounter++;
 
 	//z_buf.reset();
 
 	// Sleep and sync to desired FPS:
-	if (works) {
+	if (this->fps_desired != 0 and this->works) {	// 0 = unlimited fps
 		this->timestamp_end = SDL_GetTicks();
 		//SDL_WM_SetCaption("DEMO | FPS: " << framecounter/((timestamp_atend - timestamp_atstart)/1000.0), NULL)
 		//SDL_SetWindowTitle(this->sdlwindow, 1000.0/(this->timestamp_end - this->timestamp_start)));
@@ -165,7 +145,7 @@ bool Display::refresh() {
 		this->timestamp_start = SDL_GetTicks();
 	}
 
-	return works;
+	return this->works;
 }
 
 float Display::get_totalfps(){

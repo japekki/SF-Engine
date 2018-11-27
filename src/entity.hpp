@@ -8,15 +8,13 @@
 	#include "options.hpp"
 */
 
-	struct elements {
-		float a,b,c,d,e,f,g;
-	};
+// TODO: Polygon sprites
 
 	class Entity {
 	public:
 		Entity();
 		~Entity();
-		SDL_Surface *surface;
+		//SDL_Surface *surface;
 
 		string filename;
 

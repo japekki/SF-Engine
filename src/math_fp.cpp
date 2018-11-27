@@ -1,5 +1,5 @@
 	// TODO: FIXED POINT MATH
-	// TODO: Should these be used even with OpenGL?
+	// TODO: Should these even be used with OpenGL?
 	/*
 	class Fxp {
 		// TODO: case->Case
@@ -41,7 +41,7 @@
 		}
 
 		short Round() {
-			// TODO: Toimiiko negatiivisilla?
+			// TODO: Does this work on negative numbers?
 			if ( short(value) < 0 ) {
 				// if left fractional bit 1
 				return short(value >> 16) + 1;
@@ -61,3 +61,5 @@
 		fxp value3 = value1 * value2;
 		float value4 = value3.GetFloatingPoint();
 	*/
+
+	//void generate_sin_table();

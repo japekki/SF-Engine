@@ -4,7 +4,7 @@
 	#include "program.hpp"
 
 	// FILE NAMES:
-		#define DATAPATH "../data/"
+		#define DATAPATH "data/"
 
 	class Cavebombers : public Program {
 		public:
