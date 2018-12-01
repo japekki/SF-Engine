@@ -1,10 +1,16 @@
+/*
+	SF-Engine
+
+	This file has routines for the timeline.
+*/
+
+// There are three kind of things to put into timeline:
+// - Things that are calculated in this frame only. Sprite drawing for example.
+// - Things that need to be calculated cumulative so that the previous results are needed in further calculations.
+// - Nested sub-timelines
+
 #ifndef TIMELINE_HPP
 	#define TIMELINE_HPP
-
-	// There are three kind of things to put into timeline:
-	// - Things that are calculated in this frame only. Sprite drawing for example.
-	// - Things that need to be calculated cumulative so that the previous results are needed in further calculations.
-	// - Nested sub-timelines
 
 	#include <vector>
 
@@ -31,7 +37,7 @@
 			int position = 0;			// current playing position in milliseconds
 			int previous_position = 0;	// when we last polled an action
 			unsigned int duration;		// milliseconds
-			float speed;				// + or -, 1 = "normal speed"
+			float speed;				// + or -, 1 = "normal speed", negative plays backwards
 			bool playing;
 			std::vector<Action> actions;
 		public:

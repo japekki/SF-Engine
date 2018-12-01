@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for MIDI devices.
+*/
+
 #ifndef MIDI_HPP
 	#define MIDI_HPP
 

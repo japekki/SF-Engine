@@ -1,12 +1,14 @@
-/*
-	SF-Engine
-
-	This file has routines for geometrics.
-*/
-
 #include <math.h>
 #include "geom.hpp"
 #include "math.hpp"
+
+float Coordinate2D::distance_from_origo() {
+	return sqrt(x*x + y*y);
+};
+
+float Coordinate3D::distance_from_origo() {
+	return sqrt(x*x + y*y + z*z);
+};
 
 int Coordinategrid::get_x_min() {
 	return x_min;
@@ -103,6 +105,34 @@ void Point3D::rotate(float angle_x, float angle_y, float angle_z) {
 	x = new_x;
 }
 
+Linesegment2D::Linesegment2D(Point2D point_a, Point2D point_b) {
+	this->point_a = point_a;
+	this->point_b = point_b;
+}
+
+float Linesegment2D::get_slope() {
+	// How much Y changes, when X changes by one
+	// K = delta_y / delta_x
+	return (point_b.y - point_a.y) / (point_b.x - point_a.x);   // ignores Z coordinates
+}
+
+Line2D Linesegment2D::get_normal() {
+	// TODO
+}
+
+Linesegment3D::Linesegment3D(Point3D point_a, Point3D point_b) {
+	this->point_a = point_a;
+	this->point_b = point_b;
+}
+
+float Linesegment3D::get_slope() {
+	// TODO
+}
+
+Line3D Linesegment3D::get_normal() {
+	// TODO
+}
+
 Triangle2D::Triangle2D() {
 }
 
@@ -111,19 +141,19 @@ Triangle2D::~Triangle2D() {
 	//delete[] this->vertexes;	// FIXME: segfault
 }
 
-void Triangle2D::set_vertexes(Vertex2D *vertex1, Vertex2D *vertex2, Vertex2D *vertex3) {
+void Triangle2D::set_vertexes(Vertex2D vertex1, Vertex2D vertex2, Vertex2D vertex3) {
 	this->vertexes[0] = vertex1;
 	this->vertexes[1] = vertex2;
 	this->vertexes[2] = vertex3;
 }
 
 void Triangle2D::rotate(float angle) {
-	this->vertexes[0]->rotate(angle);
-	this->vertexes[1]->rotate(angle);
-	this->vertexes[2]->rotate(angle);
+	this->vertexes[0].rotate(angle);
+	this->vertexes[1].rotate(angle);
+	this->vertexes[2].rotate(angle);
 }
 
-void Polygon2D::add_triangle(Triangle2D *triangle) {
+void Polygon2D::add_triangle(Triangle2D &triangle) {
 	this->triangles.push_back(triangle);
 }
 
@@ -137,3 +167,76 @@ Triangle3D::~Triangle3D() {
 
 void Triangle3D::rotate(float angle_x, float angle_y, float angle_z) {
 }
+
+Polygon2D::~Polygon2D() {
+	//delete [] vertexarray;
+}
+
+Polygon3D::~Polygon3D() {
+	//delete [] vertexarray;
+}
+
+Boundingbox3D Polygon3D::get_boundingbox() {
+	Boundingbox3D result;
+	for (int triangle_i = 0; triangle_i < triangles.size(); triangle_i++) {
+		Triangle3D tmp_triangle = triangles.at(triangle_i);
+		for (int vertex_i = 0; vertex_i < 3; vertex_i++) {
+			Vertex3D tmp_vertex = tmp_triangle.vertexes[vertex_i];
+			if (result.x_min > tmp_vertex.x) result.x_min = tmp_vertex.x;
+			else if (result.x_max < tmp_vertex.x) result.x_max = tmp_vertex.x;
+			if (result.y_min > tmp_vertex.y) result.y_min = tmp_vertex.y;
+			else if (result.y_max < tmp_vertex.y) result.y_max = tmp_vertex.y;
+			if (result.z_min > tmp_vertex.z) result.z_min = tmp_vertex.z;
+			else if (result.z_max < tmp_vertex.z) result.z_max = tmp_vertex.z;
+			result.width = fabs(result.x_max - result.x_min);
+			result.height = fabs(result.y_max - result.y_min);
+			result.depth = fabs(result.z_max - result.z_min);
+		}
+	}
+	return result;
+}
+
+/*
+float Circle2D::get_area() {
+	// Circle's area
+	// A = pi * r^2
+	return PI*radius*radius;
+}
+
+float Ball::get_area() {
+	// A = 4 * pi * r^2
+	return 4 * PI * radius*radius;
+}
+
+float Ball::get_volume() {
+	// V = (4 * pi * r^3) / 3
+	return (4 * PI * radius*radius*radius) / 3;
+}
+*/
+
+float distance(Coordinate2D point_a, Coordinate2D point_b) {
+	// distance = sqrt(delta_x^2 + delta_y^2)
+	int delta_x = (point_b.x - point_a.x);
+	int delta_y = (point_b.y - point_a.y);
+	return sqrt(delta_x*delta_x + delta_y*delta_y);
+}
+
+float distance(Coordinate3D point_a, Coordinate3D point_b) {
+	// distance = sqrt(delta_x^2 + delta_y^2 + delta_z^2)
+	int delta_x = (point_b.x - point_a.x);
+	int delta_y = (point_b.y - point_a.y);
+	int delta_z = (point_b.z - point_a.z);
+	return sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z);
+}
+
+/*
+#ifdef WITH_DEBUGMSG
+	// TODO:
+	void printvertexarray(std::vector<Vertex3D> vertexes) {
+		for (int i = 0; i < vertexes.size(); i++) {
+			Vertex3D tmp = vertexes.at(i);
+			printf("x: %f y: %f z: %f r: %f g: %f b: %f\n", tmp.x, tmp.y, tmp.z, tmp.r, tmp.g, tmp.b);
+		}
+	}
+#endif
+*/

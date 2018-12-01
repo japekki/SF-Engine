@@ -1,11 +1,3 @@
-/*
-	SF-Engine
-
-	This file has demo/game specific routines.
-
-	This one is supposed to be a Minebombers style game.
-*/
-
 #include "program_cavebombers.hpp"
 
 Cavebombers::Cavebombers() {
@@ -21,7 +13,8 @@ bool Cavebombers::init() {
 	// SET UP DISPLAY DEVICE:
 		this->display->set_width(640);
 		this->display->set_height(480);
-		this->display->set_desiredfps(40);
+		this->display->set_desiredfps(50);
+		//this->display->vsync = true;
 		//this->display->set_fullscreen(true);
 	Program::init();
 	return this->works;

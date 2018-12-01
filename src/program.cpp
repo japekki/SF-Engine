@@ -1,9 +1,3 @@
-/*
-	SF-Engine
-
-	Derive game/demo specific code from here.
-*/
-
 #include <iostream>
 #include "options.hpp"
 #include "program.hpp"
@@ -32,6 +26,7 @@ Program::Program() {
 		this->display->set_width(640);
 		this->display->set_height(480);
 		this->display->set_desiredfps(40);
+		//this->display->vsync = true;
 		//this->display->set_fullscreen(true);
 }
 
@@ -97,6 +92,7 @@ void Program::handle_events() {
 						break;
 					case SDLK_s:
 						// Save screenshot:
+						/*
 						unsigned int rmask, gmask, bmask, amask;
 						#if SDL_BYTEORDER == SDL_BIG_ENDIAN
 							rmask = 0xff000000; gmask = 0x00ff0000; bmask = 0x0000ff00; amask = 0x000000ff;
@@ -105,6 +101,7 @@ void Program::handle_events() {
 						#endif
 							//if(SDL_SaveBMP(this->dispaly->sdlsurface, "screenshot.bmp") != 0)
 								//log("ERROR: Cannot save screenshot image");
+						*/
 						break;
 					case SDLK_F11:
 						this->display->toggle_fullscreen();

@@ -1,9 +1,3 @@
-/*
-	SF-Engine
-
-	This file has routines for the timeline.
-*/
-
 #include "timeline.hpp"
 
 Timeline::Timeline() {

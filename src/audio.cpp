@@ -1,16 +1,4 @@
 /*
-	SF-Engine
-
-	This file has routines for sound / music.
-*/
-
-// TODO:
-// - Why changing the init flags does not affect anything
-// - What is the difference between SDL_Init(SDL_INIT_AUDIO) and Mix_Init(flags)
-// - When to call Mix_Quit()
-// - Should a new Audio object be created for every sound file, every sound instance, or just one Audio object
-
-/*
 FLAGS:
 	MIX_INIT_FLAC
 	MIX_INIT_MOD
@@ -23,7 +11,7 @@ FLAGS:
 #include "misc.hpp"
 
 bool audio_init() {
-	bool works = true;
+	bool works = true;	// Change to false if something goes wrong
 	if (SDL_Init(SDL_INIT_AUDIO) < 0) {
 		log("Failed to init Audio.");
 		works = false;
@@ -53,7 +41,7 @@ Audio::~Audio() {
 		//Mix_Quit();
 }
 
-bool Audio::load_file(char *filename) {
+bool Audio::load_file(const char *filename) {
 	#ifdef WITH_DEBUGMSG
 		debugmsg("Audio::load_mp3()");
 		//debugmsg(filename);

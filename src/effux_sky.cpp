@@ -1,4 +1,4 @@
 #include "effux_sky.hpp"
 
-void Cloud::roll() {
+void Sky::roll_clouds() {
 }

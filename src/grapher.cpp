@@ -1,11 +1,25 @@
-/*
-	SF-Engine
-
-	This file has routines for drawing graphics.
-*/
-
+#include <SDL_image.h>
 #include "grapher.hpp"
 #include "misc.hpp"
+
+SDL_Texture* Grapher::load_texture(const char* filename) {
+	SDL_Texture *texture;
+	SDL_RWops *rwop;
+		rwop = SDL_RWFromFile(filename, "rb");
+		if (rwop != NULL) {
+			SDL_Surface *temp = IMG_LoadPNG_RW(rwop);
+			SDL_RWclose(rwop);
+			texture = SDL_CreateTextureFromSurface(this->sdlrenderer, temp);
+			SDL_FreeSurface(temp);
+			if(!texture) {
+				log("ERROR loading image file:");
+				log(IMG_GetError());
+			}
+		} else {
+			log("ERROR opening image file.");
+		}
+		return texture;
+}
 
 /*
 void Grapher::draw_pixel(Uint16 x, Uint16 y, unsigned int color) {
@@ -25,9 +39,9 @@ void Grapher::draw_triangle(Triangle2D *triangle) {
 		//this->draw_pixel(triangle->vertexes[2]->x, triangle->vertexes[2]->y, 0xffff00);
 	// Lines:
 		SDL_SetRenderDrawColor(this->sdlrenderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-		SDL_RenderDrawLine(this->sdlrenderer, triangle->vertexes[0]->x, triangle->vertexes[0]->y, triangle->vertexes[1]->x, triangle->vertexes[1]->y);
-		SDL_RenderDrawLine(this->sdlrenderer, triangle->vertexes[1]->x, triangle->vertexes[1]->y, triangle->vertexes[2]->x, triangle->vertexes[2]->y);
-		SDL_RenderDrawLine(this->sdlrenderer, triangle->vertexes[2]->x, triangle->vertexes[2]->y, triangle->vertexes[0]->x, triangle->vertexes[0]->y);
+		SDL_RenderDrawLine(this->sdlrenderer, triangle->vertexes[0].x, triangle->vertexes[0].y, triangle->vertexes[1].x, triangle->vertexes[1].y);
+		SDL_RenderDrawLine(this->sdlrenderer, triangle->vertexes[1].x, triangle->vertexes[1].y, triangle->vertexes[2].x, triangle->vertexes[2].y);
+		SDL_RenderDrawLine(this->sdlrenderer, triangle->vertexes[2].x, triangle->vertexes[2].y, triangle->vertexes[0].x, triangle->vertexes[0].y);
 	/*
 	switch(shadestyle) {
 		case POLYGON_SHADESTYLE_POINT:

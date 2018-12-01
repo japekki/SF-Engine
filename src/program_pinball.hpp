@@ -1,3 +1,11 @@
+/*
+	SF-Engine
+
+	This file has demo/game specific routines.
+
+	This one is supposed to be a pinball game.
+*/
+
 #ifndef PROGRAM_PINBALL_HPP
 	#define PROGRAM_PINBALL_HPP
 
@@ -8,9 +16,6 @@
 		#define DATAPATH "data/"
 
 		// Pictures:
-			// TODO: get rid of this test:
-				#define FILENAME_PIC_BALL DATAPATH "ball.png"
-				#define FILENAME_PIC_LEVEL1 DATAPATH "level1.png"
 
 		// Sounds:
 			#define FILENAME_MUSIC_LEVEL1 DATAPATH "kummitustalo.ogg"
@@ -29,6 +34,7 @@
 			#define FILENAME_SOUND_TILT DATAPATH "tilt.wav"
 			#define FILENAME_SOUND_JACKPOT DATAPATH "jackpot.wav"
 			#define FILENAME_SOUND_GAMEOVER DATAPATH "gameover.wav"
+			#define FILENAME_SOUND_PAUSE DATAPATH "pause.wav"
 			#define FILENAME_SOUND_LAUNCH DATAPATH "launch.wav"
 			#define FILENAME_SOUND_RAMP1 DATAPATH "ramp1.wav"
 			#define FILENAME_SOUND_RAMP2 DATAPATH "ramp2.wav"
@@ -85,10 +91,11 @@
 	};
 
 	class Gameplay {
-		std::vector<Player> players;
-		std::vector<Ball> balls;	// balls moving on screen (many balls simultaneously if in multiball mode)
-		bool gameover = false;
-		void run();
+		public:
+			std::vector<Player> players;
+			std::vector<Ball> balls;	// balls moving on screen (many balls simultaneously if in multiball mode)
+			bool gameover = false;
+			void run();
 	};
 
 	class Pinball : public Program {

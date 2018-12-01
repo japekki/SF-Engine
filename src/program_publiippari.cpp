@@ -1,12 +1,7 @@
-/*
-	SF-Engine
-
-	This file has demo/game specific routines.
-
-	This one is supposed to be a screensaver.
-*/
-
 #include "program_publiippari.hpp"
+
+void Faucet::drip() {
+}
 
 PubLiippari::PubLiippari() {
 	// SET PROGRAM ATTRIBUTES:
@@ -21,7 +16,8 @@ bool PubLiippari::init() {
 	// SET UP DISPLAY DEVICE:
 		this->display->set_width(640);
 		this->display->set_height(480);
-		this->display->set_desiredfps(40);
+		this->display->set_desiredfps(50);
+		//this->display->vsync = true;
 		//this->display->set_fullscreen(true);
 	Program::init();
 	return this->works;

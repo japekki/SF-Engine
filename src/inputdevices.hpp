@@ -1,16 +1,23 @@
+/*
+	SF-Engine
+
+	This file has routines for user interaction, like reading input devices such as keyboard, mouse, joystick etc.
+*/
+
+/*
+TODO:
+- Lower level keyboard handling (polling states may miss key presses when running slow)
+- Indicator / counter that a button has previously been pressed and released
+- Array for keyboard button states instead of separate named boolean variables
+*/
+
 #ifndef INPUTDEVICES_HPP
 	#define INPUTDEVICES_HPP
 
+	//#include "options.hpp"
 	#include "types.hpp"
 	//#include <vector>
 	//#include <SDL.h>
-
-	//#include "options.hpp"
-
-	// TODO:
-	// - Lower level keyboard handling (polling states may miss key presses when running slow)
-	// - Indicator / counter that a button has previously been pressed and released
-	// - Array for keyboard button states instead of separate named boolean variables
 
 	class Keyboard {
 		public:
@@ -80,13 +87,15 @@
 	};
 
 	class Mouse {
+		private:
+			bool cursor = true;	// Mouse pointer visible or not
 		public:
-		//bool cursor = true;	// Mouse pointer visible or not
-		int pos_x, pos_y;
-		int change_x, change_y;
-		bool button1down = false;
-		bool button2down = false;
-		bool button3down = false;
+			int pos_x, pos_y;
+			int change_x, change_y;
+			bool button1down = false;
+			bool button2down = false;
+			bool button3down = false;
+			void set_cursor(bool state);	// TODO: ability to set different mouse cursors
 	};
 
 	class Joystick {

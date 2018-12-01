@@ -1,10 +1,10 @@
+// TODO:
+// - Optimize: Use only certain color format(s), do not always store and convert everything to everything
+
 #ifndef COLOR_HPP
 	#define COLOR_HPP
 
 	#include "types.hpp"
-
-	// TODO:
-	// - Optimize: Use only certain color format(s), do not always store and convert everything to everything
 
 	struct ColorRGB {
 		float r;

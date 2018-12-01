@@ -1,7 +1,6 @@
 TODO:
-- Concatenate text
 - Make library (sfe.dll / libsfe.so)
-- Makefile
+- Makefile / configure
 - Compatibility for various compilers/IDEs (GNU GCC/G++, MS Visual Studio, Android Studio, Open Watcom)
 - When paused, don't run mainloop but sleep until event (0% cpu usage while paused)
 - Threading
@@ -13,18 +12,29 @@ TODO:
 - Video editor style demo/game creator studio, similar to Unity and Demopaja
 - Realtime video/audio input (camera, microphone, TV receiver, video file etc.)
 - Support for augmented reality and VR goggles
+- Simplify / re-design relation between Grapher, Display and SDL
 - Documentation
 - Support for multiple displays (like, demo running on big screen and settings panel on monitor)
-- Polar coordinate system (angle and radius)
-- Consider using SDL_Texture instead of SDL_Surface
-- Transition effects
+- Polar coordinate plane (angle and radius)
 - Camera
 - Exception handling
-- Networking
+- Networking (TCP/IP and serial port cable)
 - Better keyboard handling routines
-- Save and load state (for games)
+- Save and load state (for games) with recording and replay
 - Close files after loading content
 - Configuration options in a file with a settings / launcher GUI
+- Enum vs. #define
+- Generate textures according to resolution and aspect ratio instead of static size / scaling
+- Transition effects:
+	- fade in/out
+	- pixelize
+	- bar sweep
+	- frame sweep
+	- circle window
+	- pixel explode/implode
+	- burn away
+	- roll away like paper
+	- break to shards like a glass window
 
 FIX BUGS:
 - Possible memory leaks
@@ -32,5 +42,6 @@ FIX BUGS:
 - FPS limit does not give maximum FPS even if the system has enough performance
 
 OPTIMIZE / FINETUNE:
-- Get rid of unneccessary pointers
+- Get rid of unneccessary pointers and use them when unneccessary object copying happening
 - Check that all non-streamable files are closed after reading
+- Better font/text drawing

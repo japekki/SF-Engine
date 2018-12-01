@@ -1,15 +1,6 @@
-/*
-	SF-Engine
-
-	This file has routines for user interaction, like reading input devices such as keyboard, mouse, joystick etc.
-*/
-
 #include "inputdevices.hpp"
 
-/*
-#include "options.hpp"
-#include "sound.hpp"
-*/
+//#include "options.hpp"
 
 Keyboard::Keyboard() {
 }

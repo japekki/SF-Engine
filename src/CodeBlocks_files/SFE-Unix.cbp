@@ -29,6 +29,29 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
+			<Target title="SFE demo Debug">
+				<Option output="../../bin/SFE_demo/sfe_demo_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/SFE_demo/" />
+				<Option object_output="obj/Debug_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="SFE demo Release">
+				<Option output="../../bin/SFE_demo/sfe_demo" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/SFE_demo/" />
+				<Option object_output="obj/Release_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
 			<Target title="CaveBombers Debug">
 				<Option output="../../bin/CaveBombers/cavebombers_debug" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../../bin/CaveBombers/" />
@@ -42,29 +65,6 @@
 			<Target title="CaveBombers Release">
 				<Option output="../../bin/CaveBombers/cavebombers" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../../bin/CaveBombers/" />
-				<Option object_output="obj/Release_Unix/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O3" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
-			</Target>
-			<Target title="Foobar Debug">
-				<Option output="../../bin/Foobar/foobar_debug" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/Foobar/" />
-				<Option object_output="obj/Debug_Unix/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-				</Compiler>
-			</Target>
-			<Target title="Foobar Release">
-				<Option output="../../bin/Foobar/foobar" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/Foobar/" />
 				<Option object_output="obj/Release_Unix/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -176,6 +176,7 @@
 			<Add library="SDL2" />
 			<Add library="SDL2_mixer" />
 			<Add library="SDL2_image" />
+			<Add library="SDL2_ttf" />
 		</Linker>
 		<Unit filename="../audio.cpp" />
 		<Unit filename="../audio.hpp" />
@@ -183,19 +184,41 @@
 		<Unit filename="../color.hpp" />
 		<Unit filename="../config.cpp" />
 		<Unit filename="../config.hpp" />
-		<Unit filename="../data.cpp" />
-		<Unit filename="../data.hpp" />
 		<Unit filename="../debug.cpp" />
 		<Unit filename="../debug.hpp" />
 		<Unit filename="../display.cpp" />
 		<Unit filename="../display.hpp" />
 		<Unit filename="../effux_circles.cpp" />
 		<Unit filename="../effux_circles.hpp" />
+		<Unit filename="../effux_fire.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../effux_fire.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
 		<Unit filename="../effux_sky.cpp">
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
 		<Unit filename="../effux_sky.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../effux_smoke.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../effux_smoke.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../effux_textscroller.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../effux_textscroller.hpp">
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
@@ -211,9 +234,6 @@
 		<Unit filename="../inputdevices.hpp" />
 		<Unit filename="../main.cpp" />
 		<Unit filename="../main.hpp" />
-		<Unit filename="../math.cpp" />
-		<Unit filename="../math.hpp" />
-		<Unit filename="../math_fp.cpp" />
 		<Unit filename="../midi.cpp" />
 		<Unit filename="../midi.hpp" />
 		<Unit filename="../misc.cpp" />
@@ -221,6 +241,14 @@
 		<Unit filename="../network.cpp" />
 		<Unit filename="../network.hpp" />
 		<Unit filename="../options.hpp" />
+		<Unit filename="../particle.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../particle.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
 		<Unit filename="../program.cpp" />
 		<Unit filename="../program.hpp" />
 		<Unit filename="../program_cavebombers.cpp">
@@ -230,14 +258,6 @@
 		<Unit filename="../program_cavebombers.hpp">
 			<Option target="CaveBombers Debug" />
 			<Option target="CaveBombers Release" />
-		</Unit>
-		<Unit filename="../program_foobar.cpp">
-			<Option target="Foobar Debug" />
-			<Option target="Foobar Release" />
-		</Unit>
-		<Unit filename="../program_foobar.hpp">
-			<Option target="Foobar Debug" />
-			<Option target="Foobar Release" />
 		</Unit>
 		<Unit filename="../program_pinball.cpp">
 			<Option target="Pinball Debug" />
@@ -263,6 +283,14 @@
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
+		<Unit filename="../program_sfedemo.cpp">
+			<Option target="SFE demo Debug" />
+			<Option target="SFE demo Release" />
+		</Unit>
+		<Unit filename="../program_sfedemo.hpp">
+			<Option target="SFE demo Debug" />
+			<Option target="SFE demo Release" />
+		</Unit>
 		<Unit filename="../program_template.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
@@ -281,14 +309,6 @@
 		<Unit filename="../projectile.hpp" />
 		<Unit filename="../scene.cpp" />
 		<Unit filename="../scene.hpp" />
-		<Unit filename="../smoke.cpp">
-			<Option target="RocketZ Debug" />
-			<Option target="RocketZ Release" />
-		</Unit>
-		<Unit filename="../smoke.hpp">
-			<Option target="RocketZ Debug" />
-			<Option target="RocketZ Release" />
-		</Unit>
 		<Unit filename="../timeline.cpp" />
 		<Unit filename="../timeline.hpp" />
 		<Unit filename="../types.hpp" />

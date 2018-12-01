@@ -1,32 +1,29 @@
+/*
+	SF-Engine
+
+	This file has routines for making different scenes (worlds or operation modes/views in the program.
+*/
+
 #ifndef SCENE_HPP
 	#define SCENE_HPP
-/*
-	#include "math.hpp"
+
 	#include <vector>
+	#include "camera.hpp"
 	#include "entity.hpp"
 
-	class Camera {
-		public:
-			vec3 location;
-			vec3 direction;
-			float angle_x, angle_y, angle_z;	// Viewport
-			float zoom;
-			void rotate(float angle_x, float angle_y, float angle_z);
-			Camera();
-			Camera(vec3 location_, vec3 direction_);
-			// ~Camera();
-	};
+	// TODO:
+	// - Don't draw every object in the scene/world and then just clip pixels
 
 	class Scene {
 		public:
-			std::vector<Entity> entityarray;
-			Camera camera;
+			std::vector<Entity> entities;
+			//Camera camera;
 			Scene();
 			~Scene();
-			void add_entity(Entity &Entity_);
+			void add_entity(Entity entity);
 			bool del_entity(unsigned short id);
-			void draw(SDL_Surface *sdlsurface);
-			void apply_perspective();
+			//void draw(SDL_Surface *sdlsurface);
+			//void apply_perspective();
 	};
-*/
+
 #endif // SCENE_HPP

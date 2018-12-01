@@ -6,4 +6,8 @@
 		void calculate();
 	};
 
+	//class Water {
+		// wave
+	//};
+
 #endif // WATER_HPP

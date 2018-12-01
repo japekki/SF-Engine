@@ -11,8 +11,8 @@
 			std::vector<float> z;
 			Zbuf();
 			Zbuf(unsigned short width, unsigned short height);
-			void set_size(unsigned short width, unsigned short height);
-			//void get_size();
+			~Zbuf();
+			void resize(unsigned short width, unsigned short height);
 			void reset();
 	};
 

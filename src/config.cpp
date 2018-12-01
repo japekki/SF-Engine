@@ -1,15 +1,11 @@
-/*
-	SF-Engine
-
-	This file has routines for configuration (file) handling.
-*/
-
 #include "config.hpp"
 
+Config::Config(std::string filename) {
+	this->filename = filename;
+}
+
 /*
-bool read_configfile () {
-	bool works = true; // Change to false if something goes wrong
-	std::string filename = "program.cfg";
+bool read_file () {
 	std::string parameter, value;
 
 	log("Loading parameters from file " << filename << ": ");
@@ -46,12 +42,12 @@ bool read_configfile () {
 
 			}
 		}
-		works = conf_file.is_open();
+		this->works = works and conf_file.is_open();	// Preserver previous false
 		conf_file.close();
 	} //if (conf_file.is_open())
 	else {
 		log("ERROR reading config file " << filename);
-		works = false;
+		this->works = false;
 	}
 
 	//vector<string> test;
@@ -59,6 +55,6 @@ bool read_configfile () {
 	//test = split("hey hey yo yo", ' ');
 	//log(test[1]);
 
-	return works;
+	return this->works;
 }
 */

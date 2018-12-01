@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for drawing graphics.
+*/
+
 #ifndef GRAPHER_HPP
 	#define GRAPHER_HPP
 
@@ -10,6 +16,7 @@
 			unsigned short width;
 			unsigned short height;
 			Zbuf *zbuf;
+			SDL_Texture* load_texture(const char* filename);
 			//void draw_pixel(Uint16 x, Uint16 y, unsigned int color);
 			//void draw_hline(int x1, int x2, int y, unsigned int color);
 			void draw_triangle(Triangle2D *triangle);

@@ -3,18 +3,24 @@
 Zbuf::Zbuf() {
 }
 
+Zbuf::~Zbuf() {
+}
+
 Zbuf::Zbuf(unsigned short width, unsigned short height) {
 	this->width = width;
 	this->height = height;
+	this->reset();
 }
 
-void Zbuf::set_size(unsigned short width, unsigned short height) {
+void Zbuf::resize(unsigned short width, unsigned short height) {
 	this->width = width;
 	this->height = height;
+	this->reset();
 }
 
 void Zbuf::reset() {
+	// TODO: is there a faster way to do this?
 	unsigned int i;
 	for (i=0; i<z.size(); i++)
-		z.at(i)=1000000.0;
+		z.at(i)=1000.0;
 };

@@ -17,6 +17,5 @@
 			#define WITH_MOUSE
 			#define WITH_JOYSTICK
 			//#define WITH_VIDEOCAPTURE
-			//#define WITH_DIRECTX
 
 #endif // OPTIONS_HPP

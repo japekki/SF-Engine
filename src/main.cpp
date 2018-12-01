@@ -1,18 +1,13 @@
-/*
-	SF-Engine
-
-	This is the main file where the program starts.
-*/
-
 #include <SDL.h>
 #include "misc.hpp"
 #include "display.hpp"
 
-// Select program to build:
-// TODO: Automatize according to selected program target:
-	#include "program.hpp"		// Template program, included automatically by other program targets
+// SELECT PROGRAM TO BUILD:
+	// TODO: Easy template to start new program from scratch
+	// TODO: Automatize according to selected program target
+	#include "program.hpp"		// Empty program skeleton, included automatically by other program targets
+	//#include "program_sfedemo.hpp"
 	//#include "program_cavebombers.hpp"
-	//#include "program_foobar.hpp"
 	//#include "program_pinball.hpp"
 	//#include "program_publiippari.hpp"
 	//#include "program_rocketz.hpp"
@@ -28,8 +23,8 @@ int main (int argc, char** argv) {
 	// Create selected program:
 	// TODO: Automatize according to selected program target:
 		Program *program = new Program();
+		//Program *program = new SFEdemo();
 		//Program *program = new Cavebombers();
-		//Program *program = new Foobardemo();
 		//Program *program = new Pinball();
 		//Program *program = new PubLiippari();
 		//Program *program = new Rocketz();

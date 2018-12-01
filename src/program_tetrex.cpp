@@ -1,12 +1,11 @@
-/*
-	SF-Engine
-
-	This file has demo/game specific routines.
-
-	This one is supposed to be a Tetris style game.
-*/
-
 #include "program_tetrex.hpp"
+
+void Bucket::generate_shapes() {
+	// TODO: no duplicates
+}
+
+void Bucket::check_fills() {
+}
 
 Tetrex::Tetrex() {
 	// SET PROGRAM ATTRIBUTES:
@@ -21,16 +20,30 @@ bool Tetrex::init() {
 	// SET UP DISPLAY DEVICE:
 		this->display->set_width(640);
 		this->display->set_height(480);
-		this->display->set_desiredfps(40);
+		this->display->set_desiredfps(50);
+		//this->display->vsync = true;
 		//this->display->set_fullscreen(true);
 	Program::init();
 	return this->works;
+}
+
+bool Tetrex::init_titlescreen() {
+}
+
+bool Tetrex::deinit_titlescreen() {
+}
+
+bool Tetrex::init_gameplay() {
+}
+
+bool Tetrex::deinit_gameplay() {
 }
 
 bool Tetrex::mainloop() {
 	while (!this->mainloop_done and this->works) {
 		handle_events();
 		// If space, drop block immediately
+		// bucket.check_fills();
 		// If down, drop block faster
 		// If left, move block left
 		// If right, move block right

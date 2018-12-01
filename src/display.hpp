@@ -1,3 +1,11 @@
+/*
+	SF-Engine
+
+	This file has routines for handling the display/monitor.
+*/
+
+// TODO: Set monitor Hz
+
 #ifndef DISPLAY_HPP
 	#define DISPLAY_HPP
 
@@ -10,7 +18,7 @@
 		private:
 			std::string title;
 			bool fullscreen = false;
-			bool vsync = false;					// TODO
+			bool vsync = false;
 			unsigned int timestamp_initial;		// when the display was initialized
 			unsigned int timestamp_start = 0;   // timestamp at mainloop begin
 			unsigned int timestamp_end;     	// timestamp at mainloop end

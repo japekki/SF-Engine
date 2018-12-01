@@ -1,18 +1,9 @@
-/*
-	SF-Engine
-
-	This file has routines for handling the display/monitor.
-*/
-
 #include <iostream>
 #include <string>
 
 #include "misc.hpp"
 #include "display.hpp"
 #include "program.hpp"
-
-// TODO:
-	// - Set monitor Hz
 
 	Display::Display() {
 		this->coordinategrid = new Coordinategrid();
@@ -38,7 +29,8 @@
 
 		// Set up SDL display window:
 			Uint32 flags = 0;
-			if (this->fullscreen) flags = SDL_WINDOW_FULLSCREEN;
+			if (this->vsync) flags = flags || SDL_RENDERER_PRESENTVSYNC;
+			if (this->fullscreen) flags = flags || SDL_WINDOW_FULLSCREEN;
 			if (SDL_CreateWindowAndRenderer(this->width, this->height, flags, &this->sdlwindow, &this->sdlrenderer) != 0) {
                 log("ERROR while creating SDL Window with Renderer:");
                     log(SDL_GetError());

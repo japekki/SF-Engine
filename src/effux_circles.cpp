@@ -1,11 +1,3 @@
-/*
-	SF-Engine
-*/
-
-// FIXME:
-// - Even and odd circles are different width
-// - Twitching motion (probably because of using integers)
-
 #include <math.h>
 #include "effux_circles.hpp"
 #include "misc.hpp"
@@ -32,7 +24,7 @@ EffuxCircles::~EffuxCircles() {
 	delete[] this->pixels;
 }
 
-void EffuxCircles::execute(Uint32 time, bool both) {
+void EffuxCircles::calculate(Uint32 time, bool both) {
 	Uint32 color;
 	int x, y;
 

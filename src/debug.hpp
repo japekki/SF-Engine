@@ -1,3 +1,9 @@
+/*
+	SF-Engine
+
+	This file has routines for debugging the program.
+*/
+
 #ifndef DEBUG_HPP
 	#define DEBUG_HPP
 

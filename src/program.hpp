@@ -1,3 +1,16 @@
+/*
+	SF-Engine
+
+	Derive game/demo specific code from here.
+*/
+
+/*
+TODO:
+- Options for program:
+- uses fonts
+- uses sound
+*/
+
 #ifndef PROGRAM_HPP
 	#define PROGRAM_HPP
 
@@ -7,7 +20,7 @@
 	#include "timeline.hpp"
 
 	// FILE NAMES:
-		#define DATAPATH "../data/"
+		#define DATAPATH "data/"
 		// Pictures:
 			//#define FILENAME_PIC1 DATAPATH "picture.png"
 
@@ -24,6 +37,7 @@
 		public:
 			std::string name = "SFE TEMPLATE PROGRAM";
 			std::string version = "0.0000";	// Never changes, just a default value indicating to engine user that no program has been made
+			//TODO: icon
 			bool with_sound = true;
 			bool mainloop_done = false;
 			bool paused = false;

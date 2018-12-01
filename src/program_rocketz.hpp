@@ -1,3 +1,47 @@
+/*
+	SF-Engine
+
+	This file has demo/game specific routines.
+
+	This one is supposed to be a rocket game.
+*/
+
+/*
+General rules of the game:
+- A mixture of cave flying and real time strategy
+- One player (real or computer) can control it all in a team, or certain players can control certain things, player can also be a rogue
+
+Game modes / goals:
+- Destroy enemy base
+- Capture the flag
+- Last man standing (alive)
+- Escort hero
+- Race against time or other players
+- No objective, just fool around
+
+TODO:
+- Make some weapons as shields, gadgets or vehicle model features
+- Level editor
+- Level file format
+- Random level generator
+- Sprites or polygons?
+- Use Entity class (for animation etc.) instead of plain Sprite or Polygon2D
+- Weapons, shields and gadgets for humans (diving suit, heat suit, parachutes)
+- If volcanoes, lava etc. are on a background layer, they're not dangerous
+- Possibility to ride on a different layer (to dodge projectiles or go behind/front of ladders instead of crashing into them)
+- Difference between sabotage, emp and virus?
+- Trees, bushes etc.
+- Arcade style self-play demo mode with random values and computer players
+- Classes for scenes, set and compare variables lastscene and currentscene to do init/deinit with constructors/destructors
+- Friction
+- Zooming
+- Mouse support
+- Use MIDI controllers as joystick / game controller
+- Stats during and after game (most (total and serial/massacre) kills, most suicides, most damage dealt etc.)
+- Replay highlights / most impressive parts after game with fireworks effux
+- Separate code into many program_rocketz_* files
+*/
+
 #ifndef PROGRAM_ROCKETZ_HPP
 	#define PROGRAM_ROCKETZ_HPP
 
@@ -5,15 +49,20 @@
 	#include "projectile.hpp"
 	#include "geom.hpp"
 	#include "effux_circles.hpp"
+	#include "effux_textscroller.hpp"
 	#include "effux_sky.hpp"
-	#include "smoke.hpp"
+	#include "effux_fire.hpp"
+	#include "effux_smoke.hpp"
 	#include "water.hpp"
 
 	// SCENES:
 		#define SCENE_NONE 0
 		#define SCENE_TITLESCREEN 1
-		#define SCENE_GAMEPLAY 2
-		#define SCENE_SHOP 3
+		#define SCENE_SETTINGS 2
+		#define SCENE_GAMEPLAY 3
+		#define SCENE_SELFPLAY 4
+		#define SCENE_SHOP 5
+		#define SCENE_CREDITS 6
 
 	// LAYER TYPES:
 		#define LAYER_NONE 0
@@ -23,8 +72,14 @@
 
 	// FILE NAMES:
 		#define DATAPATH "data/"
+
+		// Fonts:
+			#define FILENAME_FONT_XENOSPHERE DATAPATH "xenosphere.ttf"
+			#define FILENAME_FONT_MODENINE DATAPATH "MODENINE.TTF"
+
 		// Pictures:
-			#define FILENAME_PIC_TITLESCREEN DATAPATH "RocketZ_titlescreen.png"
+			#define FILENAME_PIC_TITLESCREEN_WITH_TEXT DATAPATH "RocketZ_titlescreen.png"	// TODO: generate with code, or make fancier picture
+			#define FILENAME_PIC_TITLESCREEN DATAPATH "titlescreen.png"
 
 		// Sound effects:
 			#define FILENAME_SOUND_JETENGINE DATAPATH "jetengine.wav"
@@ -33,13 +88,14 @@
 			#define FILENAME_SOUND_IMPLOSION DATAPATH "implosion.wav"
 			#define FILENAME_SOUND_BULLETHIT DATAPATH "bullethit.wav"
 			#define FILENAME_SOUND_SHOOT DATAPATH "shoot.wav"
-			#define FILENAME_SOUND_HUMANDEATH DATAPATH "humandeath.wav"
+			#define FILENAME_SOUND_HUMANSCREAM DATAPATH "humanscream.wav"
 			#define FILENAME_SOUND_TELEPORT DATAPATH "teleport.wav"
 			#define FILENAME_SOUND_CRASH DATAPATH "crash.wav"
 			#define FILENAME_SOUND_BUY DATAPATH "buy.wav"
 			#define FILENAME_SOUND_SELL DATAPATH "sell.wav"
+			#define FILENAME_SOUND_NOTENOUGHMONEY DATAPATH "notenoughmoney.wav"
 			#define FILENAME_SOUND_BLACKHOLE_CREATED DATAPATH "blackholecreated.wav"
-			#define FILENAME_SOUND_BLACKHOLE_USED DATAPATH "blackholeused.wav"
+			#define FILENAME_SOUND_WORMHOLE_USED DATAPATH "wormholeused.wav"
 			#define FILENAME_SOUND_SELFDESTRUCT_INIT DATAPATH "selfdestructinit.wav"
 			#define FILENAME_SOUND_ABSORB DATAPATH "absorb.wav"
 			#define FILENAME_SOUND_BOUNCE DATAPATH "bouce.wav"
@@ -53,60 +109,21 @@
 			#define FILENAME_SOUND_MOEBIUS DATAPATH "moebius.wav"
 			#define FILENAME_SOUND_PAINT DATAPATH "paint.wav"
 			#define FILENAME_SOUND_PHASE DATAPATH "phase.wav"
-			#define FILENAME_SOUND_SIZER DATAPATH "sizer.wav
+			#define FILENAME_SOUND_SIZER DATAPATH "sizer.wav"
 			#define FILENAME_SOUND_SMOKE DATAPATH "smoke.wav"
 			#define FILENAME_SOUND_TRACTORBEAM DATAPATH "tractorbeam.wav"
 			#define FILENAME_SOUND_ALARM DATAPATH "alarm.wav"
-			#define FILENAME_SOUND_BASEATTACK DATAPATH "baseattack.wav"
+			#define FILENAME_SOUND_BASEATTACKWARNING DATAPATH "baseattackwarning.wav"
+			#define FILENAME_SOUND_VOLCANO_ERUPT DATAPATH "volcanoerupt.wav"
 
 		// Music:
 			#define FILENAME_MUSIC_TITLE DATAPATH "Nuggumath-Wings-pelimusa-ReMix_CROPPED.mp3"
-			#define FILENAME_MUSIC_GAMEPLAY DATAPATH "PELIMUSA.S3M"	// Ripped from Wings, not included in git
-
-	// General rules of the game:
-	// - A mixture of cave flying and real time strategy
-	// - One player (real or computer) can control it all in a team, or certain players can control certain things, player can also be a rogue
-
-	// Game modes:
-	// - Capture the flag
-	// - Destroy enemy base
-	// - Escort hero
-
-	// TODO:
-	// - Make some weapons as shields, gadgets or vehicle model features
-	// - Level editor
-	// - Random level generator
-	// - Level file format
-	// - Sprites or polygons?
-	// - Use Entity class (for animation etc.) instead of plain Sprite or Polygon2D
-	// - Weapons, shields and gadgets for humans (diving suit, heat suit, parachutes)
-	// - If volcanoes, lava etc. are on a background layer, they're not dangerous
-	// - Possibility to ride on a different layer
-	// - Difference between sabotage, emp and virus?
-
-	// Adjustable gameplay/level parameters (defaults are saved in level file and user favorite file):
-	// - Fuel limits (or off)
-	// - Weapon loading time
-	// - Amount of water rain
-	// - Amount of snow rain
-	// - Amount of land rain
-	// - Amount of lava rain
-	// - Amount of bomb rain
-	// - Amount of item rain
-	// - Amount of light
-	// - Item spawn rate
-	// - Team members can damage each other (on/off)
-	// - Enable or disable certain weapons, shields, gadgets, vehicles etc.
-	// - Amount of rogues
-	// - Amount of sharks
-	// - Amount of clouds (in background or in front layer (ships can hide behind/inside clouds))
-	// - Planet gravity level
-	// - General gravity multiplier
-	// - If gravity calculations go far beyond processing power, make a simplified gravity option
+			#define FILENAME_MUSIC_GAMEPLAY DATAPATH "game1.xm"
 
 	class Gadget : public Polygon2D, public Projectile2D {
 		// To be planted, not collectible, can be moved with tractor beam etc.
 		// TODO: think this over
+		bool can_float;
 		bool works_under_water;
 		bool sabotable;
 		bool sabotaged;
@@ -126,6 +143,22 @@
 
 	class Gadget_tunnel : public Gadget {
 		// Pipe or tunnel, humans and vehicles can go trough this, water can flow trough this
+	};
+
+	class Anchor : public Gadget {
+		// Attaches to vehicle, sticks to ground
+	};
+
+	class Ladders : public Gadget {
+		// For humans to climb up and down
+		// Can go vertically, horizontally (bridge) or diagonally
+		Coordinate2D starting_point;
+		Coordinate2D ending_point;
+		// TODO: what happens when hit in the middle
+	};
+
+	class Boulder : public Gadget {
+		// Stones rolling down a hill, crushing stuff
 	};
 
 	class Item {
@@ -182,15 +215,16 @@
 		bool parachute_burning = false;
 		short temperature;	// minus for cold, plus for hot
 		unsigned short air_left;	// TODO: infinite
-		short ammo;	// TODO: infinite
-		//bool inside_rocket;
-		//void steal(Rocket *rocket);
+		unsigned short ammo;	// TODO: infinite
+		//bool inside_vehicle;
+		//void steal(Vehicle *vehicle);
 		//void sabotage(Vehicle *vehicle);	// TODO: sabotage gadgets
 		//void plant_virus(Vehicle *vehicle);	// TODO: same as sabotage?
 	};
 
 	class Hoarder : public Human {
 		// Human that hoards items on the field and take them to base, or vice versa
+		// Can also steal items from enemy base
 		std::vector<Item> items;
 	};
 
@@ -220,12 +254,15 @@
 
 	class Shield {
 		// Always on, unlike Weapon
+		std::string name;
+		std::string description;
 		unsigned int condition;	// 0 if worn out
 		bool works_under_water;
-		unsigned char level;	// How powerful the weapon is
+		unsigned char level;	// How powerful the shield is
 		unsigned short buy_price;
 		unsigned short sell_price;
 		//Polygon2D picture;	// Or Sprite - shows up in shop and menus
+		// sound
 	};
 
 	class Shield_emp {
@@ -233,7 +270,7 @@
 	};
 
 	class Shield_lightscreen : public Shield {
-		// Allows to see in bright ligh, protects from blindness caused by flashes
+		// Allows to see in bright light, protects from blindness caused by flashes
 	};
 
 	class Shield_mirror : public Shield {
@@ -247,13 +284,13 @@
 
 	class Weapon {
 		// Has to be triggered, unlike Shield
+		std::string name;
+		std::string description;
 		unsigned short loading_time = 0;
 		bool works_under_water;
 		unsigned char level;	// How powerful the weapon is
 		unsigned short buy_price;
 		unsigned short sell_price;
-		std::string name;
-		std::string description;
 		short recoil;	// if negative, the weapon pulls the vehicle forwards when shooting (depending of course where the weapon is located in the vehicle)
 		//Polygon2D picture;	// Or Sprite - shows up in shop and menus
 		// sound
@@ -264,8 +301,7 @@
 	};
 
 	class Weapon_anchor : public Weapon {
-		// Deploy (or shoot) an achor/pendulum that has high mass and sticks to ground
-		// Attaches to vehicle
+		// Deploy (or shoot) an achor
 	};
 
 	class Weapon_blackhole : public Weapon {
@@ -296,7 +332,7 @@
 	};
 
 	class Weapon_disguise : public Weapon {
-		// Appear to be different rocket model or color
+		// Appear to be different vehicle model or color
 	};
 
 	class Weapon_dockstation : public Weapon {
@@ -330,7 +366,7 @@
 	};
 
 	class Weapon_hologram : public Weapon {
-		// Create a moving image of player's rocket to fool other players
+		// Create a moving image of weapon, human or gadget to fool other players
 	};
 
 	class Weapon_invisibility : public Weapon {
@@ -368,7 +404,7 @@
 	};
 
 	class Weapon_painter : public Weapon {
-		// Recolor things, like ground, buildings or rockets
+		// Recolor things, like ground, buildings or vehicles
 	};
 
 	class Weapon_phaser : public Weapon {
@@ -391,7 +427,7 @@
 	class Weapon_rubberband : public Weapon {
 		// Shoot a stretchy harpoon
 		// Second shoot releases the end part
-		// Both endpoint stick to ground and vehicles
+		// Both endpoints stick to ground, vehicles and gadgets
 	};
 
 	class Weapon_selfdestruct : public Weapon {
@@ -400,7 +436,7 @@
 	};
 
 	class Weapon_sizer : public Weapon {
-		// Change size
+		// Change vehicle size
 	};
 
 	class Weapon_smokegrenade : public Weapon {
@@ -432,6 +468,7 @@
 	};
 
 	class Weapon_teleport : public Weapon {
+		// Teleport to random location or to previously set location
 	};
 
 	class Weapon_termite : public Weapon {
@@ -446,18 +483,27 @@
 		// Like missile, but under water
 	};
 
+	class Weapon_minitorpedo : public Weapon {
+		// Like torpedo, but many little torpedoes launched fast
+	};
+
 	class Weapon_tracer : public Weapon {
-		// Draws a trajectory line with no damage
+		// Draws a trajectory curve with no damage
 		// TODO: different weapons have different trajectories
 	};
 
 	class Weapon_tractorbeam : public Weapon {
 		// Pull stuff or lock into relative position/location
 		// For example, a rocket can move a ship with this
+		// If the movable object is heavy, many rockets with tractor beams can co-operate to move it
+	};
+
+	class Weapon_trajectories : public Weapon {
+        // Show tracers and vectors of all projectiles
 	};
 
 	class Weapon_turbo : public Weapon {
-		// Increased speed and acceleration for a while
+		// Increased max speed and acceleration for a while
 	};
 
 	class Weapon_watergun : public Weapon {
@@ -474,9 +520,6 @@
 
 	class Rogue {
 		// Human or vehicle not belonging to any player (or team)
-	};
-
-	class Anchor : public Gadget {
 	};
 
 	class Vehicle : public Polygon2D, public Projectile2D {
@@ -534,15 +577,15 @@
 
 	class Background {
 		unsigned short type = LAYER_NONE;
-		//SDL_Surface *bitmap;
+		//SDL_Texture *bitmap;
 		// TODO: pointer for effux
 	};
 
 	class Land {
 		// bool soft, sticky, slippery, burning, freezing
 		// bool flammable, meltable, steamable/vaporable, smokable (???)
-		// If land is soft, it makes damage on impact and leaves a hole when blasted
-		// If land is hard, it doesn't make damage on impact and falls straight down without leaving a hole when blasted
+		// If land is hard, it makes damage on impact and leaves a hole when blasted
+		// If land is soft, it doesn't make damage on impact and falls straight down without leaving a hole when blasted
 		short temperature;	// minus if cold, plus if hot
 	};
 
@@ -630,11 +673,37 @@
 
 	class Shark : public Polygon2D {
 		// Eats swimming humans
+		short lifeforce;
 		unsigned char hungryness;
 	};
 
+	//class Parameters {
+		/*
+		Adjustable gameplay/level parameters (defaults are saved in level file and user favorite file):
+		- Fuel limits
+		- Weapon loading time
+		- Amount of water rain
+		- Amount of snow rain
+		- Amount of land rain
+		- Amount of lava rain
+		- Amount of bomb rain
+		- Amount of item rain
+		- Amount of light
+		- Item spawn rate
+		- Team members can damage each other (on/off)
+		- Enable or disable certain weapons, shields, gadgets, vehicles etc.
+		- Amount of rogues
+		- Amount of sharks
+		- Amount of clouds (in background or in front layer (ships can hide behind/inside clouds))
+		- Planet gravity level
+		- General gravity multiplier
+		- If gravity calculations go far beyond processing power, make a simplified gravity option
+		*/
+	//};
+
 	class Level {
 		public:
+			//Parameters parameters;
 			std::vector<Background> backgrounds;	// Parallax backgrounds
 			//std::vector<Waterpixel> water;
 			std::vector<Volcano> volcanos;
@@ -642,15 +711,17 @@
 	};
 
 	class Randomlevelgenerator {
-		int seed;
-		unsigned int wateramount;
-		unsigned int landamount;
-		unsigned int blackholes;
-		unsigned int scatterness;
-		unsigned int pipe_amount;
-		unsigned int volcano_amount;
-		int temperature;	// minus for more ice/snow, plus for more lava
-		// randomize base locations (players can change it)
+			public:
+			Level *level;
+			int seed;
+			unsigned int wateramount;
+			unsigned int landamount;
+			unsigned int blackholes;
+			unsigned int scatterness;
+			unsigned int pipe_amount;
+			unsigned int volcano_amount;
+			int temperature;	// minus for more ice/snow, plus for more lava
+			// randomize base locations (players can change it)
 	};
 
 	class Shop {
@@ -658,6 +729,7 @@
 		std::vector<Weapon> weapons_available;
 		std::vector<Shield> shields_available;
 		std::vector<Gadget> gadgets_available;
+		std::vector<Item> items_available;
 	};
 
 	class Gameplay {
@@ -666,6 +738,52 @@
 			std::vector<Player> players;
 			std::vector<Rogue> rogues;
 			bool gameover = false;
+			void execute();
+			//bool state_recording = false;
+			//bool load_state();
+			//bool save_state();
+			Triangle2D *rocket;	// Test
+	};
+
+	class Selfplay : public Gameplay {
+		// Arcade demo mode
+	};
+
+	class AI {
+		// Artificial intelligence / computer player
+		/*
+			TODO:
+            - calculate rocket steering maneuvers to go forwards to a specific location
+            - difficulty adjustment
+            - decision making balancer:
+                - pursue game mode goal/objective
+                - need for power-ups
+                - need for money
+                - need for items
+                - flee or attack
+                - use gadgets
+                - select good weapons and shields (like if enemy has a laser, then use mirror)
+            - get fooled like human player would (like if enemy is invisible or has disguised)
+            - get information only from visible range (including spycam, radar etc.)
+            - calculate trajectories (makes tracer and Weapon_trajectories obsolete?)
+            - guess what enemy is doing (like pursuing a power-up and possibly give up pursuing the same item if it seems that the enemy will get it first)
+		*/
+		/*
+			select nearest enemy
+			calculate trajectories for weapon and target
+			shoot at the enemy
+
+			select nearest power-up
+			go towards power-up
+
+			if lifeforce below half:
+				check if health power-up available
+				go towards power-up
+				shoot at nearby enemies
+
+			calculate trajectories
+			do extra maneuvers or use shield/weapon to avoid getting hit
+		*/
 	};
 
 	class Rocketz : public Program {
@@ -676,19 +794,59 @@
 			~Rocketz();
 			bool init() override;
 			Gameplay *gameplay;
-			bool init_titlescreen();
-			bool deinit_titlescreen();
-			bool init_gameplay();
-			bool deinit_gameplay();
+			// Scene init and deinit functions:
+				bool init_titlescreen();
+				bool deinit_titlescreen();
+				void titlescreen_effux(unsigned int time);					// TODO: move to titlescreen scene class
+				void titlescreen_textscroller_japesoft(unsigned int time);	// TODO: move to titlescreen scene class
+				void titlescreen_textscroller_poem(unsigned int time);		// TODO: move to titlescreen scene class
+				void titlescreen_textscroller_credits(unsigned int time);	// TODO: move to titlescreen scene class
+				bool init_gameplay();
+				bool deinit_gameplay();
 			bool mainloop() override;
-			EffuxCircles *effux_circles;
+			// Effuxes:
+				EffuxCircles *effux_circles;
+				EffuxTextscroller *effux_textscroller_japesoft;
+				EffuxTextscroller *effux_textscroller_poem;
+				EffuxTextscroller *effux_textscroller_credits;
+				int song_start_timestamp;	// for title screen text scroller
 			// Polygons:
-				Triangle2D *rocket;
+				//Triangle2D *rocket;
 				//Polygon2D rocket;
 				//Rocket *rocket;
 			// DATA:
-				Audio *music_title, *music_gameplay;
+				Audio *music_title;
+				//Audio *music_gameplay;
 				SDL_Texture *pic_titlescreen;
+				SDL_Texture *pic_titlescreen_with_text;
+				std::string multilinetext_japesoft =
+					"After more than 20 years\n"
+					"Japesoft is back on the scene\n"
+					"with this magnificient game called...";
+				std::string multilinetext_poem =
+					"Once upon a time\n"
+					"there were V-shaped rockets.\n"
+					"While shooting some fire\n"
+					"water drained into pockets.\n"
+					"\n"
+					"Since then the time has passed,\n"
+					"no more keyboards are smashed.\n"
+					"\n"
+					"Gamers' fingers\n"
+					"should never linger,\n"
+					"so that no lamer\n"
+					"could ever win theirs.\n"
+					"\n"
+					"When poser new age hipsters want to try the game,\n"
+					"the chosen real men's vehicles shall fight again!";
+				std::string multilinetext_credits =
+					"CREDITS:\n"
+					"\n"
+					"Programming: JaPeK\n"
+					"\n"
+					"Music: Nuggumath\n"
+					"\n"
+					"Fonts: Darrell Flood, Andrew Bulhak";
 	};
 
 #endif // PROGRAM_ROCKETZ_HPP

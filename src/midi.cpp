@@ -1,12 +1,6 @@
-/*
-	SF-Engine
-
-	This file has routines for MIDI devices.
-*/
-
-/*
 #include "midi.hpp"
 
+/*
 #ifdef LINUX
 	#include <sys/soundcard.h>
 	void init() {
@@ -92,7 +86,6 @@
 		// turn any MIDI notes currently playing:
 	//	midiOutReset(device);
 	//}
-
 	}
 
 	void midi_free() {

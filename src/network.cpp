@@ -1,7 +1,13 @@
-/*
-	SF-Engine
-
-	This file has routines for networking / sockets.
-*/
-
 #include "network.hpp"
+
+bool Link::send() {
+}
+
+bool Server::disconnect() {
+}
+
+bool Client::connect() {
+}
+
+bool Client::disconnect() {
+}

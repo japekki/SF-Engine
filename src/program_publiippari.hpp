@@ -1,7 +1,22 @@
+/*
+	SF-Engine
+
+	This file has demo/game specific routines.
+
+	This one is supposed to be a screensaver.
+*/
+
+/*
+TODO:
+- Screensaver settings dialog
+*/
+
 #ifndef PROGRAM_PUBLIIPPARI_HPP
 	#define PROGRAM_PUBLIIPPARI_HPP
 
+	#include <vector>
 	#include "program.hpp"
+	#include "sprite.hpp"
 
 	// FILE NAMES:
 		#define DATAPATH "data/"
@@ -9,8 +24,15 @@
 		//#define FILENAME_KANNIKALA1 DATAPATH "kannikala1.png"
 		//#define FILENAME_KANNIKALA2 DATAPATH "kannikala2.png"
 
+	class Faucet {
+		public:
+			void drip();	// Drip down beer
+	};
+
 	class PubLiippari : public Program {
 		public:
+			Faucet faucet;
+			std::vector<Sprite> kannikalat;
 			PubLiippari();
 			~PubLiippari();
 			bool init() override;
