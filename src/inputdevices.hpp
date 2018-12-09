@@ -7,8 +7,8 @@
 /*
 TODO:
 - Lower level keyboard handling (polling states may miss key presses when running slow)
-- Indicator / counter that a button has previously been pressed and released
-- Array for keyboard button states instead of separate named boolean variables
+- Sticky indicator / counter that a button has previously been pressed / released
+- Array for keyboard button states with indexes named after keyboard buttons
 */
 
 #ifndef INPUTDEVICES_HPP
@@ -35,6 +35,15 @@ TODO:
 			bool key_DOWN_down = false;
 			bool key_LEFT_down = false;
 			bool key_RIGHT_down = false;
+			bool key_SPACE_down = false;
+			bool key_ASTERISK_down = false;
+			bool key_SLASH_down = false;
+			bool key_PLUS_down = false;
+			bool key_MINUS_down = false;
+			bool key_PAGEUP_down = false;
+			bool key_PAGEDOWN_down = false;
+			bool key_HOME_down = false;
+			bool key_END_down = false;
 
 			bool key_F1_down = false;
 			bool key_F2_down = false;
@@ -46,8 +55,8 @@ TODO:
 			bool key_F8_down = false;
 			bool key_F9_down = false;
 			bool key_F10_down = false;
-			bool key_11_down = false;
-			bool key_12_down = false;
+			bool key_F11_down = false;
+			bool key_F12_down = false;
 
 			bool key_1_down = false;
 			bool key_2_down = false;

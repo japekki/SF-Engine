@@ -168,8 +168,14 @@ Triangle3D::~Triangle3D() {
 void Triangle3D::rotate(float angle_x, float angle_y, float angle_z) {
 }
 
+Polygon2D::Polygon2D() {
+}
+
 Polygon2D::~Polygon2D() {
 	//delete [] vertexarray;
+}
+
+Polygon3D::Polygon3D() {
 }
 
 Polygon3D::~Polygon3D() {

@@ -3,15 +3,14 @@
 #include "display.hpp"
 
 // SELECT PROGRAM TO BUILD:
-	// TODO: Easy template to start new program from scratch
-	// TODO: Automatize according to selected program target
+	// TODO: Some better way to make new programs against the engine
 	#include "program.hpp"		// Empty program skeleton, included automatically by other program targets
-	//#include "program_sfedemo.hpp"
-	//#include "program_cavebombers.hpp"
-	//#include "program_pinball.hpp"
-	//#include "program_publiippari.hpp"
-	//#include "program_rocketz.hpp"
-	//#include "program_tetrex.hpp"
+	//#include "programs/sfedemo/sfedemo.hpp"
+	//#include "programs/cavebombers/cavebombers.hpp"
+	//#include "programs/pinball/pinball.hpp"
+	//#include "programs/publiippari/publiippari.hpp"
+	//#include "programs/rocketz/rocketz.hpp"
+	//#include "programs/tetrex/tetrex.hpp"
 
 int main (int argc, char** argv) {
 	int exitcode = EXIT_SUCCESS;
@@ -20,7 +19,7 @@ int main (int argc, char** argv) {
 	// Clean up SDL when program quits:
 		atexit(SDL_Quit);   // Free resources
 
-	// Create selected program:
+	// CREATE SELECTED PROGRAM:
 	// TODO: Automatize according to selected program target:
 		Program *program = new Program();
 		//Program *program = new SFEdemo();

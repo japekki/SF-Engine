@@ -134,7 +134,7 @@ Color::HSLtoRGB(ColorHSL colorHSL) {
 }
 
 void generate_hsl_table() {
-		//generate_hsl_table(SDL_Surface *sdlsurface);
+	//generate_hsl_table(SDL_Surface *sdlsurface);
 }
 
 // Index: 6 bit for hue, 1 bit for saturation, 1 bit for lightness

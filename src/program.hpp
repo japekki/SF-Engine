@@ -35,7 +35,7 @@ TODO:
 			bool works = true;		// Change to false if something goes wrong
 			bool audio_works;
 		public:
-			std::string name = "SFE TEMPLATE PROGRAM";
+			std::string name = "SFE PROGRAM";
 			std::string version = "0.0000";	// Never changes, just a default value indicating to engine user that no program has been made
 			//TODO: icon
 			bool with_sound = true;
@@ -46,7 +46,7 @@ TODO:
 			Mouse *mouse;
 			Joystick *joystick;
 			Timeline *timeline;
-			void handle_events();
+			void get_events();
 			Program();
 			virtual ~Program();
 			virtual bool init();

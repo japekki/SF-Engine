@@ -1,13 +1,13 @@
 #include <SDL_image.h>
 #include <math.h>
-#include "program_pinball.hpp"
+#include "pinball.hpp"
 #include "misc.hpp"
 
 void Gameplay::run() {
 	// move ball(s)
 	// check where every ball is
 	// update score
-	// update lcd
+	// update LCD
 	// if all player->balls_left == 0 this->gameover = true;
 	// if shift play_sound(sound_flipper)
 	// if space play_sound(push)
@@ -29,7 +29,9 @@ bool Pinball::init() {
 		this->display->set_width(640);
 		this->display->set_height(480);
 		this->display->set_desiredfps(50);
+		//this->display->resizable_window = false;
 		//this->display->vsync = true;
+		//this->display->mousecursor_visible = false;
 		//this->display->set_fullscreen(true);
 
 	// LOAD IMAGE FILES:
@@ -50,7 +52,7 @@ bool Pinball::init() {
 
 bool Pinball::mainloop() {
 	while (!this->mainloop_done and this->works) {
-		handle_events();
+		get_events();
 		//gameplay->run();
 
 		this->display->refresh();

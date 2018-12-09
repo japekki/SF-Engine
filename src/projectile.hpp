@@ -1,29 +1,36 @@
-// TODO:
-// - Calculate damages when colliding
+/*
+TODO:
+- Calculate damages when colliding
+- Self rotate
+*/
 
 #ifndef PROJECTILE_HPP
 	#define PROJECTILE_HPP
 
 	#include "geom.hpp"
 
-	//class Trajectory2D {
-	//};
+	/*
+		TODO: Curve and current heading
+		class Trajectory2D {
+			Vector2D heading;
+		};
+		class Trajectory3D {
+			Vector3D heading;
+		};
+	*/
 
-	//class Trajectory3D {
-	//};
-
-	class Projectile2D {
+	class Projectile2D : public Coordinate2D {
 		public:
 			float mass;
-			float x, y;			// Location
 			Vector2D direction;	// Where is it going to and how fast
 			float get_speed();
 			float get_momentum();
 			void move();
 			bool collides(Projectile2D *projectile);
+			std::vector<Projectile2D> list_colliding_projectiles(std::vector<Projectile2D> projectiles);
 	};
 
-	class Projectile3D {
+	class Projectile3D : public Coordinate3D {
 		public:
 			float mass;
 			float x, y, z;		// Location

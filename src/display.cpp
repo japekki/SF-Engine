@@ -5,118 +5,175 @@
 #include "display.hpp"
 #include "program.hpp"
 
-	Display::Display() {
-		this->coordinategrid = new Coordinategrid();
+void Display::check_window_size() {
+	// Check if video mode (resolution) has changed (window is resized or fullscreen mode toggled)
+	SDL_DisplayMode displaymode;
+	for(int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
+		int should_be_zero = SDL_GetCurrentDisplayMode(i, &displaymode);
+		if (should_be_zero != 0) {
+			SDL_Log("Could not get display mode for video display #%d: %s", i, SDL_GetError());
+		}
+		else {
+			//SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz.", i, displaymode.w, displaymode.h, displaymode.refresh_rate);
+			int w, h;
+			SDL_GetWindowSize(this->sdlwindow, &w, &h);
+			//SDL_Log("Display window size: %d x %d", w, h);
+			//SDL_Log("Grapher old size: %d x %d", this->width, this->height);
+			if (this->width != w or this->height != h) {
+				this->width = w;
+				this->height = h;
+				this->has_resized = true;
+				//log("changed");
+			} //else log("no change");
+		//log("-------------------------------");
+		}
 	}
+}
 
-	Display::~Display() {
-		// FREE RESOURCES:
-			SDL_DestroyWindow(this->sdlwindow);
-			//delete this->sdlwindow;   // NOTE: Segfaults in Linux
-			SDL_DestroyRenderer(this->sdlrenderer);
-			//delete this->sdlrenderer;
+bool Display::is_resized() {
+	bool result = false;
+	if (this->has_resized) {
+		result = true;
+		this->has_resized = false;
 	}
+	return result;
+}
 
-	bool Display::setup() {
-		// Call this when creating or altering a display window
-		// TODO: delete/modify old when calling this again (currently opens up a secondary window)
-		// Set up SDL video:
-			if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-				log("ERROR while initializing SDL video:");
+Display::Display() {
+	this->coordinategrid = new Coordinategrid();
+}
+
+Display::~Display() {
+	// FREE RESOURCES:
+		SDL_DestroyWindow(this->sdlwindow);
+		//delete this->sdlwindow;   // NOTE: Segfaults in Linux
+		SDL_DestroyRenderer(this->sdlrenderer);
+		//delete this->sdlrenderer;
+}
+
+bool Display::setup() {
+	// Call this when creating or altering a display window
+	// TODO: delete/modify old when calling this again (currently opens up a secondary window)
+	// Set up SDL video:
+		if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+			log("ERROR while initializing SDL video:");
+			log(SDL_GetError());
+			this->works = false;
+		}
+
+	// Set up SDL display window:
+		// FIXME:
+		// - SDL_WINDOW_FULLSCREEN_DESKTOP acts the same as SDL_WINDOW_FULLSCREEN
+		// - SDL_RENDERER_PRESENTVSYNC does nothing (at least it doesn't limit fps to monitor Hz)
+
+		Uint32 flags = 0;
+		if (this->vsync) flags = flags || SDL_RENDERER_PRESENTVSYNC;
+		if (this->fullscreen)
+			if (this->fullscreenmode_desktop) flags = flags || SDL_WINDOW_FULLSCREEN_DESKTOP;
+			else flags = flags || SDL_WINDOW_FULLSCREEN;
+		if (SDL_CreateWindowAndRenderer(this->width, this->height, flags, &this->sdlwindow, &this->sdlrenderer) != 0) {
+			log("ERROR while creating SDL Window with Renderer:");
 				log(SDL_GetError());
+				SDL_Quit();
 				this->works = false;
 			}
 
-		// Set up SDL display window:
-			Uint32 flags = 0;
-			if (this->vsync) flags = flags || SDL_RENDERER_PRESENTVSYNC;
-			if (this->fullscreen) flags = flags || SDL_WINDOW_FULLSCREEN;
-			if (SDL_CreateWindowAndRenderer(this->width, this->height, flags, &this->sdlwindow, &this->sdlrenderer) != 0) {
-                log("ERROR while creating SDL Window with Renderer:");
-                    log(SDL_GetError());
-                    SDL_Quit();
-                    this->works = false;
-                }
+		if (this->resizable_window) SDL_SetWindowResizable(this->sdlwindow, SDL_TRUE);
 
-			//this->sdlsurface = SDL_GetWindowSurface(this->sdlwindow);
+	//this->zbuf->set_size(width, height);
 
-			// Set up SDL renderer:
-				// this->sdlrenderer = SDL_CreateRenderer(this->sdlwindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	// Show or hide mouse cursor:
+		if (this->mousecursor_visible) SDL_ShowCursor(SDL_ENABLE);	// Default in SDL
+		else SDL_ShowCursor(SDL_DISABLE);
 
-			//this->sdltexture = SDL_CreateTexture(this->sdlrenderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, this->width, this->height);
-			//SDL_SetRenderTarget(this->sdlrenderer, this->sdltexture);
-			//SDL_SetRenderTarget(this->sdlrenderer, 0);
+		this->refresh();	// Clear possible jerky frame at the beginning
 
-		//this->zbuf->set_size(width, height);
-		this->timestamp_initial = SDL_GetTicks();
+	this->timestamp_initial = SDL_GetTicks();
 
-		//if (this->fullscreen) SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
-		//SDL_ShowCursor(SDL_DISABLE);
-		return true;	// TODO
+	return true;	// TODO
+}
+
+void Display::set_title(std::string title) {
+	this->title = title;
+	if (this->sdlwindow != nullptr) SDL_SetWindowTitle(this->sdlwindow, title.c_str());
+}
+
+void Display::set_width(int width) {
+	this->width = width;
+}
+
+void Display::set_height(int height) {
+	this->height = height;
+}
+
+void Display::set_desiredfps(unsigned char fps) {
+	this->fps_desired = fps;
+}
+
+bool Display::set_fullscreen(bool state) {
+	this->fullscreen = state;
+	if (state)
+		if (this->fullscreenmode_desktop) SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		else SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN);
+	else
+		SDL_SetWindowFullscreen(this->sdlwindow, 0);
+	check_window_size();
+	return true;	// TODO
+}
+
+bool Display::toggle_fullscreen() {
+	if (this->fullscreen)
+		SDL_SetWindowFullscreen(this->sdlwindow, 0);
+	else
+		if (this->fullscreenmode_desktop) SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		else SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN);
+	this->fullscreen =! this->fullscreen;
+	check_window_size();
+	return true;	// TODO
+}
+
+void Display::show_mousecursor(bool state) {
+	SDL_ShowCursor(state);
+	this->mousecursor_visible = state;
+}
+
+void Display::toggle_mousecursor() {
+	if (this->mousecursor_visible) {
+		SDL_ShowCursor(SDL_DISABLE);
+		this->mousecursor_visible = false;
+	} else {
+		SDL_ShowCursor(SDL_ENABLE);
+		this->mousecursor_visible = true;
 	}
+}
 
-	void Display::set_title(std::string title) {
-		this->title = title;
-		// TODO:
-		// If window already exists:
-		SDL_SetWindowTitle(this->sdlwindow, title.c_str());
-	}
+int Display::get_width() {
+	return this->width;
+}
 
-	void Display::set_width(int width) {
-		this->width = width;
-	}
+int Display::get_height() {
+	return this->height;
+}
 
-	void Display::set_height(int height) {
-		this->height = height;
-	}
+void Display::set_timestamp_start(unsigned int timestamp) {
+	this->timestamp_start = timestamp;
+}
 
-	void Display::set_desiredfps(unsigned char fps) {
-		this->fps_desired = fps;
-	}
+void Display::set_timestamp_end(unsigned int timestamp) {
+	this->timestamp_end = timestamp;
+}
 
-	bool Display::set_fullscreen(bool fullscreen) {
-		this->fullscreen = fullscreen;
-		if (fullscreen)
-			SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN);
-		else
-			SDL_SetWindowFullscreen(this->sdlwindow, 0);
-		return true;	// TODO
-	}
+unsigned int Display::get_timestamp_start() {
+	return this->timestamp_start;
+}
 
-	bool Display::toggle_fullscreen() {
-		if (this->fullscreen)
-			SDL_SetWindowFullscreen(this->sdlwindow, 0);
-		else
-			SDL_SetWindowFullscreen(this->sdlwindow, SDL_WINDOW_FULLSCREEN);
-		this->fullscreen =! this->fullscreen;
-		return true;	// TODO
-	}
+unsigned int Display::get_timestamp_end() {
+	return this->timestamp_end;
+}
 
-	int Display::get_width() {
-		return this->width;
-	}
-
-	int Display::get_height() {
-		return this->height;
-	}
-
-	void Display::set_timestamp_start(unsigned int timestamp) {
-		this->timestamp_start = timestamp;
-	}
-
-	void Display::set_timestamp_end(unsigned int timestamp) {
-		this->timestamp_end = timestamp;
-	}
-
-	unsigned int Display::get_timestamp_start() {
-		return this->timestamp_start;
-	}
-
-	unsigned int Display::get_timestamp_end() {
-		return this->timestamp_end;
-	}
-
-void Display::clearscreen() {	// FIXME: Does not clear the screen
+void Display::clearscreen() {
+	// FIXME: Does not clear the screen
+	// TODO: Move to grapher?
 	SDL_RenderClear(this->sdlrenderer);
 }
 
@@ -127,13 +184,14 @@ bool Display::refresh() {
 	//z_buf.reset();
 
 	// Sleep and sync to desired FPS:
-	if (this->fps_desired != 0 and this->works) {	// 0 = unlimited fps
+	if (this->works) {
 		this->timestamp_end = SDL_GetTicks();
 		//SDL_WM_SetCaption("DEMO | FPS: " << framecounter/((timestamp_atend - timestamp_atstart)/1000.0), NULL)
 		//SDL_SetWindowTitle(this->sdlwindow, 1000.0/(this->timestamp_end - this->timestamp_start)));
-		int delay = (1000.0/this->fps_desired) - (this->timestamp_end - this->timestamp_start);
-		if (delay > 0)
-			SDL_Delay(delay);
+		if (this->fps_desired != 0) {	// 0 = unlimited fps
+			int delay = (1000.0/this->fps_desired) - (this->timestamp_end - this->timestamp_start);
+			if (delay > 0) SDL_Delay(delay);
+		}
 		this->timestamp_start = SDL_GetTicks();
 	}
 
@@ -159,6 +217,20 @@ unsigned int Display::get_runtime() {
 
 unsigned int Display::get_framecount() {
 	return this->framecounter;
+}
+
+bool Display::save_screenshot() {
+	/*
+		// TODO: Generate filename: programname_programversion_timestamp.png
+		unsigned int rmask, gmask, bmask, amask;
+		#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+			rmask = 0xff000000; gmask = 0x00ff0000; bmask = 0x0000ff00; amask = 0x000000ff;
+		#else
+			rmask = 0x000000ff; gmask = 0x0000ff00; bmask = 0x00ff0000; amask = 0xff000000;
+		#endif
+			//if(SDL_SaveBMP(this->dispaly->sdlsurface, "filename.png") != 0)
+				//log("ERROR: Cannot save screenshot image");
+	*/
 }
 
 Coordinate2D Display::apply_coordinategrid(Coordinate2D coordinate) {

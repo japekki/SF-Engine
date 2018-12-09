@@ -1,3 +1,4 @@
+#include <SDL.h>
 #include "timeline.hpp"
 
 Timeline::Timeline() {
@@ -6,12 +7,30 @@ Timeline::Timeline() {
 Timeline::~Timeline() {
 }
 
-/*
-
 void Timeline::init() {
-	init_timestamp = SDL_GetTicks();
+	this->init_timestamp = SDL_GetTicks();
 }
 
+void Timeline::set_speed(float speed) {
+	this->speed = speed;
+}
+
+/*
+float Timeline::get_speed() {
+	return this->speed;
+}
+*/
+
+int Timeline::get_position() {
+	//return position;
+	return speed * (SDL_GetTicks() - this->init_timestamp);	// FIXME: jump from current position
+}
+
+void Timeline::set_position(int position) {
+	this->position = position;
+}
+
+/*
 void Timeline::sync(unsigned char sync_type) {
 	switch (sync_type) {
 		case SYNC_CLOCK:
@@ -22,20 +41,8 @@ void Timeline::sync(unsigned char sync_type) {
 	// TODO: Handle cumulative actions between our leaps
 }
 
-int Timeline::get_position() {
-	return position;
-}
-
 void Timeline::set_position(int new_position) {
 	position = new_position;
-}
-
-void Timeline::jumpto(int new_position) {
-	position = new_position;
-}
-
-void Timeline::set_speed(float new_speed) {
-	speed = new_speed;
 }
 
 //void Timeline::add_action(Action action) {
@@ -53,11 +60,11 @@ void Timeline::clear() {
 }
 
 void Timeline::start() {
-	playing = true;
+	running = true;
 }
 
 void Timeline::stop() {
-	playing = false;
+	running = false;
 }
 
 int Timeline::time_until_next_action() {

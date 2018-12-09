@@ -37,6 +37,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../../src" />
 				</Compiler>
 			</Target>
 			<Target title="SFE demo Release">
@@ -47,6 +48,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O3" />
+					<Add directory="../../src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -60,6 +62,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../../src" />
 				</Compiler>
 			</Target>
 			<Target title="CaveBombers Release">
@@ -70,6 +73,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O3" />
+					<Add directory="../../src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -83,6 +87,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../../src" />
 				</Compiler>
 			</Target>
 			<Target title="Pinball Release">
@@ -93,6 +98,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O3" />
+					<Add directory="../../src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -106,6 +112,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../../src" />
 				</Compiler>
 			</Target>
 			<Target title="PubLiippari Release">
@@ -116,6 +123,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O3" />
+					<Add directory="../../src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -129,6 +137,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../../src" />
 				</Compiler>
 			</Target>
 			<Target title="RocketZ Release">
@@ -139,6 +148,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O3" />
+					<Add directory="../../src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -152,6 +162,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../../src" />
 				</Compiler>
 			</Target>
 			<Target title="Tetrex Release">
@@ -162,6 +173,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O3" />
+					<Add directory="../../src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -180,6 +192,14 @@
 		</Linker>
 		<Unit filename="../audio.cpp" />
 		<Unit filename="../audio.hpp" />
+		<Unit filename="../camera.cpp">
+			<Option target="SFE demo Debug" />
+			<Option target="SFE demo Release" />
+		</Unit>
+		<Unit filename="../camera.hpp">
+			<Option target="SFE demo Debug" />
+			<Option target="SFE demo Release" />
+		</Unit>
 		<Unit filename="../color.cpp" />
 		<Unit filename="../color.hpp" />
 		<Unit filename="../config.cpp" />
@@ -251,69 +271,205 @@
 		</Unit>
 		<Unit filename="../program.cpp" />
 		<Unit filename="../program.hpp" />
-		<Unit filename="../program_cavebombers.cpp">
+		<Unit filename="../programs/cavebombers/cavebombers.cpp">
 			<Option target="CaveBombers Debug" />
 			<Option target="CaveBombers Release" />
 		</Unit>
-		<Unit filename="../program_cavebombers.hpp">
+		<Unit filename="../programs/cavebombers/cavebombers.hpp">
 			<Option target="CaveBombers Debug" />
 			<Option target="CaveBombers Release" />
 		</Unit>
-		<Unit filename="../program_pinball.cpp">
+		<Unit filename="../programs/pinball/pinball.cpp">
 			<Option target="Pinball Debug" />
 			<Option target="Pinball Release" />
 		</Unit>
-		<Unit filename="../program_pinball.hpp">
+		<Unit filename="../programs/pinball/pinball.hpp">
 			<Option target="Pinball Debug" />
 			<Option target="Pinball Release" />
 		</Unit>
-		<Unit filename="../program_publiippari.cpp">
+		<Unit filename="../programs/publiippari/publiippari.cpp">
 			<Option target="PubLiippari Debug" />
 			<Option target="PubLiippari Release" />
 		</Unit>
-		<Unit filename="../program_publiippari.hpp">
+		<Unit filename="../programs/publiippari/publiippari.hpp">
 			<Option target="PubLiippari Debug" />
 			<Option target="PubLiippari Release" />
 		</Unit>
-		<Unit filename="../program_rocketz.cpp">
+		<Unit filename="../programs/rocketz/ai.cpp">
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
-		<Unit filename="../program_rocketz.hpp">
+		<Unit filename="../programs/rocketz/ai.hpp">
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
-		<Unit filename="../program_sfedemo.cpp">
+		<Unit filename="../programs/rocketz/base.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/base.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/building.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/building.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/bullet.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/bullet.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/gadget.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/gadget.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/gameplay.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/gameplay.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/human.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/human.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/item.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/item.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/land.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/land.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/level.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/level.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/player.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/player.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/rain.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/rain.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/rocketz.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/rocketz.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/shield.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/shield.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/shop.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/shop.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/vehicle.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/vehicle.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/weapon.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/weapon.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/sfedemo/sfedemo.cpp">
 			<Option target="SFE demo Debug" />
 			<Option target="SFE demo Release" />
 		</Unit>
-		<Unit filename="../program_sfedemo.hpp">
+		<Unit filename="../programs/sfedemo/sfedemo.hpp">
 			<Option target="SFE demo Debug" />
 			<Option target="SFE demo Release" />
 		</Unit>
-		<Unit filename="../program_template.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="../program_template.hpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="../program_tetrex.cpp">
+		<Unit filename="../programs/tetrex/tetrex.cpp">
 			<Option target="Tetrex Debug" />
 			<Option target="Tetrex Release" />
 		</Unit>
-		<Unit filename="../program_tetrex.hpp">
+		<Unit filename="../programs/tetrex/tetrex.hpp">
 			<Option target="Tetrex Debug" />
 			<Option target="Tetrex Release" />
 		</Unit>
 		<Unit filename="../projectile.cpp" />
 		<Unit filename="../projectile.hpp" />
-		<Unit filename="../scene.cpp" />
-		<Unit filename="../scene.hpp" />
+		<Unit filename="../sprite.cpp">
+			<Option target="SFE demo Debug" />
+			<Option target="SFE demo Release" />
+		</Unit>
+		<Unit filename="../sprite.hpp">
+			<Option target="SFE demo Debug" />
+			<Option target="SFE demo Release" />
+		</Unit>
 		<Unit filename="../timeline.cpp" />
 		<Unit filename="../timeline.hpp" />
 		<Unit filename="../types.hpp" />
 		<Unit filename="../water.cpp" />
 		<Unit filename="../water.hpp" />
+		<Unit filename="../world.cpp">
+			<Option target="SFE demo Debug" />
+			<Option target="SFE demo Release" />
+		</Unit>
+		<Unit filename="../world.hpp">
+			<Option target="SFE demo Debug" />
+			<Option target="SFE demo Release" />
+		</Unit>
 		<Unit filename="../zbuf.cpp" />
 		<Unit filename="../zbuf.hpp" />
 		<Extensions>

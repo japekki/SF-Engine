@@ -7,8 +7,8 @@ TODO:
 - Birds, balloons, airplanes etc.
 - Rainbow
 - Heat wobble
-- Movement paths/curves
 - Star field
+- Movement paths/curves for suns, planets and stars
 */
 
 #ifndef EFFUX_SKY_HPP

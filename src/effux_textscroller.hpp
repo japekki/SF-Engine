@@ -1,4 +1,9 @@
 /*
+	Creates separate textures for text lines.
+	If individual text lines do not need to move dynamically, use Grapher class text and scroller routines instead.
+*/
+
+/*
 TODO:
 - Font, color and size changing within text
 - Background color
@@ -24,18 +29,14 @@ TODO:
 	#include <SDL_ttf.h>
 	#include <vector>
 	#include "display.hpp"
-
-	struct textbox {
-		SDL_Texture *texture;
-		SDL_Rect rect;
-	};
+	#include "sprite.hpp"
 
 	class EffuxTextscroller {
 		private:
 			Grapher *grapher;
 			TTF_Font *font;
 			SDL_Color color = {255, 255, 255};	// White by default
-			std::vector<textbox> textboxes;
+			std::vector<simplesprite> textboxes;
 		public:
 			bool works = true;	// Change to false if something goes wrong
 			unsigned short width;
@@ -43,9 +44,8 @@ TODO:
 			unsigned char alignment = TEXTALIGN_LEFT;
 			unsigned char scrollstyle = SCROLLSTYLE_NONE;
 			EffuxTextscroller(Grapher *grapher);
-			EffuxTextscroller(Grapher *grapher, const char* filename, int size, unsigned char alignment, unsigned char scrollstyle, SDL_Color color, std::string text);
+			EffuxTextscroller(Grapher *grapher, TTF_Font *font, unsigned char alignment, unsigned char scrollstyle, SDL_Color color, std::string text);
 			~EffuxTextscroller();
-			bool load_font(const char* filename, int size);
 			bool write(std::string text);	// Separated by newline "\n"
 			void set_color(SDL_Color color);
 			unsigned int get_width();	// Width of the longest text line's texture

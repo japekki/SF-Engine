@@ -6,17 +6,26 @@
 	This one is supposed to be a Minebombers style game.
 */
 
-#ifndef PROGRAM_CAVEBOMBERS_HPP
-	#define PROGRAM_CAVEBOMBERS_HPP
+/*
+Game modes / goals:
+- Adventure (at least 1 player)
+- Duel (at least 2 players)
+*/
+
+#ifndef CAVEBOMBERS_HPP
+	#define CAVEBOMBERS_HPP
 
 	#include "program.hpp"
 
 	// FILE NAMES:
 		#define DATAPATH "data/"
 
-		// Sounds:
+		// Sound effects:
 			#define FILENAME_SOUND_GAMEOVER DATAPATH "gameover.wav"
 			#define FILENAME_SOUND_PAUSE DATAPATH "pause.wav"
+
+		// Music:
+			#define FILENAME_MUSIC_GAMEPLAY DATAPATH "game.xm"
 
 	class Tile {
 		// Can we wall, floor, water etc.
@@ -47,4 +56,4 @@
 			bool mainloop() override;
 	};
 
-#endif // PROGRAM_CAVEBOMBERS_HPP
+#endif // CAVEBOMBERS_HPP

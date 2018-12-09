@@ -16,11 +16,11 @@
 	#include <vector>
 
 	void log(const std::string &msg);
+
 	#ifdef WITH_DEBUGMSG
 		void debugmsg(const std::string &msg);
 	#endif // WITH_DEBUGMSG
 
-	//std::vector<std::string> split(std::string text, char delimiter);
 	std::string lowercase(std::string text);
 	std::string uppercase(std::string text);
 	std::string togglecase(std::string text);

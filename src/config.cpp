@@ -44,16 +44,10 @@ bool read_file () {
 		}
 		this->works = works and conf_file.is_open();	// Preserver previous false
 		conf_file.close();
-	} //if (conf_file.is_open())
-	else {
+	} else {
 		log("ERROR reading config file " << filename);
 		this->works = false;
 	}
-
-	//vector<string> test;
-	//string test2;
-	//test = split("hey hey yo yo", ' ');
-	//log(test[1]);
 
 	return this->works;
 }

@@ -3,7 +3,7 @@
 
 ## Versions
 
-Engine: 0.0002
+Engine: 0.0003
 
 SFEdemo: 0.0001
 
@@ -11,7 +11,7 @@ CaveBombers: 0.0001
 
 Pinball: 0.0001
 
-RocketZ: 0.0002
+RocketZ: 0.0003
 
 PubLiippari: 0.0001
 
@@ -31,7 +31,7 @@ Currently supported/tested operating systems and compilers:
 
 MS-Windows (MinGW), GNU/Linux, GNU g++
 
-Should compile to both 32 and 64 bit executable.
+Should compile into both 32 and 64 bit executable.
 
 ## Depencies
 
@@ -42,3 +42,5 @@ Links to fonts used: [ModeNine](https://www.fontspace.com/grudnuk-creations/mode
 **NOTE:** 32 bit version, at least on MinGW, gives an error when trying to load a .PNG file. It says something about inflateValidate procedure, not sure why this is, probably a bug in some version of SDL2_image / libpng16-16.dll / zlib1.dll I guess...
 
 ![screenshot](http://titanix.net/~japek/archive/RocketZ_0.0001.png)
+
+You may download precompiled RocketZ binaries for Windows and Linux from [RocketZ homepage](http://titanix.net/~japek/rocketz/).

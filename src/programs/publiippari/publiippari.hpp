@@ -11,8 +11,8 @@ TODO:
 - Screensaver settings dialog
 */
 
-#ifndef PROGRAM_PUBLIIPPARI_HPP
-	#define PROGRAM_PUBLIIPPARI_HPP
+#ifndef PUBLIIPPARI_HPP
+	#define PUBLIIPPARI_HPP
 
 	#include <vector>
 	#include "program.hpp"
@@ -39,4 +39,4 @@ TODO:
 			bool mainloop() override;
 	};
 
-#endif // PROGRAM_PUBLIIPPARI_HPP
+#endif // PUBLIIPPARI_HPP

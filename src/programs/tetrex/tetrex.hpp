@@ -11,10 +11,12 @@ TODO:
 - High scores for different bucket and block sizes
 - 2 player mode
 - Computer player
+- Don't rotate block if it would have to go trough other block
+- Title screen where moving blocks form the word "Tetrex"
 */
 
-#ifndef PROGRAM_TETREX_HPP
-	#define PROGRAM_TETREX_HPP
+#ifndef TETREX_HPP
+	#define TETREX_HPP
 
 	#include "program.hpp"
 
@@ -23,10 +25,11 @@ TODO:
 
 		// Sounds:
 		#define FILENAME_SOUND_BLOCKDOWN DATAPATH "blockdown.wav"
-		#define FILENAME_SOUND_LINEFULL DATAPATH "linefull.wav"
+		#define FILENAME_SOUND_BOMB DATAPATH "bomb.wav"
 		#define FILENAME_SOUND_GAMEOVER DATAPATH "gameover.wav"
 		#define FILENAME_SOUND_HIGHSCORE DATAPATH "highscore.wav"
-		#define FILENAME_SOUND_BOMB DATAPATH "bomb.wav"
+		#define FILENAME_SOUND_LINEFULL DATAPATH "linefull.wav"
+		#define FILENAME_SOUND_NEXTLEVEL DATAPATH "nextlevel.wav"
 		#define FILENAME_SOUND_PAUSE DATAPATH "pause.wav"
 
 	class Block {
@@ -43,6 +46,15 @@ TODO:
 		void check_fills();
 	};
 
+	class Player {
+		unsigned int score;
+	};
+
+	class Gameplay {
+		Bucket bucket[2];	//Two buckets if two players
+		//Player[2] player;
+	};
+
 	class Tetrex : public Program {
 		public:
 			Tetrex();
@@ -55,4 +67,4 @@ TODO:
 			bool mainloop() override;
 	};
 
-#endif // PROGRAM_TETREX_HPP
+#endif // TETREX_HPP

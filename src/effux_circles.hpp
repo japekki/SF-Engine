@@ -18,13 +18,13 @@
 			Grapher *grapher;
 		public:
 			SDL_Texture *sdltexture;
-			Uint32 *pixels;
+			Uint32 *pixels = nullptr;
 			unsigned short width;
 			unsigned short height;
 			std::vector<bool> circles;
 			EffuxCircles(Grapher *grapher);
 			~EffuxCircles();
-			void calculate(Uint32 time, bool both);	// Draw to this->sdltexture
+			void draw(Uint32 time, Uint8 style);	// Draw to this->sdltexture
 	};
 
 #endif // EFFUX_CIRCLES_HPP

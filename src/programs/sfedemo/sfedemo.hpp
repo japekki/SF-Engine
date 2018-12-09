@@ -7,20 +7,24 @@
 	Merely a collection / showcase / test suite of SF Engine features.
 */
 
-#ifndef PROGRAM_SFEDEMO_HPP
-	#define PROGRAM_SFEDEMO_HPP
+#ifndef SFEDEMO_HPP
+	#define SFEDEMO_HPP
 
 	#include "program.hpp"
+	#include "world.hpp"
 
 	class SFEdemo : public Program {
 		private:
+			Timeline *timeline;
 			//EffuxCircles *effux_circles;
 			//EffuxTextscroller *effux_textscroller;
+			World world_room;
 		public:
 			SFEdemo();
 			~SFEdemo();
 			bool init() override;
+			bool world_room_init();
 			bool mainloop() override;
 	};
 
-#endif // PROGRAM_SFEDEMO_HPP
+#endif // SFEDEMO_HPP

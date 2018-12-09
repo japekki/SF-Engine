@@ -1,4 +1,4 @@
-#include "program_publiippari.hpp"
+#include "publiippari.hpp"
 
 void Faucet::drip() {
 }
@@ -17,15 +17,17 @@ bool PubLiippari::init() {
 		this->display->set_width(640);
 		this->display->set_height(480);
 		this->display->set_desiredfps(50);
+		this->display->resizable_window = false;
 		//this->display->vsync = true;
-		//this->display->set_fullscreen(true);
+		//this->display->mousecursor_visible = false;
+		this->display->set_fullscreen(true);
 	Program::init();
 	return this->works;
 }
 
 bool PubLiippari::mainloop() {
 	while (!this->mainloop_done and this->works) {
-		handle_events();
+		get_events();
 		this->display->refresh();
 	}
 	return this->works;

@@ -5,31 +5,22 @@
 EffuxTextscroller::EffuxTextscroller(Grapher *grapher) {
 }
 
-EffuxTextscroller::EffuxTextscroller(Grapher *grapher, const char* filename, int size, unsigned char alignment, unsigned char scrollstyle, SDL_Color color, std::string text) {
+EffuxTextscroller::EffuxTextscroller(Grapher *grapher, TTF_Font *font, unsigned char alignment, unsigned char scrollstyle, SDL_Color color, std::string text) {
 	this->width = grapher->width;
 	this->height = grapher->height;
 	this->grapher = grapher;
 	this->alignment = alignment;
 	this->scrollstyle = scrollstyle;
 	this->set_color(color);
-	this->load_font(filename, size);
+	this->font = font;
 	this->write(text);
 }
 
 EffuxTextscroller::~EffuxTextscroller() {
 	for (int i=0; i<this->textboxes.size(); i++) {
-		SDL_DestroyTexture(this->textboxes.at(i).texture);
+		SDL_DestroyTexture(this->textboxes.at(i).sdltexture);
 	}
 	// delete this->textboxes;
-}
-
-bool EffuxTextscroller::load_font(const char* filename, int size) {
-	this->font = TTF_OpenFont(filename, size);
-	if (font == NULL) {
-		log("Error loading font.");
-		this->works = false;
-	}
-	return this->works;
 }
 
 void EffuxTextscroller::set_color(SDL_Color color) {
@@ -46,10 +37,7 @@ bool EffuxTextscroller::write(std::string text) {
 		std::vector<std::string> lines;
 		lines = split(text, "\n");
 		for (int i=0; i<lines.size(); i++) {
-			SDL_Surface *surface = TTF_RenderText_Solid(this->font, lines.at(i).c_str(), this->color);
-			SDL_Texture *texture = SDL_CreateTextureFromSurface(this->grapher->sdlrenderer, surface);
-									//SDL_CreateTexture(this->grapher->sdlrenderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-			SDL_FreeSurface(surface);
+			SDL_Texture *texture = this->grapher->create_textline_texture(lines.at(i), this->font, this->color);
 
 		// Create rect:
 			SDL_Rect rect;
@@ -60,8 +48,8 @@ bool EffuxTextscroller::write(std::string text) {
 				TTF_SizeText(this->font, lines.at(i).c_str(), &rect.w, &rect.h);
 
 		// Create textbox and add it to stash:
-			textbox box;
-			box.texture = texture;
+			simplesprite box;
+			box.sdltexture = texture;
 			box.rect = rect;
 			this->textboxes.push_back(box);
 		}
@@ -107,7 +95,7 @@ bool EffuxTextscroller::draw(short scroll_position) {
 				rect.y = scroll_position + total_height;	// TODO
 		rect.w = this->textboxes.at(i).rect.w;
 		rect.h = this->textboxes.at(i).rect.h;
-		SDL_RenderCopy(this->grapher->sdlrenderer, this->textboxes.at(i).texture, &this->textboxes.at(i).rect, &rect);
+		SDL_RenderCopy(this->grapher->sdlrenderer, this->textboxes.at(i).sdltexture, &this->textboxes.at(i).rect, &rect);
 		total_height += this->textboxes.at(i).rect.h;
 	}
 	return this->works;	// TODO

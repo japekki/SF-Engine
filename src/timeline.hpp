@@ -32,22 +32,20 @@
 	};
 
 	class Timeline {
-		private:
-			int init_timestamp;			// Demo will start from index 0 at the timeline, when synced to clock
-			int position = 0;			// current playing position in milliseconds
+		public:
+			int init_timestamp;			// Program will start from index 0 at the timeline, when synced to clock
+			int position = 0;			// current running position in milliseconds
 			int previous_position = 0;	// when we last polled an action
 			unsigned int duration;		// milliseconds
-			float speed;				// + or -, 1 = "normal speed", negative plays backwards
-			bool playing;
+			float speed = 1;			// + or -, 1 = "normal speed", negative plays backwards
+			bool running;
 			std::vector<Action> actions;
-		public:
 			Timeline();
 			~Timeline();
 			void init();
-			void sync(unsigned char sync_type);
+			//void sync(unsigned char sync_type);
 			int get_position();
-			void set_position(int new_position);
-			void jumpto(int new_position);
+			void set_position(int position);
 			void set_speed(float new_speed);
 			//void add_action(int time, void *function);
 			void clear();			// clear all actions

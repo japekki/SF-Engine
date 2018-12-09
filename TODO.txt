@@ -1,8 +1,10 @@
 TODO:
 - Make library (sfe.dll / libsfe.so)
 - Makefile / configure
-- Compatibility for various compilers/IDEs (GNU GCC/G++, MS Visual Studio, Android Studio, Open Watcom)
-- When paused, don't run mainloop but sleep until event (0% cpu usage while paused)
+- Merge MinGW and UNIX projects together as targets in Code::Blocks
+- Compatibility for various compilers/IDEs (GNU GCC/G++, Dev-C++, MS Visual Studio, Android Studio, Open Watcom)
+- More sense to program class inheritance
+- When paused, don't run mainloop but sleep until event (no CPU load while paused)
 - Threading
 - Support for DirectX, OpenGL/GLES (make libSDL optional)
 - Support for MS-DOS and Android operating systems
@@ -17,14 +19,17 @@ TODO:
 - Support for multiple displays (like, demo running on big screen and settings panel on monitor)
 - Polar coordinate plane (angle and radius)
 - Camera
+- Vector graphics file support (.SVG)
 - Exception handling
 - Networking (TCP/IP and serial port cable)
 - Better keyboard handling routines
-- Save and load state (for games) with recording and replay
+- Save and load state (for games) with recording and replay, rewind, fast forward
 - Close files after loading content
 - Configuration options in a file with a settings / launcher GUI
-- Enum vs. #define
+- Enum vs. #define (get rid of duplicate definitions in header files, DATAPATH for example in program.hpp and program_*.hpp)
+- Separate example programs into sub folders
 - Generate textures according to resolution and aspect ratio instead of static size / scaling
+- React to events (quit) immediately, don't wait for mainloop / screen refresh
 - Transition effects:
 	- fade in/out
 	- pixelize

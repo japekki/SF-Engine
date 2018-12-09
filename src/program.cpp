@@ -27,6 +27,7 @@ Program::Program() {
 		this->display->set_height(480);
 		this->display->set_desiredfps(40);
 		//this->display->vsync = true;
+		//this->display->mousecursor_visible = false;
 		//this->display->set_fullscreen(true);
 }
 
@@ -53,18 +54,23 @@ Program::~Program() {
 
 bool Program::mainloop() {
 	while (!this->mainloop_done and this->works) {
-		handle_events();
+		get_events();
 		this->display->refresh();
 	}
 	return this->works;
 }
 
-void Program::handle_events() {
+void Program::get_events() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_QUIT:
-				this->mainloop_done = true;
+				this->mainloop_done = true;	// TODO: quit (and free resources) immediately - in case something went wrong, or super slow fps (< 0.1)
+				break;
+			case SDL_WINDOWEVENT:
+				if (event.window.event == SDL_WINDOWEVENT_RESIZED or event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+					this->display->check_window_size();
+				}
 				break;
 			case SDL_KEYDOWN:
 				//keyboard.push_event(event.key);
@@ -88,23 +94,43 @@ void Program::handle_events() {
 						this->keyboard->key_RIGHT_down = true;
 						break;
 					case SDLK_SPACE:
-						this->paused = !this->paused;
+						this->keyboard->key_SPACE_down = true;
 						break;
-					case SDLK_s:
-						// Save screenshot:
-						/*
-						unsigned int rmask, gmask, bmask, amask;
-						#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-							rmask = 0xff000000; gmask = 0x00ff0000; bmask = 0x0000ff00; amask = 0x000000ff;
-						#else
-							rmask = 0x000000ff; gmask = 0x0000ff00; bmask = 0x00ff0000; amask = 0xff000000;
-						#endif
-							//if(SDL_SaveBMP(this->dispaly->sdlsurface, "screenshot.bmp") != 0)
-								//log("ERROR: Cannot save screenshot image");
-						*/
+					case SDLK_KP_MULTIPLY:
+						this->keyboard->key_ASTERISK_down = true;
+						break;
+					case SDLK_KP_DIVIDE:
+						this->keyboard->key_SLASH_down = true;
+						break;
+					case SDLK_KP_PLUS:
+						this->keyboard->key_PLUS_down = true;
+						break;
+					case SDLK_KP_MINUS:
+						this->keyboard->key_MINUS_down = true;
+						break;
+					case SDLK_PAGEUP:
+						this->keyboard->key_PAGEUP_down = true;
+						break;
+					case SDLK_PAGEDOWN:
+						this->keyboard->key_PAGEDOWN_down = true;
+						break;
+					case SDLK_HOME:
+						this->keyboard->key_HOME_down = true;
+						break;
+					case SDLK_END:
+						this->keyboard->key_END_down = true;
+						break;
+					case SDLK_PRINTSCREEN:
+						// TODO: Save screenshot:
+						//this->display->save_screenshot();
+						// TODO: Prevent being captured by OS (Windows)
 						break;
 					case SDLK_F11:
-						this->display->toggle_fullscreen();
+						this->keyboard->key_F11_down = true;
+
+						break;
+					case SDLK_F12:
+						this->keyboard->key_F12_down = true;
 						break;
 				}
 				break;
@@ -128,6 +154,39 @@ void Program::handle_events() {
 						break;
 					case SDLK_RIGHT:
 						this->keyboard->key_RIGHT_down = false;
+						break;
+					case SDLK_SPACE:
+						this->keyboard->key_SPACE_down = false;
+						break;
+					case SDLK_KP_MULTIPLY:
+						this->keyboard->key_ASTERISK_down = false;
+						break;
+					case SDLK_KP_DIVIDE:
+						this->keyboard->key_SLASH_down = false;
+						break;
+					case SDLK_KP_PLUS:
+						this->keyboard->key_PLUS_down = false;
+						break;
+					case SDLK_KP_MINUS:
+						this->keyboard->key_MINUS_down = false;
+						break;
+					case SDLK_PAGEUP:
+						this->keyboard->key_PAGEUP_down = false;
+						break;
+					case SDLK_PAGEDOWN:
+						this->keyboard->key_PAGEDOWN_down = false;
+						break;
+					case SDLK_HOME:
+						this->keyboard->key_HOME_down = false;
+						break;
+					case SDLK_END:
+						this->keyboard->key_END_down = false;
+						break;
+					case SDLK_F11:
+						this->keyboard->key_F11_down = false;
+						break;
+					case SDLK_F12:
+						this->keyboard->key_F12_down = false;
 						break;
 				}
 				break;
