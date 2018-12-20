@@ -1,9 +1,10 @@
 #include "cavebombers.hpp"
+#include "display.hpp"
 
 Cavebombers::Cavebombers() {
 	// SET PROGRAM ATTRIBUTES:
 		this->name = "CaveBombers";
-		this->version = "0.0001";
+		this->version = "0.0002";
 }
 
 Cavebombers::~Cavebombers() {

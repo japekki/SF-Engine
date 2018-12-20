@@ -18,10 +18,10 @@ SDL_KeyboardEvent Keyboard::pop_event() {
 */
 
 Joystick::Joystick() {
-		//SDL_Init(SDL_INIT_JOYSTICK); // TODO: SDL_Init should be called before all other SDL functions.
-		//SDL_JoystickEventState(SDL_ENABLE);
-		//joystick.sdl_joystick = SDL_JoystickOpen(0);
-		//log("Joystick initialized.");
+	//SDL_Init(SDL_INIT_JOYSTICK); // TODO: SDL_Init should be called before all other SDL functions.
+	//SDL_JoystickEventState(SDL_ENABLE);
+	//joystick.sdl_joystick = SDL_JoystickOpen(0);
+	//log("Joystick initialized.");
 }
 
 Joystick::~Joystick() {

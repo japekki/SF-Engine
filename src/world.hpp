@@ -11,16 +11,18 @@
 	#define WORLD_HPP
 
 	#include <vector>
-	#include "camera.hpp"
-	#include "geom.hpp"
+
+	// Forward declarations:
+		class Camera;
+		class Polygon3D;
 
 	class World {
 		public:
-			std::vector<Polygon3D> polygons;
-			Camera camera;
+			std::vector<Polygon3D*> polygons;
+			Camera* camera;
 			World();
 			~World();
-			void add_polygon3d(Polygon3D polygon);
+			void add_polygon3d(Polygon3D* polygon);
 			void execute();
 			//bool del_entity(unsigned short id);
 			//void draw(SDL_Surface *sdlsurface);

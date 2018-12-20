@@ -7,7 +7,13 @@
 /*
 TODO:
 - Set monitor Hz
+- Multiple monitors
 - Check if desktop fullscreen mode scales 1:1 / is it slower than just a windows of that size
+*/
+
+/*
+FIXME:
+- check_window_size() is called multiple times in a row when window size changes / fullscreen toggles
 */
 
 #ifndef DISPLAY_HPP
@@ -15,7 +21,6 @@ TODO:
 
 	#include <SDL.h>
 	#include <string>
-	#include "geom.hpp"
 	#include "grapher.hpp"
 
 	class Display : public Grapher {
@@ -28,20 +33,18 @@ TODO:
 			bool mousecursor_visible = true;
 			bool vsync = false;
 			bool resizable_window = true;
+			bool minimized = false;				// True if window gets minimized
 			unsigned int timestamp_initial;		// when the display was initialized
-			unsigned int timestamp_start = 0;   // timestamp at mainloop begin
-			unsigned int timestamp_end;     	// timestamp at mainloop end
+			unsigned int timestamp_start = 0;	// timestamp at mainloop begin
+			unsigned int timestamp_end = 0;		// timestamp at mainloop end
+			float lastfps;
 			unsigned int framecounter = 0;
-			unsigned char fps_desired = 1;		// Don't draw faster than this, 0 = unlimited
-			unsigned char fps_max;				// Highest FPS momentarily achieved
+			unsigned char fps_desired = 10;		// Don't draw faster than this, 0 = unlimited
+			//unsigned char fps_max;			// Highest FPS momentarily achieved
 			bool fullscreenmode_desktop = true;	// if true, keep desktop resolution, if false change resolution
 			SDL_Window *sdlwindow = nullptr;
 			void check_window_size();			// get information of current display mode
 			bool is_resized();					// Check if size has changed after last check
-			//SDL_Renderer *sdlrenderer;		// Inherited from class Grapher (?)
-			//SDL_Texture *sdltexture;			// Inherited from class Grapher (?)
-			//bool resizable;
-			//Color clearcolor;
 		// FUNCTIONS:
 			Display();
 			~Display();
@@ -62,6 +65,7 @@ TODO:
 			bool set_vsync(bool vsync);
 			void clearscreen();
 			bool refresh();
+			void load_icon(const char* filename);
 			bool setup();
 			float get_totalfps();				// Total average fps from init to deinit
 			float get_lastfps();				// Fps during last frame refresh
@@ -69,8 +73,8 @@ TODO:
 			unsigned int get_runtime();
 			unsigned int get_framecount();
 			bool save_screenshot();
-			Coordinate2D apply_coordinategrid(Coordinate2D coordinate);
-			Coordinate3D apply_coordinategrid(Coordinate3D coordinate);
+			//bool record_video();
+			//bool render_video(unsigned short fps);
 	};
 
 #endif // DISPLAY_HPP

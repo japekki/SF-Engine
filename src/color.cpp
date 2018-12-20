@@ -61,23 +61,26 @@ ColorRGB Color::hsl_to_rgb() {
 }
 
 unsigned int Color::hsl_to_int() {
+	return 0;	// TODO
 }
 
 ColorHSL Color::rgb_to_hsl() {
 }
 
 unsigned int Color::rgb_to_int() {
-	Uint8 r = 255*this->r;
-	Uint8 g = 255*this->g;
-	Uint8 b = 255*this->b;
-	this->rgbint = (r << 16) + (g << 8) + b;
+	//Uint8 r = 255*this->r;
+	//Uint8 g = 255*this->g;
+	//Uint8 b = 255*this->b;
+	//this->rgbint = (r << 16) + (g << 8) + b;
 }
 
+/*
 ColorRGB Color::int_to_rgb() {
 }
 
 ColorHSL Color::int_to_hsl() {
 }
+*/
 
 /*
 Color::HSLtoRGB(ColorHSL colorHSL) {

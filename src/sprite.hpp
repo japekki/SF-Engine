@@ -19,7 +19,7 @@
 
 	class Sprite {
 		public:
-			std::vector<Frame> frames;
+			std::vector<Frame*> frames;
 			unsigned short activeframe = 0;
 			unsigned int playtimes;	// 0 = infinite
 			bool backwards = false;
@@ -33,7 +33,7 @@
 
 	class Spritegroup {
 		public:
-			std::vector<Sprite> sprites;
+			std::vector<Sprite*> sprites;
 	};
 
 	class Voxel {	// 3D bitmap sprite

@@ -3,16 +3,15 @@
 
 	#include <vector>
 	#include "building.hpp"
-	#include "item.hpp"
 
-	// FILE NAMES:
-		#define DATAPATH "data/"
+	// Forward declarations:
+		//class Point;
 
-		// Sound effects:
-			#define FILENAME_SOUND_BASEATTACKWARNING DATAPATH "baseattackwarning.wav"
-
-	class Base { //: public Building {
+	class Base : public Building {
 		// Player's base
+		public:
+			Base();
+			~Base();
 		// TODO: Many bases or just one, should player select where to (re-)spawn?
 	};
 

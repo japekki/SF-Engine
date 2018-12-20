@@ -7,8 +7,8 @@ World::World() {
 World::~World() {
 }
 
-void World::add_polygon3d(Polygon3D polygon) {
-	polygons.push_back(polygon);
+void World::add_polygon3d(Polygon3D* polygon) {
+	//polygons.push_back(polygon);
 	// TODO: return id
 	// return 0;
 }

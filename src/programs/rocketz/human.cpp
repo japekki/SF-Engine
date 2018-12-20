@@ -1,18 +1,31 @@
 #include "human.hpp"
 #include "vehicle.hpp"
+#include "geom.hpp"
+
+void Human::get_into_vehicle(Vehicle* vehicle) {
+	this->vehicle = vehicle;
+	this->vehicle->driver = this;
+	this->inside_vehicle = true;
+}
+
+void Human::get_out_from_vehicle() {
+	this->vehicle->driver = nullptr;
+	this->inside_vehicle = false;
+	this->vehicle = nullptr;
+}
 
 void Human::steal(Vehicle *vehicle) {
 	// TODO: some kind of fighting if driver already aboard
-	vehicle->driver->inside_vehicle = false;
-	vehicle->driver = this;
-	this->inside_vehicle = true;
+	vehicle->driver->inside_vehicle = false;	// Kick current driver out
+	this->get_into_vehicle(vehicle);
+	// TODO: Change vehicle's owner
 }
 
 void Human::sabotage(Vehicle *vehicle) {
 	if (vehicle->sabotable) vehicle->sabotaged = true;
 }
 
-void Human::walk(Uint8 direction) {
+void Human::walk(unsigned char direction) {
 	if (!this->falling and !this->swimming) {
 		// alter position
 		// draw animation
@@ -32,7 +45,7 @@ void Human::collect(Item *item) {
 	// Use item immediately
 }
 
-void Human::shoot(Vector2D direction) {
+void Human::shoot() {
 	if (this->ammo > 0) {
 		this->ammo--;
 		//play sound

@@ -3,11 +3,13 @@
 #include "program.hpp"
 #include "audio.hpp"
 #include "misc.hpp"
+#include "display.hpp"
 
 Program::Program() {
-	#ifdef WITH_DEBUGMSG
-		debugmsg("Program::Program()");
-	#endif // WITH_DEBUGMSG
+	log("Program started.");
+
+	// Clean up SDL when program quits:
+		atexit(SDL_Quit);
 
 	// CREATE DISPLAY DEVICE:
 		this->display = new Display();
@@ -18,7 +20,7 @@ Program::Program() {
 		this->joystick = new Joystick();
 
 	// CREATE AUDIO DEVICE:
-		this->audio_works = audio_init();
+		//this->audio_works = audio_init();
 
 	// SET UP MIDI:
 
@@ -42,14 +44,17 @@ bool Program::init() {
 }
 
 Program::~Program() {
-	#ifdef WITH_DEBUGMSG
-		debugmsg("Program::~Program()");
-	#endif // WITH_DEBUGMSG
 	// FREE RESOURCES:
 		delete this->display;
 		delete this->keyboard;
 		delete this->mouse;
 		delete this->joystick;
+	log("Program finished.");
+	printf("TIME: %i ms -- FRAMES: %i -- FPS: %f / %i\n",
+		this->display->get_runtime(),
+		this->display->get_framecount(),
+		this->display->get_totalfps(),
+		this->display->get_desiredfps());
 }
 
 bool Program::mainloop() {
@@ -68,9 +73,14 @@ void Program::get_events() {
 				this->mainloop_done = true;	// TODO: quit (and free resources) immediately - in case something went wrong, or super slow fps (< 0.1)
 				break;
 			case SDL_WINDOWEVENT:
-				if (event.window.event == SDL_WINDOWEVENT_RESIZED or event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
+				if (event.window.event == SDL_WINDOWEVENT_RESIZED or event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
 					this->display->check_window_size();
-				}
+				else if (event.window.event == SDL_WINDOWEVENT_MAXIMIZED)
+					this->display->minimized = true;
+				else if (event.window.event == SDL_WINDOWEVENT_RESTORED)
+					this->display->minimized = false;
+				//else if (event.window.event == SDL_WINDOWEVENT_HIDDEN)
+				//else if (event.window.event == SDL_WINDOWEVENT_EXPOSED:
 				break;
 			case SDL_KEYDOWN:
 				//keyboard.push_event(event.key);
@@ -80,6 +90,9 @@ void Program::get_events() {
 						break;
 					case SDLK_RETURN:
 						this->keyboard->key_ENTER_down = true;
+						break;
+					case SDLK_SPACE:
+						this->keyboard->key_SPACE_down = true;
 						break;
 					case SDLK_UP:
 						this->keyboard->key_UP_down = true;
@@ -92,9 +105,6 @@ void Program::get_events() {
 						break;
 					case SDLK_RIGHT:
 						this->keyboard->key_RIGHT_down = true;
-						break;
-					case SDLK_SPACE:
-						this->keyboard->key_SPACE_down = true;
 						break;
 					case SDLK_KP_MULTIPLY:
 						this->keyboard->key_ASTERISK_down = true;
@@ -120,6 +130,9 @@ void Program::get_events() {
 					case SDLK_END:
 						this->keyboard->key_END_down = true;
 						break;
+					case SDLK_PAUSE:
+						this->keyboard->key_PAUSE_down = true;
+						break;
 					case SDLK_PRINTSCREEN:
 						// TODO: Save screenshot:
 						//this->display->save_screenshot();
@@ -127,7 +140,6 @@ void Program::get_events() {
 						break;
 					case SDLK_F11:
 						this->keyboard->key_F11_down = true;
-
 						break;
 					case SDLK_F12:
 						this->keyboard->key_F12_down = true;
@@ -143,6 +155,9 @@ void Program::get_events() {
 					case SDLK_RETURN:
 						this->keyboard->key_ENTER_down = false;
 						break;
+					case SDLK_SPACE:
+						this->keyboard->key_SPACE_down = false;
+						break;
 					case SDLK_UP:
 						this->keyboard->key_UP_down = false;
 						break;
@@ -154,9 +169,6 @@ void Program::get_events() {
 						break;
 					case SDLK_RIGHT:
 						this->keyboard->key_RIGHT_down = false;
-						break;
-					case SDLK_SPACE:
-						this->keyboard->key_SPACE_down = false;
 						break;
 					case SDLK_KP_MULTIPLY:
 						this->keyboard->key_ASTERISK_down = false;
@@ -182,6 +194,11 @@ void Program::get_events() {
 					case SDLK_END:
 						this->keyboard->key_END_down = false;
 						break;
+					case SDLK_PAUSE:
+						this->keyboard->key_PAUSE_down = false;
+						break;
+					case SDLK_PRINTSCREEN:
+						break;
 					case SDLK_F11:
 						this->keyboard->key_F11_down = false;
 						break;
@@ -190,16 +207,27 @@ void Program::get_events() {
 						break;
 				}
 				break;
+
 			case SDL_MOUSEMOTION:
 				//mouse.change_x = event.motion.xrel;
 				//mouse.change_y = event.motion.yrel;
 				//mouse.pos_x = event.motion.x;
 				//mouse.pos_y = event.motion.y;
-				//if (this->display->coordinategrid->centered) {
+				//if (this->display->grid->centered) {
 				//	mouse.pos_x -= this->display->get_width()/2;
 				//	mouse.pos_y -= this->display->get_height()/2;
 				//}
 				break;
+
+			case SDL_MOUSEWHEEL:
+				if(event.wheel.y > 0) // scroll up
+					this->mouse->wheel_up = true;
+				else if(event.wheel.y < 0) // scroll down
+					this->mouse->wheel_down = true;
+				//if(event.wheel.x > 0) // scroll right
+				//else if(event.wheel.x < 0) // scroll left
+				break;
+
 			case SDL_MOUSEBUTTONDOWN:
 				//printf("Mouse button %d pressed at (%d,%d)\n", event.button.button, event.button.x, event.button.y);
 				switch (event.button.button) {

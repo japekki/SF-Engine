@@ -1,12 +1,12 @@
+/*
+TODO:
+- Human shields
+*/
+
 #ifndef SHIELD_HPP
 	#define SHIELD_HPP
 
 	#include <string>
-
-	// FILE NAMES:
-		#define DATAPATH "data/"
-
-		// Sound effects:
 
 	class Shield {
 		public:
@@ -21,6 +21,10 @@
 			unsigned short sell_price;
 			//Polygon2D picture;	// Or Sprite - shows up in shop and menus
 			// sound when used
+	};
+
+	class Shield_bounce : public Shield {
+		Shield_bounce();
 	};
 
 	class Shield_cold : public Shield {
@@ -49,6 +53,10 @@
 
 	class Shield_mirror : public Shield {
 		Shield_mirror();
+	};
+
+	class Shield_repel : public Shield {
+		Shield_repel();
 	};
 
 #endif // SHIELD_HPP

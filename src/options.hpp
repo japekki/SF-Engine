@@ -10,7 +10,7 @@
 	// OPTIONS:
 
 		//#define INTERACTIVE
-		//#define WITH_DEBUGMSG  // For verbose console debug messages
+		//#define WITH_DEBUGMSG	// For verbose console debug messages
 
 		// For interactive input:
 			//#define WITH_MIDI

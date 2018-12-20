@@ -1,4 +1,5 @@
 #include "tetrex.hpp"
+#include "display.hpp"
 
 void Bucket::generate_shapes() {
 	// TODO: no duplicates
@@ -10,7 +11,7 @@ void Bucket::check_fills() {
 Tetrex::Tetrex() {
 	// SET PROGRAM ATTRIBUTES:
 		this->name = "Tetrex";
-		this->version = "0.0001";
+		this->version = "0.0002";
 }
 
 Tetrex::~Tetrex() {

@@ -1,13 +1,17 @@
 #ifndef BUILDING_HPP
 	#define BUILDING_HPP
 
-	#include "item.hpp"
-	#include "human.hpp"
+	#include <vector>
+	#include "gameobject.hpp"
 
-	class Building {
+	// Forward declarations:
+		class Item;
+		class Human;
+
+	class Building : public Gameobject {
 		// Stationary, does not move
 		public:
-			short lifeforce;
+			short health;
 			std::vector<Item*> items_inside;
 			std::vector<Human*> humans_inside;
 			void explode();

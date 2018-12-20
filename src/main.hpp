@@ -8,6 +8,6 @@
 	#define MAIN_HPP
 
 	#define ENGINE_NAME "SF Engine"
-	#define ENGINE_VERSION "0.0003"
+	#define ENGINE_VERSION "0.0004"
 
 #endif // MAIN_HPP

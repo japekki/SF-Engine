@@ -1,15 +1,18 @@
-#include "sfedemo.hpp"
+#include "sfe_demo.hpp"
+//#include #geom.hpp"
+#include "timeline.hpp"
+#include "display.hpp"
 
-SFEdemo::SFEdemo() {
+SFE_Demo::SFE_Demo() {
 	// SET PROGRAM ATTRIBUTES:
-		this->name = "SFE demo";
+		this->name = "SFE Demo";
 		this->version = "0.0001";
 }
 
-SFEdemo::~SFEdemo() {
+SFE_Demo::~SFE_Demo() {
 }
 
-bool SFEdemo::init() {
+bool SFE_Demo::init() {
 	// INITIALIZE TIMELINE:
 		this->timeline = new Timeline();
 		this->timeline->init();
@@ -25,15 +28,15 @@ bool SFEdemo::init() {
 	return this->works;
 }
 
-bool SFEdemo::world_room_init() {
-	Polygon3D polygon_chair;
-	Polygon3D polygon_table;
-	world_room.add_polygon3d(polygon_chair);
-	world_room.add_polygon3d(polygon_table);
+bool SFE_Demo::world_room_init() {
+	Polygon* polygon_chair = new Polygon();
+	Polygon* polygon_table = new Polygon();
+	//world_room->add_polygon3d(polygon_chair);
+	//world_room->add_polygon3d(polygon_table);
 	return true;	// TODO
 }
 
-bool SFEdemo::mainloop() {
+bool SFE_Demo::mainloop() {
 	while (!this->mainloop_done and this->works) {
 		unsigned int time_elapsed = this->timeline->get_position();
 		//world_room.camera.rotate(timeline.get_position(), 0, 0);

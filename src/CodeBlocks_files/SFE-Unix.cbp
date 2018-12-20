@@ -29,9 +29,9 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
-			<Target title="SFE demo Debug">
-				<Option output="../../bin/SFE_demo/sfe_demo_debug" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/SFE_demo/" />
+			<Target title="SFE Benchmark Debug">
+				<Option output="../../bin/SFE_Benchmark/sfe_benchmark_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/SFE_Benchmark/" />
 				<Option object_output="obj/Debug_Unix/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -40,9 +40,34 @@
 					<Add directory="../../src" />
 				</Compiler>
 			</Target>
-			<Target title="SFE demo Release">
-				<Option output="../../bin/SFE_demo/sfe_demo" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="../../bin/SFE_demo/" />
+			<Target title="SFE Benchmark Release">
+				<Option output="../../bin/SFE_Benchmark/sfe_benchmark" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/SFE_Benchmark/" />
+				<Option object_output="obj/Release_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add directory="../../src" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="SFE Demo Debug">
+				<Option output="../../bin/SFE_Demo/sfe_demo_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/SFE_Demo/" />
+				<Option object_output="obj/Debug_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="../../src" />
+				</Compiler>
+			</Target>
+			<Target title="SFE Demo Release">
+				<Option output="../../bin/SFE_Demo/sfe_demo" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../bin/SFE_Demo/" />
 				<Option object_output="obj/Release_Unix/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -193,12 +218,16 @@
 		<Unit filename="../audio.cpp" />
 		<Unit filename="../audio.hpp" />
 		<Unit filename="../camera.cpp">
-			<Option target="SFE demo Debug" />
-			<Option target="SFE demo Release" />
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+			<Option target="SFE Benchmark Debug" />
+			<Option target="SFE Benchmark Release" />
 		</Unit>
 		<Unit filename="../camera.hpp">
-			<Option target="SFE demo Debug" />
-			<Option target="SFE demo Release" />
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+			<Option target="SFE Benchmark Debug" />
+			<Option target="SFE Benchmark Release" />
 		</Unit>
 		<Unit filename="../color.cpp" />
 		<Unit filename="../color.hpp" />
@@ -217,6 +246,14 @@
 		<Unit filename="../effux_fire.hpp">
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../effux_motionblur.cpp">
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+		</Unit>
+		<Unit filename="../effux_motionblur.hpp">
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
 		</Unit>
 		<Unit filename="../effux_sky.cpp">
 			<Option target="RocketZ Debug" />
@@ -242,8 +279,14 @@
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
-		<Unit filename="../entity.cpp" />
-		<Unit filename="../entity.hpp" />
+		<Unit filename="../effux_twister.cpp">
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+		</Unit>
+		<Unit filename="../effux_twister.hpp">
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+		</Unit>
 		<Unit filename="../geom.cpp" />
 		<Unit filename="../geom.hpp" />
 		<Unit filename="../grapher.cpp" />
@@ -252,8 +295,14 @@
 		<Unit filename="../gui.hpp" />
 		<Unit filename="../inputdevices.cpp" />
 		<Unit filename="../inputdevices.hpp" />
-		<Unit filename="../main.cpp" />
-		<Unit filename="../main.hpp" />
+		<Unit filename="../main.cpp">
+			<Option target="SFE Debug" />
+			<Option target="SFE Release" />
+		</Unit>
+		<Unit filename="../main.hpp">
+			<Option target="SFE Debug" />
+			<Option target="SFE Release" />
+		</Unit>
 		<Unit filename="../midi.cpp" />
 		<Unit filename="../midi.hpp" />
 		<Unit filename="../misc.cpp" />
@@ -279,6 +328,22 @@
 			<Option target="CaveBombers Debug" />
 			<Option target="CaveBombers Release" />
 		</Unit>
+		<Unit filename="../programs/cavebombers/filenames.hpp">
+			<Option target="CaveBombers Debug" />
+			<Option target="CaveBombers Release" />
+		</Unit>
+		<Unit filename="../programs/cavebombers/main.cpp">
+			<Option target="CaveBombers Debug" />
+			<Option target="CaveBombers Release" />
+		</Unit>
+		<Unit filename="../programs/pinball/filenames.hpp">
+			<Option target="Pinball Debug" />
+			<Option target="Pinball Release" />
+		</Unit>
+		<Unit filename="../programs/pinball/main.cpp">
+			<Option target="Pinball Debug" />
+			<Option target="Pinball Release" />
+		</Unit>
 		<Unit filename="../programs/pinball/pinball.cpp">
 			<Option target="Pinball Debug" />
 			<Option target="Pinball Release" />
@@ -287,6 +352,14 @@
 			<Option target="Pinball Debug" />
 			<Option target="Pinball Release" />
 		</Unit>
+		<Unit filename="../programs/publiippari/filenames.hpp">
+			<Option target="PubLiippari Debug" />
+			<Option target="PubLiippari Release" />
+		</Unit>
+		<Unit filename="../programs/publiippari/main.cpp">
+			<Option target="PubLiippari Debug" />
+			<Option target="PubLiippari Release" />
+		</Unit>
 		<Unit filename="../programs/publiippari/publiippari.cpp">
 			<Option target="PubLiippari Debug" />
 			<Option target="PubLiippari Release" />
@@ -294,14 +367,6 @@
 		<Unit filename="../programs/publiippari/publiippari.hpp">
 			<Option target="PubLiippari Debug" />
 			<Option target="PubLiippari Release" />
-		</Unit>
-		<Unit filename="../programs/rocketz/ai.cpp">
-			<Option target="RocketZ Debug" />
-			<Option target="RocketZ Release" />
-		</Unit>
-		<Unit filename="../programs/rocketz/ai.hpp">
-			<Option target="RocketZ Debug" />
-			<Option target="RocketZ Release" />
 		</Unit>
 		<Unit filename="../programs/rocketz/base.cpp">
 			<Option target="RocketZ Debug" />
@@ -327,11 +392,31 @@
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
+		<Unit filename="../programs/rocketz/computerplayer.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/computerplayer.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/filenames.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
 		<Unit filename="../programs/rocketz/gadget.cpp">
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
 		<Unit filename="../programs/rocketz/gadget.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/gameobject.cpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/gameobject.hpp">
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
@@ -372,6 +457,10 @@
 			<Option target="RocketZ Release" />
 		</Unit>
 		<Unit filename="../programs/rocketz/level.hpp">
+			<Option target="RocketZ Debug" />
+			<Option target="RocketZ Release" />
+		</Unit>
+		<Unit filename="../programs/rocketz/main.cpp">
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
@@ -431,13 +520,37 @@
 			<Option target="RocketZ Debug" />
 			<Option target="RocketZ Release" />
 		</Unit>
-		<Unit filename="../programs/sfedemo/sfedemo.cpp">
-			<Option target="SFE demo Debug" />
-			<Option target="SFE demo Release" />
+		<Unit filename="../programs/sfe_benchmark/main.cpp">
+			<Option target="SFE Benchmark Debug" />
+			<Option target="SFE Benchmark Release" />
 		</Unit>
-		<Unit filename="../programs/sfedemo/sfedemo.hpp">
-			<Option target="SFE demo Debug" />
-			<Option target="SFE demo Release" />
+		<Unit filename="../programs/sfe_benchmark/sfe_benchmark.cpp">
+			<Option target="SFE Benchmark Debug" />
+			<Option target="SFE Benchmark Release" />
+		</Unit>
+		<Unit filename="../programs/sfe_benchmark/sfe_benchmark.hpp">
+			<Option target="SFE Benchmark Debug" />
+			<Option target="SFE Benchmark Release" />
+		</Unit>
+		<Unit filename="../programs/sfe_demo/main.cpp">
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+		</Unit>
+		<Unit filename="../programs/sfe_demo/sfe_demo.cpp">
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+		</Unit>
+		<Unit filename="../programs/sfe_demo/sfe_demo.hpp">
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+		</Unit>
+		<Unit filename="../programs/tetrex/filenames.hpp">
+			<Option target="Tetrex Debug" />
+			<Option target="Tetrex Release" />
+		</Unit>
+		<Unit filename="../programs/tetrex/main.cpp">
+			<Option target="Tetrex Debug" />
+			<Option target="Tetrex Release" />
 		</Unit>
 		<Unit filename="../programs/tetrex/tetrex.cpp">
 			<Option target="Tetrex Debug" />
@@ -450,12 +563,16 @@
 		<Unit filename="../projectile.cpp" />
 		<Unit filename="../projectile.hpp" />
 		<Unit filename="../sprite.cpp">
-			<Option target="SFE demo Debug" />
-			<Option target="SFE demo Release" />
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+			<Option target="SFE Benchmark Debug" />
+			<Option target="SFE Benchmark Release" />
 		</Unit>
 		<Unit filename="../sprite.hpp">
-			<Option target="SFE demo Debug" />
-			<Option target="SFE demo Release" />
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+			<Option target="SFE Benchmark Debug" />
+			<Option target="SFE Benchmark Release" />
 		</Unit>
 		<Unit filename="../timeline.cpp" />
 		<Unit filename="../timeline.hpp" />
@@ -463,12 +580,16 @@
 		<Unit filename="../water.cpp" />
 		<Unit filename="../water.hpp" />
 		<Unit filename="../world.cpp">
-			<Option target="SFE demo Debug" />
-			<Option target="SFE demo Release" />
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+			<Option target="SFE Benchmark Debug" />
+			<Option target="SFE Benchmark Release" />
 		</Unit>
 		<Unit filename="../world.hpp">
-			<Option target="SFE demo Debug" />
-			<Option target="SFE demo Release" />
+			<Option target="SFE Demo Debug" />
+			<Option target="SFE Demo Release" />
+			<Option target="SFE Benchmark Debug" />
+			<Option target="SFE Benchmark Release" />
 		</Unit>
 		<Unit filename="../zbuf.cpp" />
 		<Unit filename="../zbuf.hpp" />

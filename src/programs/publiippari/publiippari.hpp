@@ -9,6 +9,7 @@
 /*
 TODO:
 - Screensaver settings dialog
+- Omit separate console window on MS-Windows
 */
 
 #ifndef PUBLIIPPARI_HPP
@@ -16,23 +17,25 @@ TODO:
 
 	#include <vector>
 	#include "program.hpp"
-	#include "sprite.hpp"
+	#include "grapher.hpp"
 
-	// FILE NAMES:
-		#define DATAPATH "data/"
-		#define FILENAME_LOGO DATAPATH "logo.png"
-		//#define FILENAME_KANNIKALA1 DATAPATH "kannikala1.png"
-		//#define FILENAME_KANNIKALA2 DATAPATH "kannikala2.png"
+	// Forward declarations:
+		//class Simplesprite;
 
 	class Faucet {
 		public:
+			Faucet();
+			~Faucet();
 			void drip();	// Drip down beer
+			void plumps();	// wave beer surface and play sound
+			Simplesprite texture;
 	};
 
 	class PubLiippari : public Program {
 		public:
-			Faucet faucet;
-			std::vector<Sprite> kannikalat;
+			Faucet* faucet;
+			Simplesprite logo;
+			std::vector<Simplesprite*> fishes;
 			PubLiippari();
 			~PubLiippari();
 			bool init() override;

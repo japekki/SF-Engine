@@ -1,13 +1,14 @@
 /*
 TODO:
+- Class template for 2D and 3D Projectile
+- Convert from 2D to 3D and vice versa
 - Calculate damages when colliding
-- Self rotate
 */
 
 #ifndef PROJECTILE_HPP
 	#define PROJECTILE_HPP
 
-	#include "geom.hpp"
+	#include <vector>
 
 	/*
 		TODO: Curve and current heading
@@ -19,29 +20,30 @@ TODO:
 		};
 	*/
 
-	class Projectile2D : public Coordinate2D {
+	// Forward declarations:
+		class Point;
+		class Vector2D;
+
+	class Projectile {
 		public:
+			Point* location;		// Center point
+			float rotation = 0;		// angle
 			float mass;
-			Vector2D direction;	// Where is it going to and how fast
+			float speed = 0;
+			Vector2D* direction;		// Where is it going to and how fast
+			Projectile();
+			~Projectile();
 			float get_speed();
+			void set_speed(float speed);
+			void inc_speed(float amount);
+			void dec_speed(float amount);
 			float get_momentum();
 			void move();
-			bool collides(Projectile2D *projectile);
-			std::vector<Projectile2D> list_colliding_projectiles(std::vector<Projectile2D> projectiles);
+			void rotate(float angle);
+			bool collides(Projectile *projectile);
+			std::vector<Projectile*> list_colliding_projectiles(std::vector<Projectile*> projectiles);
 	};
 
-	class Projectile3D : public Coordinate3D {
-		public:
-			float mass;
-			float x, y, z;		// Location
-			Vector3D direction;	// Where is it going to and how fast
-			float get_speed();
-			float get_momentum();
-			void move();
-			bool collides(Projectile3D *projectile);
-	};
-
-	void collide(Projectile2D *projectile1, Projectile2D *projectile2);	// Alter direction/speed in both projectiles
-	void collide(Projectile3D *projectile1, Projectile3D *projectile2);	// Alter direction/speed in both projectiles
+	void collide(Projectile *projectile1, Projectile *projectile2);	// Alter direction/speed in both projectiles
 
 #endif // PROJECTILE_HPP

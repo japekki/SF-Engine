@@ -14,6 +14,7 @@ TODO:
 #ifndef EFFUX_SKY_HPP
 	#define EFFUX_SKY_HPP
 
+	#include <vector>
 	#include "color.hpp"
 	#include "particle.hpp"
 
@@ -22,8 +23,9 @@ TODO:
 		Color color;
 		unsigned short width;
 		unsigned short height;
-		//short wind_x;
-		//short wind_y;
+	};
+
+	class Planet {
 	};
 
 	class Sun {
@@ -41,7 +43,10 @@ TODO:
 		unsigned char layers;	// TODO: Each sky as layer or many layers in one sky?
 		unsigned short time;	// stars at nigh, sun at day
 		Color color;
-		Sun *sun;				// TODO: multiple suns
+		//short wind_x;
+		//short wind_y;
+		std::vector<Planet*> planets;
+		std::vector<Sun*> suns;
 		unsigned short cloudiness;
 		void roll_clouds();		// Roll previous clouds, generate new clouds according to cloudiness
 	};

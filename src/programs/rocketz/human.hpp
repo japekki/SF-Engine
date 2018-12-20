@@ -1,20 +1,9 @@
 #ifndef HUMAN_HPP
 	#define HUMAN_HPP
 
-	#include "item.hpp"
-	#include "player.hpp"
-	#include "geom.hpp"
-	//#include "vehicle.hpp"
+	#include "gameobject.hpp"
 
 	#include <vector>
-
-	// FILE NAMES:
-		#define DATAPATH "data/"
-
-		// Sound effects:
-			#define FILENAME_SOUND_HUMANHEAL DATAPATH "humanheal.wav"
-			#define FILENAME_SOUND_HUMANSCREAM DATAPATH "humanscream.wav"	// get hit
-			#define FILENAME_SOUND_HUMANYELL DATAPATH "humansyell.wav"		// die
 
 	//class Blood : public Water {
 		//const SDL_Color color = {200, 0, 0};
@@ -23,6 +12,8 @@
 	// Forward declarations:
 		class Item;
 		class Vehicle;
+		class Player;
+		class Vector2D;
 
 	#define WALK_LEFT 0
 	#define WALK_RIGHT 1
@@ -30,7 +21,7 @@
 	#define WALK_DOWN 3	// With ladders
 	// TODO: diagonal ladders
 
-	class Human {
+	class Human : public Gameobject {
 		public:
 			// max_speed
 			Player *owner = nullptr;	// nullptr if rogue
@@ -44,14 +35,17 @@
 			bool parachute_burning = false;
 			short temperature;	// minus for cold, plus for hot
 			unsigned short ammo;	// TODO: infinite
-			bool inside_vehicle;
+			bool inside_vehicle = false;
+			Vehicle *vehicle = nullptr;	// inside this vehicle
+			void get_into_vehicle(Vehicle* vehicle);
+			void get_out_from_vehicle();
 			void steal(Vehicle *vehicle);
 			void sabotage(Vehicle *vehicle);	// TODO: sabotage gadgets
 			//void plant_virus(Vehicle *vehicle);	// TODO: same as sabotage?
-			void walk(Uint8 direction);
+			void walk(unsigned char direction);
 			void swim(Vector2D direction);
 			void collect(Item *item);
-			void shoot(Vector2D direction);	// TODO: always same speed in bullet
+			void shoot();	// TODO: always same speed in bullet
 			//void heal(unsigned short health);
 			void fall();
 			void get_damage(unsigned short damage);
@@ -71,7 +65,7 @@
 
 	class Soldier : public Human {
 		Player *owner;	// nullptr if rogue
-		short lifeforce;
+		short health;
 	};
 
 	class Guardian : public Human {

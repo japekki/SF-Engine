@@ -24,7 +24,7 @@
 			std::vector<bool> circles;
 			EffuxCircles(Grapher *grapher);
 			~EffuxCircles();
-			void draw(Uint32 time, Uint8 style);	// Draw to this->sdltexture
+			void execute(Uint32 time, Uint8 style);	// Draw to this->sdltexture
 	};
 
 #endif // EFFUX_CIRCLES_HPP

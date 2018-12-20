@@ -1,274 +1,382 @@
-// TODO: Option to make any weapon a bouncer?
+/*
+TODO:
+- Option to make any weapon a bouncer
+- Human weapons
+*/
 
 #ifndef WEAPON_HPP
 	#define WEAPON_HPP
 
 	#include <string>
-	#include "geom.hpp"
 
-	// FILE NAMES:
-		#define DATAPATH "data/"
-
-		// Sound effects:
-			#define FILENAME_SOUND_SELFDESTRUCT_INIT DATAPATH "selfdestructinit.wav"
-			#define FILENAME_SOUND_ABSORB DATAPATH "absorb.wav"
-			#define FILENAME_SOUND_BOUNCE DATAPATH "bounce.wav"
-			#define FILENAME_SOUND_ELECTRO DATAPATH "electro.wav"
-			#define FILENAME_SOUND_FREEZER DATAPATH "freezer.wav"
-			#define FILENAME_SOUND_EMP DATAPATH "emp.wav"
-			#define FILENAME_SOUND_GRIND DATAPATH "grind.wav"
-			#define FILENAME_SOUND_HOLOGRAM DATAPATH "hologram.wav"
-			#define FILENAME_SOUND_LIFESTEAL DATAPATH "lifesteal.wav"
-			#define FILENAME_SOUND_MINIMISSILE DATAPATH "minimissile.wav"
-			#define FILENAME_SOUND_MOEBIUS DATAPATH "moebius.wav"
-			#define FILENAME_SOUND_PAINT DATAPATH "paint.wav"
-			#define FILENAME_SOUND_PHASER DATAPATH "phaser.wav"
-			#define FILENAME_SOUND_SIZER DATAPATH "sizer.wav"
-			#define FILENAME_SOUND_TELEPORT DATAPATH "teleport.wav"
-			#define FILENAME_SOUND_TRACTORBEAM DATAPATH "tractorbeam.wav"
+	// Forward declarations:
+	class Polygon;
+	class Player;
 
 	class Weapon {
 		public:
 			// Has to be triggered, unlike Shield
 			std::string name;
 			std::string description;
+			Player* owner;
 			unsigned short loading_time = 0;
 			bool works_under_water;
 			unsigned char level;	// How powerful the weapon is
 			unsigned short buy_price;
 			unsigned short sell_price;
 			short recoil;	// if negative, the weapon pulls the vehicle forwards when shooting (depending of course where the weapon is located in the vehicle)
-			Polygon2D *picture;	// Or Sprite - shows up in shop and menus
+			Polygon *picture;	// Or Sprite - shows up in shop and menus
 			// sound
+			Weapon();
+			~Weapon();
+			virtual void shoot();
 	};
 
 	class Weapon_absorber : public Weapon {
-		Weapon_absorber();
+		public:
+			Weapon_absorber();
+			void shoot() override;
 	};
 
 	class Weapon_anchor : public Weapon {
-		Weapon_anchor();
+		public:
+			Weapon_anchor();
+			void shoot() override;
 	};
 
 	class Weapon_blackhole : public Weapon {
-		Weapon_blackhole();
+		public:
+			Weapon_blackhole();
+			void shoot() override;
 	};
 
 	class Weapon_bouncer : public Weapon {
-		unsigned short bounces_left = 10;
-		Weapon_bouncer();
+		public:
+			unsigned short bounces_left = 10;
+			Weapon_bouncer();
+			void shoot() override;
 	};
 
 	class Weapon_bubblegum : public Weapon {
-		Weapon_bubblegum();
+		public:
+			Weapon_bubblegum();
+			void shoot() override;
 	};
 
 	class Weapon_cannon : public Weapon {
-		Weapon_cannon();
+		public:
+			Weapon_cannon();
+			void shoot() override;
 	};
 
 	class Weapon_cluster : public Weapon {
-		Weapon_cluster();
+		public:
+			Weapon_cluster();
+			void shoot() override;
 	};
 
 	class Weapon_darkgrenade : public Weapon {
-		Weapon_darkgrenade();
+		public:
+			Weapon_darkgrenade();
+			void shoot() override;
 	};
 
 	class Weapon_disguise : public Weapon {
-		Weapon_disguise();
+		public:
+			Weapon_disguise();
+			void shoot() override;
 	};
 
 	class Weapon_dockstation : public Weapon {
-		Weapon_dockstation();
+		public:
+			Weapon_dockstation();
+			void shoot() override;
 	};
 
 	class Weapon_duster : public Weapon {
-		Weapon_duster();
+		public:
+			Weapon_duster();
+			void shoot() override;
 	};
 
 	class Weapon_ejectionseat : public Weapon {
-		Weapon_ejectionseat();
+		public:
+			Weapon_ejectionseat();
+			void shoot() override;
 	};
 
 	class Weapon_electro : public Weapon {
-		Weapon_electro();
+		public:
+			Weapon_electro();
+			void shoot() override;
 	};
 
 	class Weapon_emp : public Weapon {
-		Weapon_emp();
+		public:
+			Weapon_emp();
+			void shoot() override;
 	};
 
 	class Weapon_flashgrenade : public Weapon {
-		Weapon_flashgrenade();
+		public:
+			Weapon_flashgrenade();
+			void shoot() override;
 	};
 
 	class Weapon_freezer : public Weapon {
-		Weapon_freezer();
+		public:
+			Weapon_freezer();
+			void shoot() override;
 	};
 
 	class Weapon_gravity : public Weapon {
-		Weapon_gravity();
+		public:
+			Weapon_gravity();
+			void shoot() override;
 	};
 
 	class Weapon_grenade : public Weapon {
-		unsigned short timer;
-		Weapon_grenade();
+		public:
+			unsigned short timer;
+			Weapon_grenade();
+			void shoot() override;
 	};
 
 	class Weapon_grinder : public Weapon {
-		Weapon_grinder();
+		public:
+			Weapon_grinder();
+			void shoot() override;
 	};
 
 	class Weapon_hologram : public Weapon {
-		Weapon_hologram();
+		public:
+			Weapon_hologram();
+			void shoot() override;
 	};
 
 	class Weapon_invisibility : public Weapon {
-		Weapon_invisibility();
+		public:
+			Weapon_invisibility();
+			void shoot() override;
 	};
 
 	class Weapon_jammer : public Weapon {
-		Weapon_jammer();
+		public:
+			Weapon_jammer();
+			void shoot() override;
 	};
 
 	class Weapon_laser : public Weapon {
-		Weapon_laser();
+		public:
+			Weapon_laser();
+			void shoot() override;
 	};
 
 	class Weapon_lifestealer : public Weapon {
-		Weapon_lifestealer();
+		public:
+			Weapon_lifestealer();
+			void shoot() override;
 	};
 
 	class Weapon_mine : public Weapon {
-		Weapon_mine();
+		public:
+			Weapon_mine();
+			void shoot() override;
 	};
 
 	class Weapon_minimissile : public Weapon {
-		Weapon_minimissile();
+		public:
+			Weapon_minimissile();
+			void shoot() override;
 	};
 
 	class Weapon_minitorpedo : public Weapon {
-		Weapon_minitorpedo();
+		public:
+			Weapon_minitorpedo();
+			void shoot() override;
 	};
 
 	class Weapon_missile : public Weapon {
-		Weapon_missile();
+		public:
+			Weapon_missile();
+			void shoot() override;
 	};
 
 	class Weapon_moebius : public Weapon {
-		Weapon_moebius();
+		public:
+			Weapon_moebius();
+			void shoot() override;
 	};
 
 	class Weapon_napalm : public Weapon {
-		Weapon_napalm();
+		public:
+			Weapon_napalm();
+			void shoot() override;
 	};
 
 	class Weapon_painter : public Weapon {
-		Weapon_painter();
+		public:
+			Weapon_painter();
+			void shoot() override;
 	};
 
 	class Weapon_phaser : public Weapon {
-		Weapon_phaser();
+		public:
+			Weapon_phaser();
+			void shoot() override;
 	};
 
 	class Weapon_radialgun : public Weapon {
-		Weapon_radialgun();
+		public:
+			Weapon_radialgun();
+			void shoot() override;
 	};
 
 	class Weapon_radiationbomb : public Weapon {
-		Weapon_radiationbomb();
+		public:
+			Weapon_radiationbomb();
+			void shoot() override;
 	};
 
 	class Weapon_random : public Weapon {
-		Weapon_random();
+		public:
+			Weapon_random();
+			void shoot() override;
 	};
 
 	class Weapon_rubberband : public Weapon {
-		Weapon_rubberband();
+		public:
+			Weapon_rubberband();
+			void shoot() override;
 	};
 
 	class Weapon_selfdestruct : public Weapon {
-		unsigned int timer;
-		Weapon_selfdestruct();
+		public:
+			unsigned int timer;
+			Weapon_selfdestruct();
+			void shoot() override;
 	};
 
 	class Weapon_sizer : public Weapon {
-		Weapon_sizer();
+		public:
+			Weapon_sizer();
+			void shoot() override;
 	};
 
 	class Weapon_smokegrenade : public Weapon {
-		Weapon_smokegrenade();
+		public:
+			Weapon_smokegrenade();
+			void shoot() override;
 	};
 
 	class Weapon_smokescreen : public Weapon {
-		Weapon_smokescreen();
+		public:
+			Weapon_smokescreen();
+			void shoot() override;
 	};
 
 	class Weapon_soldier : public Weapon {
-		Weapon_soldier();
+		public:
+			Weapon_soldier();
+			void shoot() override;
 	};
 
 	class Weapon_spraygun : public Weapon {
-		Weapon_spraygun();
+		public:
+			Weapon_spraygun();
+			void shoot() override;
 	};
 
 	class Weapon_spycam : public Weapon {
-		Weapon_spycam();
+		public:
+			Weapon_spycam();
+			void shoot() override;
 	};
 
 	class Weapon_station : public Weapon {
-		Weapon weapon;
-		Weapon_station();
+		public:
+			Weapon weapon;
+			Weapon_station();
+			void shoot() override;
 	};
 
 	class Weapon_stinger : public Weapon {
-		Weapon_stinger();
+		public:
+			Weapon_stinger();
+			void shoot() override;
+	};
+
+	class Weapon_tangler : public Weapon {
+		public:
+			Weapon_tangler();
+			void shoot() override;
 	};
 
 	class Weapon_teleport : public Weapon {
-		Weapon_teleport();
+		public:
+			Weapon_teleport();
+			void shoot() override;
 	};
 
 	class Weapon_termite : public Weapon {
-		Weapon_termite();
+		public:
+			Weapon_termite();
+			void shoot() override;
 	};
 
 	class Weapon_torch : public Weapon {
-		Weapon_torch();
+		public:
+			Weapon_torch();
+			void shoot() override;
 	};
 
 	class Weapon_torpedo : public Weapon {
-		Weapon_torpedo();
+		public:
+			Weapon_torpedo();
+			void shoot() override;
 	};
 
 	class Weapon_tracer : public Weapon {
-		// TODO: different weapons have different trajectories";
-		Weapon_tracer();
+		// TODO: different weapons have different trajectories
+		public:
+			Weapon_tracer();
+			void shoot() override;
 	};
 
 	class Weapon_tractorbeam : public Weapon {
-		Weapon_tractorbeam();
+		public:
+			Weapon_tractorbeam();
+			void shoot() override;
 	};
 
 	class Weapon_trajectories : public Weapon {
-		Weapon_trajectories();
+		public:
+			Weapon_trajectories();
+			void shoot() override;
 	};
 
 	class Weapon_turbo : public Weapon {
-		Weapon_turbo();
+		public:
+			Weapon_turbo();
+			void shoot() override;
 	};
 
 	class Weapon_watergun : public Weapon {
-		Weapon_watergun();
+		public:
+			Weapon_watergun();
+			void shoot() override;
 	};
 
 	class Weapon_wormhole : public Weapon {
-		Weapon_wormhole();
+		public:
+			Weapon_wormhole();
+			void shoot() override;
 	};
 
 	class Weapon_zoom : public Weapon {
-		Weapon_zoom();
+		public:
+			Weapon_zoom();
+			void shoot() override;
 	};
 
 #endif // WEAPON_HPP

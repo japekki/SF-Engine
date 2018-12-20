@@ -45,6 +45,8 @@ TODO:
 			bool key_HOME_down = false;
 			bool key_END_down = false;
 
+			bool key_PAUSE_down = false;
+
 			bool key_F1_down = false;
 			bool key_F2_down = false;
 			bool key_F3_down = false;
@@ -104,7 +106,9 @@ TODO:
 			bool button1down = false;
 			bool button2down = false;
 			bool button3down = false;
-			void set_cursor(bool state);	// TODO: ability to set different mouse cursors
+			bool wheel_up = false;
+			bool wheel_down = false;
+			void set_cursor(bool state);	// TODO: set different mouse cursors
 	};
 
 	class Joystick {

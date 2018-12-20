@@ -6,10 +6,11 @@
 
 /*
 TODO:
+- Text shadow with alpha
+- Outline
+- Color shade/fade
 - Scroller for textures, single and parallax
-- Render to specific target texture.
-- Optional feature: recalculate/resize stuff when desktop fullscreen toggles, resolution changes, window resizes or target texture resizes
-- Don't try to recreate/wrap too much stuff, rely more on direct SDL API calls throughout all code instead
+- Don't try to recreate/wrap too much stuff, rely more on direct SDL API calls
 - Take some routines out from Grapher class and separate into modular effux files
 - Optimize:
 	- Static and streaming textures, texture (un)locking, SDL_RENDERER_ACCELERATED
@@ -23,11 +24,26 @@ TODO:
 	#include <SDL.h>
 	#include <SDL_ttf.h>
 	#include "geom.hpp"
-	#include "zbuf.hpp"
 
-	struct simplesprite {
-		SDL_Texture *sdltexture = nullptr;
-		SDL_Rect rect;
+	// LAYER TYPES:
+		#define LAYER_NONE 0
+		#define LAYER_COLOR 1
+		#define LAYER_BITMAP 2
+		#define LAYER_EFFUX 3
+
+	class Layer {
+		public:
+			Layer();
+			~Layer();
+			unsigned char type = LAYER_NONE;
+			SDL_Texture *sdltexture;
+			// Effux* effux;
+	};
+
+	class Simplesprite {
+		public:
+			SDL_Texture *sdltexture = nullptr;
+			SDL_Rect rect;
 	};
 
 	class Grapher {
@@ -36,32 +52,32 @@ TODO:
 			//unsigned int pixelformat;	// TODO
 			int width;
 			int height;
-			Zbuf *zbuf;
-			SDL_Texture* load_imagefile(const char* filename);
+			//Zbuf *zbuf;
+			SDL_Surface* load_surface(const char* filename);
+			SDL_Texture* load_texture(const char* filename);
+			bool init_fontsystem();
+			void deinit_fontsystem();
 			TTF_Font* load_font(const char* filename, int size);	// returns NULL if not successful
 			SDL_Texture* create_textmultiline_texture(std::string textline, TTF_Font *font, SDL_Color color);
 			SDL_Texture* create_textline_texture(std::string text, TTF_Font *font, SDL_Color color);
+			bool colorfade(SDL_Texture* &texture, Uint32 color);
+			Grapher();
 			bool draw_text(std::string text, TTF_Font *font, SDL_Color color, int x, int y);
 			bool draw_texture(SDL_Texture* texture, SDL_Rect rect);
-			// TODO:
-				//bool draw_texture(SDL_Texture* texture, SDL_Rect rect, Uint8 opacity);
-				//bool draw_texture(SDL_Texture* texture, SDL_Rect rect, int width, int height);
-				//bool draw_texture(SDL_Texture* texture, SDL_Rect rect,int width, int height, Uint8 opacity);
+			bool draw_texture(Simplesprite* texture);
+			//bool draw_texture(SDL_Texture* texture, SDL_Rect rect, int width, int height);
 			bool draw_texture(SDL_Texture* texture, int x, int y);
-			// TODO:
-				//bool draw_texture(SDL_Texture* texture, int x, int y, Uint8 opacity);
-				//bool draw_texture(SDL_Texture* texture, int x, int y, int width, int height);
-				//bool draw_texture(SDL_Texture* texture, int x, int y, int width, int height, Uint8 opacity);
-			//bool draw_texture(SDL_Texture* texture, int x, int y, Uint8 opacity);
-			bool draw_texture(simplesprite &sprite);
+			//bool draw_texture(SDL_Texture* texture, int x, int y, int width, int height);
+			bool draw_texture(Simplesprite &sprite);
 			//void draw_hline(int x1, int x2, int y, unsigned int color);
-			void draw_triangle(Triangle2D *triangle);
-			void draw_triangle(Triangle3D *triangle);
-			void draw_polygon(Polygon2D *polygon);
-			void draw_polygon(Polygon3D *polygon);
+			void draw_triangle(Triangle* triangle);
+			void draw_polygon(Polygon *polygon);
 			SDL_Renderer *sdlrenderer;
-			bool with_coordinategrid = false;
-			Coordinategrid *coordinategrid;
+			Coordinategrid grid;
+			bool with_grid = false;
+			bool use_grid;
+			void set_grid(float x_min, float y_min, float x_max, float y_max);
+			Point* apply_grid(Point* coordinate);
 	};
 
 	SDL_Texture* create_alphacircle(Grapher *grapher, Uint32 color);

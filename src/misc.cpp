@@ -29,19 +29,19 @@ void debugmsg(const std::string &msg) {
 #endif // WITH_DEBUGMSG
 
 std::string lowercase(std::string text) {
-	for (int x=0; x<text.length(); x++)
+	for (unsigned int x=0; x<text.length(); x++)
 		if (text[x] >= 'A' && text[x] <= 'Z') text[x]-= ('A'-'a');
 	return text;
 }
 
 std::string uppercase(std::string text) {
-	for (int x=0; x<text.length(); x++)
+	for (unsigned int x=0; x<text.length(); x++)
 		if (text[x] >= 'a' && text[x] <= 'z') text[x]+= ('A'-'a');
 	return text;
 }
 
 std::string togglecase(std::string text) {
-	for (int x=0; x<text.length(); x++) {
+	for (unsigned int x=0; x<text.length(); x++) {
 		if (text[x] >= 'A' && text[x] <= 'Z') text[x]-= ('A'-'a');
 		else if (text[x] >= 'a' && text[x] <= 'z') text[x]+= ('A'-'a');
 	}
@@ -50,7 +50,7 @@ std::string togglecase(std::string text) {
 
 std::string reverse(std::string text) {
 	std::string copy = text;
-	for (int index=0; index<text.length(); index++)
+	for (unsigned int index=0; index<text.length(); index++)
 		copy[index]=text[text.length()-index-1];
 	return copy;
 }
@@ -68,5 +68,5 @@ std::vector<std::string> split(std::string text, std::string delimiter) {
 			text = "";
 		}
 	}
-    return result;
+	return result;
 }

@@ -1,37 +1,52 @@
 #include "projectile.hpp"
+#include <iostream>
+#include "geom.hpp"
 
-float Projectile2D::get_speed() {
-	// TODO
+Projectile::Projectile() {
 }
 
-float Projectile2D::get_momentum() {
+Projectile::~Projectile() {
+}
+
+float Projectile::get_speed() {
+	return this->speed;	// TODO
+}
+
+void Projectile::inc_speed(float amount) {
+	this->speed += amount;
+	printf("Speed: %f\n", this->speed);
+}
+
+void Projectile::dec_speed(float amount) {
+	this->speed -= amount;
+	printf("Speed: %f\n", this->speed);
+}
+
+float Projectile::get_momentum() {
 	return this->mass * this->get_speed();
 }
 
-void Projectile2D::move() {
-	x += direction.i;
-	y += direction.j;
+void Projectile::move() {
+	this->location->x += direction->i;
+	this->location->y += direction->j;
 }
 
-void Projectile3D::move() {
-	x += direction.i;
-	y += direction.j;
-	z += direction.k;
+void Projectile::rotate(float angle) {
+	this->rotation = angle;
 }
 
-bool Projectile2D::collides(Projectile2D *projectile) {
+bool Projectile::collides(Projectile *projectile) {
+	// TODO
+	return false;
 }
 
-bool Projectile3D::collides(Projectile3D *projectile) {
+std::vector<Projectile*> Projectile::list_colliding_projectiles(std::vector<Projectile*> projectiles) {
+	// TODO
+	std::vector<Projectile*> colliding;
+	return colliding;
 }
 
-std::vector<Projectile2D> Projectile2D::list_colliding_projectiles(std::vector<Projectile2D> projectiles) {
-}
-
-void collide(Projectile2D *projectile1, Projectile2D *projectile2) {
+void collide(Projectile *projectile1, Projectile *projectile2) {
 	// TODO
 }
 
-void collide(Projectile3D *projectile1, Projectile3D *projectile2) {
-	// TODO
-}

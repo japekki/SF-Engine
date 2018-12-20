@@ -9,6 +9,7 @@
 /*
 TODO:
 - Server for hosting games, accounts, statistics etc.
+- Save state in server so it can be continued (if networks breaks, or if users want to play again from some point of previous game)
 - Make some weapons as shields, gadgets or vehicle model features
 - Make some shields as vehicle model features
 - Sprites or polygons?
@@ -36,25 +37,14 @@ TODO:
 	#define ROCKETZ_HPP
 
 	#include "program.hpp"
-	#include "ai.hpp"
-	#include "base.hpp"
-	#include "building.hpp"
-	#include "bullet.hpp"
-	#include "gadget.hpp"
-	#include "gameplay.hpp"
-	#include "human.hpp"
-	#include "item.hpp"
-	#include "land.hpp"
-	#include "level.hpp"
-	#include "player.hpp"
-	#include "rain.hpp"
-	#include "shield.hpp"
-	#include "shop.hpp"
-	#include "vehicle.hpp"
-	#include "weapon.hpp"
+	#include "gameobject.hpp"
+	#include <SDL_mixer.h>
 
-	#include "effux_circles.hpp"
-	#include "effux_textscroller.hpp"
+	// Forward declarations:
+		class EffuxTextscroller;
+		class EffuxCircles;
+		class Gameplay;
+		class Simplesprite;
 
 	// SCENES:
 		#define SCENE_NONE 0
@@ -64,36 +54,14 @@ TODO:
 		#define SCENE_SELFPLAY 4
 		#define SCENE_SHOP 5
 
-	// FILE NAMES:
-		#define DATAPATH "data/"
-
-		// Fonts:
-			#define FILENAME_FONT_XENOSPHERE DATAPATH "xenosphere.ttf"
-			#define FILENAME_FONT_MODENINE DATAPATH "modenine.ttf"
-
-		// Pictures:
-
-		// Sound effects:
-			#define FILENAME_SOUND_ALARM DATAPATH "alarm.wav"
-			#define FILENAME_SOUND_BLACKHOLE_CREATED DATAPATH "blackholecreated.wav"
-			#define FILENAME_SOUND_EXPLOSION DATAPATH "explosion.wav"
-			#define FILENAME_SOUND_IMPLOSION DATAPATH "implosion.wav"
-			#define FILENAME_SOUND_SHOOT DATAPATH "shoot.wav"
-			#define FILENAME_SOUND_SMOKE DATAPATH "smoke.wav"
-			#define FILENAME_SOUND_WORMHOLE_USED DATAPATH "wormholeused.wav"
-
-		// Music:
-			#define FILENAME_MUSIC_TITLE DATAPATH "Nuggumath-Wings-pelimusa-ReMix_CROPPED.mp3"
-			#define FILENAME_MUSIC_GAMEPLAY DATAPATH "game1.xm"
-
 	class Radar {
 		// Radar / Sonar, like a mini-map
-		// angle
+		unsigned char angle;
 		unsigned char rotation_speed;
 		unsigned int range;
 	};
 
-	class Drone {
+	class Drone : public Gameobject {
 		// Remote controllable
 	};
 
@@ -138,22 +106,26 @@ TODO:
 	class Rocketz : public Program {
 		protected:
 			unsigned char scene = SCENE_NONE;
+			bool paused = false;
 		public:
-			TTF_Font *font_xenosphere_small;
-			//TTF_Font *font_xenosphere_big;
-			TTF_Font *font_xenosphere_huge;
-			TTF_Font *font_modenine_small;
-			Randomlevelgenerator* randomlevelgenerator;
+
+			// FONTS:
+				TTF_Font *font_xenosphere_small = nullptr;
+				TTF_Font *font_xenosphere_huge = nullptr;
+				TTF_Font *font_modenine_small = nullptr;
+				//TTF_Font *font_xenosphere_big = nullptr;
+				//TTF_Font *font_modenine_tiny = nullptr;
+
+			//Randomlevelgenerator* randomlevelgenerator = nullptr;
+
 			Rocketz();
 			~Rocketz();
 			bool init() override;
 			bool mainloop() override;
+
 			// FOR TITLESCREEN:
 				bool init_titlescreen();
 				bool deinit_titlescreen();
-				//Triangle2D *rocket;
-				//Polygon2D rocket;
-				//Rocket *rocket;
 				EffuxCircles *effux_circles = nullptr;
 				EffuxTextscroller *effux_textscroller_japesoft = nullptr;
 				EffuxTextscroller *effux_textscroller_poem = nullptr;
@@ -164,11 +136,11 @@ TODO:
 				void titlescreen_textscroller_poem(unsigned int time);
 				void titlescreen_textscroller_credits(unsigned int time);
 				bool resize_titlescreen();
-				Audio *music_title;
+				Mix_Music *music_title = nullptr;
 				SDL_Texture *texture_titlescreen = nullptr;
 				SDL_Texture *texture_newgame = nullptr;
-				simplesprite textbox_title;
-				simplesprite textbox_newgame;
+				Simplesprite* textbox_title;
+				Simplesprite* textbox_newgame;
 				std::string multilinetext_japesoft =
 					"After more than 20 years\n"
 					"Japesoft is back on the scene\n"
@@ -178,29 +150,36 @@ TODO:
 					"there were V-shaped rockets.\n"
 					"While shooting some fire\n"
 					"water drained into pockets.\n"
-					"\n"
+					" \n"
 					"Since then the time has passed,\n"
 					"no more keyboards are smashed.\n"
-					"\n"
+					" \n"
 					"Gamers' fingers\n"
 					"should never linger,\n"
 					"so that no lamer\n"
 					"could ever win theirs.\n"
-					"\n"
+					" \n"
 					"When poser new age hipsters want to try the game,\n"
 					"the chosen real men in vehicles shall fight again!";
 				std::string multilinetext_credits =
 					"CREDITS\n"
-					"\n"
+					" \n"
 					"Programming :\n"
 					"JaPeK\n"
-					"\n"
-					"Music :\n"
-					"Nuggumath\n"
-					"\n"
+					" \n"
+					"Graphics :\n"
+					"JaPeK\n"
+					" \n"
 					"Fonts :\n"
 					"Darrell Flood\n"
-					"Andrew Bulhak";
+					"Andrew Bulhak\n"
+					" \n"
+					"Music :\n"
+					"Nuggumath\n"
+					" \n"
+					"Sound effects :\n"
+					"Mike Koenig";
+
 			// FOR GAMEPLAY:
 				Gameplay *gameplay;
 				bool init_gameplay();

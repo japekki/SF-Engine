@@ -1,7 +1,9 @@
 #include "level.hpp"
 
 Level::Level(Uint32 width, Uint32 height) {
-	this->landpixels.resize(this->width * this->height);
+	this->width = width;
+	this->height = height;
+	this->landpixels.resize(width * height);
 }
 
 Level::~Level() {
@@ -9,25 +11,34 @@ Level::~Level() {
 		//delete this->landpixels.at(i);	// ???
 }
 
-void Randomlevelgenerator::set_size(Uint32 width, Uint32 height) {
+void Level::add_layer(Layer *layer) {
+	this->layers.push_back(layer);
+}
+
+void RandomLevel::set_size(Uint32 width, Uint32 height) {
 	this->width = width;
 	this->height = height;
 }
 
-void Randomlevelgenerator::generate() {
+void RandomLevel::generate() {
 	Level *level;
 	level = new Level(this->width, this->height);
+
+	// CREATE LAND:
 	for (Uint32 y=0; y<this->height; y++) {
 		for (Uint32 x=0; x<this->width; x++) {
 			//level->landpixels.at(y * this->width + x) = nullptr;
 		}
 	}
+	// CREATE WEATHER:
+	// CREATE BLACK HOLES:
+	// CREATE ITEMS:
 	this->level = level;
 }
 
-Randomlevelgenerator::Randomlevelgenerator(Uint32 width, Uint32 height) {
+RandomLevel::RandomLevel(Uint32 width, Uint32 height) {
 }
 
-Randomlevelgenerator::~Randomlevelgenerator() {
+RandomLevel::~RandomLevel() {
 	delete this->level;	// ???
 }

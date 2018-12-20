@@ -18,17 +18,17 @@
 		#define SYNC_NONE 0
 		#define SYNC_CLOCK 1
 	// ACTION TYPES:
-		#define TIMELINE_JUMPTO     1
-		#define TIMELINE_CALLBACK   2
-		//#define TIMELINE_KEYFRAME 3
+		#define TIMELINE_JUMPTO		1
+		#define TIMELINE_CALLBACK	2
+		//#define TIMELINE_KEYFRAME	3
 
 	class Action {
 		public:
 			int occuretime;
 			unsigned char type;
 			bool cumulative;
-			void *function; // If type is callback
-			int jumpto;     // If type is jumpto
+			void *function;	// If type is callback
+			int jumpto;		// If type is jumpto
 	};
 
 	class Timeline {
@@ -46,6 +46,8 @@
 			//void sync(unsigned char sync_type);
 			int get_position();
 			void set_position(int position);
+			void jump_forwards(int time);
+			void jump_backwards(int time);
 			void set_speed(float new_speed);
 			//void add_action(int time, void *function);
 			void clear();			// clear all actions

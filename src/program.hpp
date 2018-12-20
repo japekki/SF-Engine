@@ -14,31 +14,28 @@ TODO:
 #ifndef PROGRAM_HPP
 	#define PROGRAM_HPP
 
-	#include "audio.hpp"
-	#include "display.hpp"
+	#include <string>
 	#include "inputdevices.hpp"
-	#include "timeline.hpp"
 
-	// FILE NAMES:
-		#define DATAPATH "data/"
-		// Pictures:
-			//#define FILENAME_PIC1 DATAPATH "picture.png"
+	// Forward declarations:
+		class Audio;
+		class Display;
+		class Timeline;
+		class Keyboard;
+		class Mouse;
+		class Joystick;
 
-		// 3D models:
-			//#define FILENAME_OBJECT1 DATAPATH "model.obj"
-
-		// Sounds:
-			//#define FILENAME_AUDIO1 DATAPATH "audio.ogg"
 
 	class Program {
 		protected:
 			bool works = true;		// Change to false if something goes wrong
-			bool audio_works;
+			//bool audio_works;
 		public:
 			std::string name = "SFE PROGRAM";
 			std::string version = "0.0000";	// Never changes, just a default value indicating to engine user that no program has been made
 			//TODO: icon
 			bool with_sound = true;
+			Audio *audio;
 			bool mainloop_done = false;
 			bool paused = false;
 			Display *display;

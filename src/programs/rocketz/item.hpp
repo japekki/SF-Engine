@@ -1,18 +1,12 @@
 #ifndef ITEM_HPP
 	#define ITEM_HPP
 
-	#include "geom.hpp"
-	#include "projectile.hpp"
+	#include "gameobject.hpp"
 
-	// FILE NAMES:
-		#define DATAPATH "data/"
+	// Forward declarations:
+		class Human;
 
-		// Sound effects:
-			#define FILENAME_SOUND_EXTRALIFE DATAPATH "extralife.wav"
-
-	class Human;	// Forward declaration
-
-	class Item : public Polygon2D, public Projectile2D {
+	class Item : public Gameobject {
 		// Collectible items by humans, not by vehicles.
 		// Items are used immediately when touched by human, or collected to base when carried by hoarders.
 		// Usually some sort of power-ups.
@@ -27,7 +21,7 @@
 	class Item_medkit : public Item {
 		// Heals a human
 		unsigned short health;
-		//void heal(Human *human);
+		void heal(Human *human);
 	};
 
 	class Item_money : public Item {

@@ -2,6 +2,7 @@
 #include <math.h>
 #include "pinball.hpp"
 #include "misc.hpp"
+#include "display.hpp"
 
 void Gameplay::run() {
 	// move ball(s)
@@ -17,7 +18,7 @@ void Gameplay::run() {
 Pinball::Pinball() {
 	// SET PROGRAM ATTRIBUTES:
 		this->name = "Pinball";
-		this->version = "0.0001";
+		this->version = "0.0002";
 }
 
 Pinball::~Pinball() {
@@ -37,12 +38,6 @@ bool Pinball::init() {
 	// LOAD IMAGE FILES:
 
 	// LOAD AUDIO FILES:
-		/*
-		if (this->with_sound) {
-			this->music_level1 = new Audio;
-			this->music_level1->load_file(FILENAME_MUSIC_LEVEL1);
-		}
-		*/
 
 	// INIT EFFUXES:
 		//this->music_level1->play();

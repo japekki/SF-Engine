@@ -10,16 +10,12 @@ FLAGS:
 #include "audio.hpp"
 #include "misc.hpp"
 
-bool audio_init() {
-	bool works = true;	// Change to false if something goes wrong
+Audio::Audio() {
 	if (SDL_Init(SDL_INIT_AUDIO) < 0) {
 		log("Failed to init Audio.");
-		works = false;
+		this->works = false;
 	}
-	return works;
-}
-
-Audio::Audio() {
+	Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024);
 	int flags = 0;
 	//int flags = MIX_INIT_MP3;
 	int result = 0;
@@ -30,38 +26,46 @@ Audio::Audio() {
 		log(Mix_GetError());
 		//exit(1);
 	}
+	Mix_AllocateChannels(16);
 }
 
 Audio::~Audio() {
-	#ifdef WITH_DEBUGMSG
-		debugmsg("Audio::~Audio()");
-	#endif // WITH_DEBUGMSG
-	Mix_FreeMusic(this->audio);
 	//while(Mix_Init(0))
-		//Mix_Quit();
+		Mix_Quit();
 }
 
-bool Audio::load_file(const char *filename) {
-	#ifdef WITH_DEBUGMSG
-		debugmsg("Audio::load_mp3()");
-		//debugmsg(filename);
-	#endif // WITH_DEBUGMSG
+Mix_Music* Audio::load_music(const char *filename) {
+	Mix_Music* music;
 
 	if (this->works) {
-		Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 640);
-		this->audio = Mix_LoadMUS(filename);
-		if(!this->audio) {
+		music = Mix_LoadMUS(filename);
+		if(!music) {
 			this->works = false;
 			log("Error loading music file:");
 			log(Mix_GetError());
 		}
 	}
-	return this->works;
+	return music;
 }
 
-void Audio::play() {
-	#ifdef WITH_DEBUGMSG
-		debugmsg("Audio::play()");
-	#endif // WITH_DEBUGMSG
-	Mix_PlayMusic(this->audio, -1);
+Mix_Chunk* Audio::load_sound(const char *filename) {
+	Mix_Chunk* sound;
+
+	if (this->works) {
+		sound = Mix_LoadWAV(filename);
+		if(!sound) {
+			this->works = false;
+			log("Error loading music file:");
+			log(Mix_GetError());
+		}
+	}
+	return sound;
+}
+
+void Audio::play(Mix_Music* audio, int loops) {
+	Mix_PlayMusic(audio, loops);
+}
+
+void Audio::play(Mix_Chunk* sound, int loops) {
+	Mix_PlayChannel(-1, sound, 0);
 }

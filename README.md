@@ -3,19 +3,25 @@
 
 ## Versions
 
-Engine: 0.0003
+### Engine:
 
-SFEdemo: 0.0001
+SFE: 0.0004
 
-CaveBombers: 0.0001
+SFE Benchmark: 0.0001
 
-Pinball: 0.0001
+SFE Demo: 0.0001
 
-RocketZ: 0.0003
+### Sample programs:
 
-PubLiippari: 0.0001
+CaveBombers: 0.0002
 
-Tetrex: 0.0001
+Pinball: 0.0002
+
+RocketZ: 0.0005
+
+Pub Liippari: 0.0002
+
+Tetrex: 0.0002
 
 ## Features
 
@@ -41,6 +47,6 @@ Links to fonts used: [ModeNine](https://www.fontspace.com/grudnuk-creations/mode
 
 **NOTE:** 32 bit version, at least on MinGW, gives an error when trying to load a .PNG file. It says something about inflateValidate procedure, not sure why this is, probably a bug in some version of SDL2_image / libpng16-16.dll / zlib1.dll I guess...
 
-![screenshot](http://titanix.net/~japek/archive/RocketZ_0.0001.png)
+![screenshot](http://titanix.net/~japek/rocketz/RocketZ_0.004.png)
 
 You may download precompiled RocketZ binaries for Windows and Linux from [RocketZ homepage](http://titanix.net/~japek/rocketz/).

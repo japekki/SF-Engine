@@ -9,25 +9,18 @@ TODO:
 	#define LEVEL_HPP
 
 	#include "geom.hpp"
-	#include "human.hpp"
-	#include "land.hpp"
+	#include "grapher.hpp"
 
-	// LAYER TYPES:
-		#define LAYER_NONE 0
-		#define LAYER_COLOR 1
-		#define LAYER_BITMAP 2
-		#define LAYER_EFFUX 3
+	// Forward declarations:
+	class Land;
+	class Human;
 
-	// FILE NAMES:
-		#define DATAPATH "data/"
+	class Effuxlayer : public Layer {
+		// effux->execute();	// execute some effux
+	};
 
-		// Sound effects:
-			#define FILENAME_SOUND_VOLCANO_ERUPT DATAPATH "volcanoerupt.wav"
-
-	class Background {
-		unsigned short type = LAYER_NONE;
-		//SDL_Texture *bitmap;
-		// TODO: pointer for effux
+	class Staticlayer : public Layer {
+		bool load();	// load image file
 	};
 
 	class Wind {
@@ -41,9 +34,9 @@ TODO:
 		unsigned short erupt_intensity;
 	};
 
-	class Shark : public Polygon2D {
+	class Shark : public Polygon {
 		// Eats swimming humans
-		short lifeforce;
+		short health;
 		unsigned char hungryness;
 		void eat(Human* human);
 	};
@@ -52,16 +45,17 @@ TODO:
 		public:
 			Uint32 width, height;
 			//Parameters parameters;
-			std::vector<Background> backgrounds;	// Parallax backgrounds
+			std::vector<Layer*> layers;	// Parallax backgrounds
 			//std::vector<Waterpixel> water;
-			std::vector<Volcano> volcanoes;
-			std::vector<Shark> sharks;
-			std::vector<Land> landpixels;
+			std::vector<Volcano*> volcanoes;
+			std::vector<Shark*> sharks;
+			std::vector<Land*> landpixels;
 			Level(Uint32 width, Uint32 height);
 			~Level();
+			void add_layer(Layer *layer);
 	};
 
-	class Randomlevelgenerator {
+	class RandomLevel {
 		public:
 			Level *level;
 			int seed;
@@ -74,8 +68,8 @@ TODO:
 			Uint32 volcano_amount;
 			int temperature;	// minus for more ice/snow, plus for more lava
 			// randomize base locations (players can change it)
-			Randomlevelgenerator(Uint32 width, Uint32 height);
-			~Randomlevelgenerator();
+			RandomLevel(Uint32 width, Uint32 height);
+			~RandomLevel();
 			void set_size(Uint32 width, Uint32 height);
 			void generate();
 	};

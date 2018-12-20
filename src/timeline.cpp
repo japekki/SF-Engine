@@ -30,6 +30,12 @@ void Timeline::set_position(int position) {
 	this->position = position;
 }
 
+void Timeline::jump_forwards(int time) {
+}
+
+void Timeline::jump_backwards(int time) {
+}
+
 /*
 void Timeline::sync(unsigned char sync_type) {
 	switch (sync_type) {
@@ -50,9 +56,9 @@ void Timeline::set_position(int new_position) {
 //}
 
 //void add_action(int time, void *function) {
-//    Action tmpact;
-//    tmpact.triggertime = time;
-//    tmpact.function = function;
+//	Action tmpact;
+//	tmpact.triggertime = time;
+//	tmpact.function = function;
 //}
 
 void Timeline::clear() {
@@ -68,8 +74,8 @@ void Timeline::stop() {
 }
 
 int Timeline::time_until_next_action() {
-//    current_time =
-//    return next_event_time - current_time;
+//	current_time =
+//	return next_event_time - current_time;
 	for (int i=0; i<actions.size(); i++) {
 		//if (actions.at(i). )
 	}

@@ -16,16 +16,7 @@ Game modes / goals:
 	#define CAVEBOMBERS_HPP
 
 	#include "program.hpp"
-
-	// FILE NAMES:
-		#define DATAPATH "data/"
-
-		// Sound effects:
-			#define FILENAME_SOUND_GAMEOVER DATAPATH "gameover.wav"
-			#define FILENAME_SOUND_PAUSE DATAPATH "pause.wav"
-
-		// Music:
-			#define FILENAME_MUSIC_GAMEPLAY DATAPATH "game.xm"
+	#include <vector>
 
 	class Tile {
 		// Can we wall, floor, water etc.
@@ -37,15 +28,25 @@ Game modes / goals:
 		unsigned char treasure;
 	};
 
-	class Level {
+	class Map {
 		//unsigned char squares[][];	// 256 different tiles to construct from
 	};
 
+	class Level {
+		Map map;
+		void generate();	// generate random map for level
+	};
+
 	class Player {
+		public:
+			unsigned char lives;
+			unsigned int score;
+			Player();
+			~Player();
 	};
 
 	class Gameplay {
-		// 1-4 players
+		std::vector<Player*> players;	// 1-4 players
 	};
 
 	class Cavebombers : public Program {

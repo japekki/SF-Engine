@@ -1,16 +1,12 @@
 #ifndef GADGET_HPP
 	#define GADGET_HPP
 
-	#include "projectile.hpp"
+	#include "gameobject.hpp"
 
-	// FILE NAMES:
-		#define DATAPATH "data/"
+	// Forward declarations:
+		//class Gameobject;
 
-		// Sound effects:
-			#define FILENAME_SOUND_BOULDER DATAPATH "boulder.wav"
-			#define FILENAME_SOUND_LADDERS DATAPATH "ladders.wav"
-
-	class Gadget : public Polygon2D, public Projectile2D {
+	class Gadget : public Gameobject {
 		// To be planted, not collectible, can be moved with tractor beam etc.
 		// TODO: think this over
 		bool can_float;
@@ -36,8 +32,8 @@
 	class Gadget_ladders : public Gadget {
 		// For humans to climb up and down
 		// Can go vertically, horizontally (bridge) or diagonally
-		Coordinate2D starting_point;
-		Coordinate2D ending_point;
+		Point* starting_point;
+		Point* ending_point;
 		// TODO: what happens when hit in the middle
 	};
 

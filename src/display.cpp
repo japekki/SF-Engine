@@ -28,6 +28,8 @@ void Display::check_window_size() {
 		//log("-------------------------------");
 		}
 	}
+	// TODO: better way to do this:
+		this->set_grid(this->grid.x_min, this->grid.y_min, this->grid.x_max, this->grid.x_max);
 }
 
 bool Display::is_resized() {
@@ -40,15 +42,21 @@ bool Display::is_resized() {
 }
 
 Display::Display() {
-	this->coordinategrid = new Coordinategrid();
 }
 
 Display::~Display() {
 	// FREE RESOURCES:
 		SDL_DestroyWindow(this->sdlwindow);
-		//delete this->sdlwindow;   // NOTE: Segfaults in Linux
+		//delete this->sdlwindow;	// FIXME: Segfaults in Linux
 		SDL_DestroyRenderer(this->sdlrenderer);
 		//delete this->sdlrenderer;
+}
+
+void Display::load_icon(const char* filename) {
+	SDL_Surface *surface;
+	surface = this->load_surface(filename);
+	SDL_SetWindowIcon(this->sdlwindow, surface);
+	SDL_FreeSurface(surface);
 }
 
 bool Display::setup() {
@@ -76,17 +84,18 @@ bool Display::setup() {
 				log(SDL_GetError());
 				SDL_Quit();
 				this->works = false;
-			}
+		}
+		// Clear possible garbage:
+			SDL_SetRenderDrawColor(this->sdlrenderer, 0x00, 0x00, 0x00, 0x00);
+			SDL_RenderClear(this->sdlrenderer);
 
 		if (this->resizable_window) SDL_SetWindowResizable(this->sdlwindow, SDL_TRUE);
-
-	//this->zbuf->set_size(width, height);
 
 	// Show or hide mouse cursor:
 		if (this->mousecursor_visible) SDL_ShowCursor(SDL_ENABLE);	// Default in SDL
 		else SDL_ShowCursor(SDL_DISABLE);
 
-		this->refresh();	// Clear possible jerky frame at the beginning
+		this->refresh();	// Clear possible garbage at the beginning
 
 	this->timestamp_initial = SDL_GetTicks();
 
@@ -172,38 +181,39 @@ unsigned int Display::get_timestamp_end() {
 }
 
 void Display::clearscreen() {
-	// FIXME: Does not clear the screen
-	// TODO: Move to grapher?
 	SDL_RenderClear(this->sdlrenderer);
 }
 
 bool Display::refresh() {
-	SDL_RenderPresent(this->sdlrenderer);
-	this->framecounter++;
+	// TODO: Find out if this is done by default in OS / SDL:
+		//if (!this->minimized) SDL_RenderPresent(this->sdlrenderer);	// Don't draw if window is minimized
+		SDL_RenderPresent(this->sdlrenderer);
 
-	//z_buf.reset();
+	this->framecounter++;
 
 	// Sleep and sync to desired FPS:
 	if (this->works) {
 		this->timestamp_end = SDL_GetTicks();
-		//SDL_WM_SetCaption("DEMO | FPS: " << framecounter/((timestamp_atend - timestamp_atstart)/1000.0), NULL)
+		//SDL_WM_SetCaption("FPS: " << framecounter/((timestamp_atend - timestamp_atstart)/1000.0), NULL)
 		//SDL_SetWindowTitle(this->sdlwindow, 1000.0/(this->timestamp_end - this->timestamp_start)));
 		if (this->fps_desired != 0) {	// 0 = unlimited fps
 			int delay = (1000.0/this->fps_desired) - (this->timestamp_end - this->timestamp_start);
 			if (delay > 0) SDL_Delay(delay);
 		}
-		this->timestamp_start = SDL_GetTicks();
+		int current_timestamp = SDL_GetTicks();
+		//this->lastfps = 1000.0/(current_timestamp - this->timestamp_start);	// NOTE: does not work if FPS >= 1000
+		this->timestamp_start = current_timestamp;
 	}
 
 	return this->works;
 }
 
-float Display::get_totalfps(){
-	return this->framecounter/((this->timestamp_end - this->timestamp_initial)/1000.0);
+float Display::get_totalfps() {
+	return this->framecounter/((this->timestamp_start - this->timestamp_initial)/1000.0);
 }
 
 float Display::get_lastfps(){
-	return 1/((this->timestamp_end - this->timestamp_start)/1000.0);
+	return this->lastfps;
 }
 
 unsigned char Display::get_desiredfps() {
@@ -221,7 +231,7 @@ unsigned int Display::get_framecount() {
 
 bool Display::save_screenshot() {
 	/*
-		// TODO: Generate filename: programname_programversion_timestamp.png
+		// TODO: Generate filename: program_version_timestamp_framecounter.png
 		unsigned int rmask, gmask, bmask, amask;
 		#if SDL_BYTEORDER == SDL_BIG_ENDIAN
 			rmask = 0xff000000; gmask = 0x00ff0000; bmask = 0x0000ff00; amask = 0x000000ff;
@@ -231,21 +241,21 @@ bool Display::save_screenshot() {
 			//if(SDL_SaveBMP(this->dispaly->sdlsurface, "filename.png") != 0)
 				//log("ERROR: Cannot save screenshot image");
 	*/
+	return false;	// TODO
 }
 
-Coordinate2D Display::apply_coordinategrid(Coordinate2D coordinate) {
-	Coordinate2D result;
-	result.x = this->width / (this->coordinategrid->x_max - this->coordinategrid->x_min) * coordinate.x;
-	result.y = this->height / (this->coordinategrid->y_max - this->coordinategrid->y_min) * coordinate.y;
-	if (this->coordinategrid->centered) {
-		result.x += this->width/2;
-		result.y += this->height/2;
-	}
-	return result;
-}
-
-Coordinate3D Display::apply_coordinategrid(Coordinate3D coordinate) {
-	Coordinate3D result;
-	// TODO
-	return result;
-}
+/*
+// Show FPS:
+	SDL_Rect rect_fps;
+	SDL_Texture* text_fps;
+	std::ostringstream ss;
+	ss << int(this->display->get_lastfps());
+	//printf("%f\n", this->display->get_lastfps());
+	std::string fps(ss.str());
+	text_fps = this->display->create_textline_texture("FPS: " + fps, this->font_modenine_tiny, {0xff, 0xff, 0xff});
+	SDL_QueryTexture(text_fps, NULL, NULL, &rect_fps.w, &rect_fps.h);
+	rect_fps.x = 0;	//this->display->width - rect_fps.w;
+	rect_fps.y = 0;	//this->display->height - rect_fps.h;
+	this->display->draw_texture(text_fps, rect_fps);
+	SDL_DestroyTexture(text_fps);
+*/

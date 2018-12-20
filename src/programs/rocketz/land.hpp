@@ -3,12 +3,6 @@
 
 	#include <SDL.h>
 
-	// FILE NAMES:
-		#define DATAPATH "data/"
-
-		// Sound effects:
-			#define FILENAME_SOUND_AVALANCHE DATAPATH "avalanche.wav"
-
 	class Land {
 		public:
 			// bool flammable, meltable, steamable/vaporable, smokable (???)

@@ -11,7 +11,7 @@ bool read_file () {
 	log("Loading parameters from file " << filename << ": ");
 
 	std::string line;
-	std::ifstream conf_file(filename.c_str(), std::ios::binary);   // Default?
+	std::ifstream conf_file(filename.c_str(), std::ios::binary);	// Default?
 	if (conf_file.is_open()) {
 		while (!conf_file.eof()) {
 			getline (conf_file, line);

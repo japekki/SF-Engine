@@ -28,15 +28,18 @@ TODO:
 	#include <SDL.h>
 	#include <SDL_ttf.h>
 	#include <vector>
-	#include "display.hpp"
-	#include "sprite.hpp"
+	#include <string>
+
+	// Forward declarations:
+		class Grapher;
+		class Simplesprite;
 
 	class EffuxTextscroller {
 		private:
-			Grapher *grapher;
-			TTF_Font *font;
+			Grapher* grapher;
+			TTF_Font* font;
 			SDL_Color color = {255, 255, 255};	// White by default
-			std::vector<simplesprite> textboxes;
+			std::vector<Simplesprite*> textboxes;
 		public:
 			bool works = true;	// Change to false if something goes wrong
 			unsigned short width;

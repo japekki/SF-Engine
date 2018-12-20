@@ -14,3 +14,9 @@ void Shop::list_gadgets() {
 
 void Shop::list_items() {
 }
+
+void Shop::buy() {
+}
+
+void Shop::sell() {
+}
