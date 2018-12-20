@@ -47,6 +47,6 @@ Links to fonts used: [ModeNine](https://www.fontspace.com/grudnuk-creations/mode
 
 **NOTE:** 32 bit version, at least on MinGW, gives an error when trying to load a .PNG file. It says something about inflateValidate procedure, not sure why this is, probably a bug in some version of SDL2_image / libpng16-16.dll / zlib1.dll I guess...
 
-![screenshot](http://titanix.net/~japek/rocketz/rocketz_0.005.png)
+![screenshot](http://titanix.net/~japek/rocketz/rocketz_0.0005.png)
 
 You may download precompiled RocketZ binaries for Windows and Linux from [RocketZ homepage](http://titanix.net/~japek/rocketz/).
