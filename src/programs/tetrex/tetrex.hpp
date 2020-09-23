@@ -9,7 +9,7 @@
 /*
 TODO:
 - High scores for different bucket and block sizes
-- 2 player mode
+- Multiplayer mode (2 or even more)
 - Computer player
 - Don't rotate block if it would have to go trough other block
 - Title screen where moving blocks form the word "Tetrex"
@@ -21,35 +21,36 @@ TODO:
 	#include <vector>
 	#include "program.hpp"
 
-	class Block {
+	class Piece {
 		unsigned char width, height;	// in squares
-		//boolean squares[][];			// array of block shape
+		//bool squares[][];			// array of block shape
+		void create_all_pieces(unsigned char block_count);
+		bool rotate_cw();
+		bool rotate_ccw();
 	};
 
 	class Bucket {
-		// This is space where the block fall
-		unsigned char with, height;		// in squares
-		//boolean squares[][];			// array of block shape
-		std::vector<Block> block_collection;	// All different shapes
-		void generate_shapes();			// create every kind of block for given width and height
-		void check_fills();
-		void bomb();					// create a hole with bomb
-		void make_block();
-		void execute();					// check full lines, drop block down
+		private:
+			std::vector<Piece> block_collection;	// All different shapes
+			void generate_shapes();					// create every kind of block for given width and height
+			void check_fills();
+		public:
+			Bucket();
+			~Bucket();
+			unsigned char width, height;	// in squares
+			//boolean squares[][];			// array of block shape
+			void bomb();					// create a hole with bomb
+			void make_block();
+			void execute();					// check full lines, drop block down
 	};
 
 	class Player {
-		unsigned int score;
-	};
-
-	class Gameplay {
-		Bucket bucket[2];	// two buckets if two players
-		//Player[2] player;
+		uint32_t score;
 	};
 
 	struct highscore {
 		std::string name;
-		unsigned int score;
+		uint32_t score;
 	};
 
 	class Halloffame {
@@ -59,11 +60,30 @@ TODO:
 			bool save();
 	};
 
+	class Level {
+		public:
+			Bucket* bucket;
+			highscore hiscore;
+			//Bucket bucket[2];	// two buckets if two players
+	};
+
+	class Gameplay {
+		public:
+			Level* level;
+			std::vector<Player> players;
+			Display* display;
+			Audio* audio;
+			Gameplay(Display* display, Audio* audio);
+			~Gameplay();
+	};
+
 	class Tetrex : public Program {
 		public:
-			highscore scoreboard[10];	// TODO: separate scoreboards to different blocks and buckets
-			Tetrex();
+			const std::string text_title = "Tetrex (yet another Tetris clone)";
+			//highscore scoreboard[10];	// TODO: separate scoreboards to different blocks and buckets
+			Tetrex(int argc, char** argv);
 			~Tetrex();
+			Gameplay* gameplay;
 			bool init_titlescreen();
 			bool deinit_titlescreen();
 			bool init_gameplay();

@@ -1,6 +1,5 @@
 #include <SDL.h>
 #include "misc.hpp"
-#include "display.hpp"
 
 #include "tetrex.hpp"	// Program to execute
 
@@ -8,7 +7,7 @@ int main (int argc, char** argv) {
 	int exitcode = EXIT_SUCCESS;
 
 	// CREATE PROGRAM:
-		Program *program = new Tetrex();
+		Program *program = new Tetrex(argc, argv);
 
 	// INITIALIZATIONS
 		if (!program->init()) {

@@ -1,37 +1,61 @@
 #include "shield.hpp"
 
-Shield_bounce::Shield_bounce() {
+void Shield::activate() {
+	if (condition > 0)
+		activated = true;
+}
+
+void Shield::deactivate() {
+	if (!always_on)
+		activated = false;
+}
+
+Shield_bouncer::Shield_bouncer() {
+	name = "Bouncer";
 	description = "Bounce projectiles away.";
 }
 
-Shield_cold::Shield_cold() {
+Shield_knocker::Shield_knocker() {
+	name = "Knocker";
+	description = "Knock blobs away.";
+}
+
+Shield_warmer::Shield_warmer() {
+	name = "Warmer";
 	description = "Protect from freezing.";
 }
 
-Shield_electro::Shield_electro() {
+Shield_faraday::Shield_faraday() {
+	name = "Faraday";
 	description = "Protect from electro weapon and EMP.";
 }
 
-Shield_hot::Shield_hot() {
-	description = "Protect from fire.";
+Shield_cooler::Shield_cooler() {
+	name = "Cooler";
+	description = "Protect from heat.";
 }
 
 Shield_inertialdamper::Shield_inertialdamper() {
-	description = "Keep trajectory still at collision, recoil or when being blasted at. Doesn't work with gravity or tractor beam.";
+	name = "Inertial damper";
+	description = "Retain heading and speed at collision, weapon recoil or when being blasted at.";
 }
 
-Shield_lifesteal::Shield_lifesteal() {
-	description = "Protect from life stealing.";
+Shield_unpenetrable::Shield_unpenetrable() {
+	name = "Unpenetrable shield";
+	description = "Disables 100% of all damage to vehicle and human.";
 }
 
-Shield_lightscreen::Shield_lightscreen() {
+Shield_sunscreen::Shield_sunscreen() {
+	name = "Sunscreen glasses";
 	description = "Allows to see in bright light, protects from blindness caused by flashes.";
 }
 
 Shield_mirror::Shield_mirror() {
+	name = "Mirror";
 	description = "Reflects laser away.";
 }
 
-Shield_repel::Shield_repel() {
-	description = "Repel projectiles away.";
+Shield_repeller::Shield_repeller() {
+	name = "Repeller";
+	description = "Repel blobs.";
 }

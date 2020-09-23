@@ -1,59 +1,66 @@
 #ifndef HUMAN_HPP
 	#define HUMAN_HPP
 
-	#include "gameobject.hpp"
-
 	#include <vector>
+	#include "gamespace.hpp"
 
 	//class Blood : public Water {
 		//const SDL_Color color = {200, 0, 0};
 	//};
 
 	// Forward declarations:
-		class Item;
 		class Vehicle;
 		class Player;
-		class Vector2D;
+		class Vector;
+		class Item;
+		class Weapon;
+		class Shield;
 
 	#define WALK_LEFT 0
 	#define WALK_RIGHT 1
-	#define WALK_UP 2	// With ladders
-	#define WALK_DOWN 3	// With ladders
+	#define WALK_UP 2		// With ladders
+	#define WALK_DOWN 3		// With ladders
 	// TODO: diagonal ladders
 
-	class Human : public Gameobject {
+	class Human : public Gameblob {
 		public:
-			// max_speed
-			Player *owner = nullptr;	// nullptr if rogue
-			unsigned short max_health = 100;
-			short health;
-			unsigned short air_left;	// TODO: infinite
-			unsigned char parachutes;	// Don't get hit if dropping down to ground
-			bool falling;
-			bool swimming;
-			unsigned int fall_distance;
+			std::vector<Weapon*> weapons;
+			std::vector<Shield*> shields;
+			Player *owner = nullptr;		// nullptr if rogue or expired
+			uint16_t air_left = 100;
+			unsigned char parachutes = 1;	// Don't get damage if hitting down to ground
+			bool parachute_in_use = false;
 			bool parachute_burning = false;
-			short temperature;	// minus for cold, plus for hot
-			unsigned short ammo;	// TODO: infinite
+			bool falling = false;
+			bool swimming = false;
+			float acceleration = 0.005;
+			//uint32_t fall_distance;
+			short temperature = 0;			// minus for cold, plus for hot
+			uint16_t ammo = 0;				// TODO: infinite
 			bool inside_vehicle = false;
-			Vehicle *vehicle = nullptr;	// inside this vehicle
+			Vehicle *vehicle = nullptr;		// inside this vehicle
+			void repair(Gameblob* gameblob);
 			void get_into_vehicle(Vehicle* vehicle);
 			void get_out_from_vehicle();
 			void steal(Vehicle *vehicle);
-			void sabotage(Vehicle *vehicle);	// TODO: sabotage gadgets
+			void sabotage(Vehicle *vehicle);		// TODO: sabotage gadgets
 			//void plant_virus(Vehicle *vehicle);	// TODO: same as sabotage?
 			void walk(unsigned char direction);
-			void swim(Vector2D direction);
-			void collect(Item *item);
+			void swim(Vector direction);
+			void jump();
 			void shoot();	// TODO: always same speed in bullet
-			//void heal(unsigned short health);
+			void activate_parachute();
 			void fall();
-			void get_damage(unsigned short damage);
-			void die();
+			//void damage(float damage);
+			void explode();
+			void draw();
+			Human(Gameplay* gameplay);
+			~Human();
 	};
 
 	class Rogue : public Human {
-		// Human not belonging to any player (or team)
+		// Human not belonging to any team
+		// Do random stuff
 	};
 
 	class Hoarder : public Human {
@@ -65,7 +72,6 @@
 
 	class Soldier : public Human {
 		Player *owner;	// nullptr if rogue
-		short health;
 	};
 
 	class Guardian : public Human {

@@ -8,70 +8,76 @@ TODO:
 #ifndef LEVEL_HPP
 	#define LEVEL_HPP
 
-	#include "geom.hpp"
-	#include "grapher.hpp"
+	#include "gamespace.hpp"
 
 	// Forward declarations:
-	class Land;
-	class Human;
-
-	class Effuxlayer : public Layer {
-		// effux->execute();	// execute some effux
-	};
-
-	class Staticlayer : public Layer {
-		bool load();	// load image file
-	};
-
-	class Wind {
-		short speed;	// minus winds to the left, plus winds to the right
-	};
+		class Human;
+		class Gameplay;
+		class Layer;
 
 	class Volcano {
 		// Spills out lava slowly, may erupt and spill a lot of lava into the sky
 		// Generates smoke
-		unsigned short lava_intensity;
-		unsigned short erupt_intensity;
+		uint16_t lava_intensity;
+		uint16_t erupt_intensity;
 	};
 
-	class Shark : public Polygon {
+	class Shark : public Gameblob {
 		// Eats swimming humans
-		short health;
-		unsigned char hungryness;
+		uint8_t hungryness;
 		void eat(Human* human);
 	};
 
-	class Level {
+	class Weather {
 		public:
-			Uint32 width, height;
-			//Parameters parameters;
-			std::vector<Layer*> layers;	// Parallax backgrounds
-			//std::vector<Waterpixel> water;
-			std::vector<Volcano*> volcanoes;
-			std::vector<Shark*> sharks;
-			std::vector<Land*> landpixels;
-			Level(Uint32 width, Uint32 height);
-			~Level();
-			void add_layer(Layer *layer);
+			Vector wind_speed;
+			short temperature = 0;		// minus for more ice/snow, plus for more lava
+			uint8_t rain_amount = 0;
 	};
 
-	class RandomLevel {
+	class Level : public Weather {
+		private:
+			uint16_t width = 0;
+			uint16_t height = 0;
+			uint32_t* blocks = nullptr;
+			//uint32_t* blocks_new = nullptr;		// Do no alter original block data until whole array has been iterated trough
+			void execute_blobs();
+			void execute_blocks();
 		public:
-			Level *level;
-			int seed;
-			Uint32 width, height;
-			Uint32 wateramount;
-			Uint32 landamount;
-			Uint32 blackholes;
-			Uint32 scatterness;
-			Uint32 pipe_amount;
-			Uint32 volcano_amount;
-			int temperature;	// minus for more ice/snow, plus for more lava
-			// randomize base locations (players can change it)
-			RandomLevel(Uint32 width, Uint32 height);
-			~RandomLevel();
-			void set_size(Uint32 width, Uint32 height);
-			void generate();
+			Gameplay* gameplay = nullptr;
+
+			uint32_t blockcount = 0;		// size of block pixel array
+			SDL_Texture* block_texture = nullptr;	// block_pixels is drawn here
+
+			// Parameters for level:
+				int random_seed = 0;
+				bool with_blocks = false;
+				uint16_t odds_item = 0;
+				uint16_t odds_water = 0;
+				uint16_t odds_land = 0;
+				uint16_t odds_blackhole = 0;
+				uint16_t odds_pipe = 0;
+				uint16_t odds_volcano = 0;
+				uint16_t odds_shark = 0;
+				uint16_t scatterness = 0;		// lower number means bigger areas of same block type
+
+				// TODO: Balance parameter(s) for block odds (like: little water and much land)
+				uint16_t odds_newitem = 500;	// max frames between new item, minimum is 1
+				uint16_t odds_debree = 5;
+				std::vector<Layer*> layers;	// Parallax backgrounds
+				std::vector<Volcano*> volcanoes;
+				std::vector<Shark*> sharks;
+				std::vector<Blackhole*> blackholes;
+
+			uint16_t get_width();
+			uint16_t get_height();
+			void set_size(uint16_t width, uint16_t height);
+			void set_block(uint16_t x, uint16_t y, uint32_t block);
+			void execute();
+			Level(Gameplay* gameplay, uint16_t width, uint16_t height, bool with_blocks);
+			~Level();
+			void add_layer(Layer *layer);
+			void randomize();
 	};
 
 #endif // LEVEL_HPP

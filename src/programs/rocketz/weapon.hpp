@@ -2,381 +2,470 @@
 TODO:
 - Option to make any weapon a bouncer
 - Human weapons
+- weapon_stop_target
+- weapon_spin_target
 */
 
 #ifndef WEAPON_HPP
 	#define WEAPON_HPP
 
 	#include <string>
+	#include <vector>
+	#include "gamespace.hpp"
 
 	// Forward declarations:
-	class Polygon;
-	class Player;
+		class Gameplay;
+		class Trianglelist;
+		class Player;
+
+	class Bullet : public Gameblob {
+		public:
+			SDL_Color color = SDLCOLOR_GREY;
+			Bullet(Gameplay* gameplay);
+			~Bullet();
+			void draw();
+	};
+
+	class Blockbullet : public Gameblob {
+		// bullet as level block
+		public:
+			uint8_t blocktype = 0;
+			Blockbullet(Gameplay* gameplay);
+			~Blockbullet();
+			void draw();
+	};
+
+	class Waterbullet : public Blockbullet {
+		// when hits land block, expires and creates water block in level
+		public:
+			Waterbullet(Gameplay* gameplay);
+			//~Waterbullet();
+			//void draw();
+	};
+
+	class Bomb : public Gameblob {
+		public:
+			Bomb(Gameplay* gameplay);
+			int timer;		// -1 = explosion timer disabled
+			void defuse();
+			void execute();
+	};
+
+	class Cannonball : public Gameblob {
+	};
+
+	class Missile : public Gameblob {
+	};
+
+	class Torpedo : public Gameblob {
+	};
+
+	class Mine : public Gameblob {
+	};
+
+/*
+	template<class T> class Shooter {
+		public:
+			Shooter();
+			~Shooter();
+	}
+*/
+
+/*
+	class Shooter {
+		public:
+			Shooter();
+			~Shooter();
+	};
+*/
 
 	class Weapon {
 		public:
 			// Has to be triggered, unlike Shield
 			std::string name;
 			std::string description;
-			Player* owner;
-			unsigned short loading_time = 0;
+			Gameplay* gameplay;
+			Player* owner = nullptr;
+			uint32_t timestamp_lastshoot = 0;
+			uint16_t loading_time = 150;
 			bool works_under_water;
 			unsigned char level;	// How powerful the weapon is
-			unsigned short buy_price;
-			unsigned short sell_price;
-			short recoil;	// if negative, the weapon pulls the vehicle forwards when shooting (depending of course where the weapon is located in the vehicle)
-			Polygon *picture;	// Or Sprite - shows up in shop and menus
-			// sound
+			uint16_t buy_price = 0;
+			uint16_t sell_price = 0;
+			short recoil;	// if negative, the weapon pulls the vehicle forwards when shooting (depending of course where the weapon is located in the vehicle) // TODO: Calculate as projectile collisions?
+			//Trianglelist* picture = nullptr;	// Or Sprite - shows up in shop and menus
+			//Mix_Chunk* sound = nullptr;
 			Weapon();
+			Weapon(Gameplay* gameplay);
 			~Weapon();
-			virtual void shoot();
+			virtual void shoot(Point location, Vector heading, float angle, float power);
 	};
 
 	class Weapon_absorber : public Weapon {
 		public:
-			Weapon_absorber();
-			void shoot() override;
+			Weapon_absorber(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_anchor : public Weapon {
 		public:
-			Weapon_anchor();
-			void shoot() override;
+			Weapon_anchor(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_blackhole : public Weapon {
 		public:
-			Weapon_blackhole();
-			void shoot() override;
+			Weapon_blackhole(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_bouncer : public Weapon {
 		public:
-			unsigned short bounces_left = 10;
-			Weapon_bouncer();
-			void shoot() override;
+			uint16_t bounces_left = 10;
+			Weapon_bouncer(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_bubblegum : public Weapon {
 		public:
-			Weapon_bubblegum();
-			void shoot() override;
+			Weapon_bubblegum(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_cannon : public Weapon {
 		public:
-			Weapon_cannon();
-			void shoot() override;
+			Weapon_cannon(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_cluster : public Weapon {
 		public:
-			Weapon_cluster();
-			void shoot() override;
+			Weapon_cluster(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_darkgrenade : public Weapon {
 		public:
-			Weapon_darkgrenade();
-			void shoot() override;
+			Weapon_darkgrenade(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
-	class Weapon_disguise : public Weapon {
+	class Weapon_disguiser : public Weapon {
 		public:
-			Weapon_disguise();
-			void shoot() override;
+			Weapon_disguiser(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
-	class Weapon_dockstation : public Weapon {
+	class Weapon_basemaker : public Weapon {
 		public:
-			Weapon_dockstation();
-			void shoot() override;
+			Weapon_basemaker(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_duster : public Weapon {
 		public:
-			Weapon_duster();
-			void shoot() override;
-	};
-
-	class Weapon_ejectionseat : public Weapon {
-		public:
-			Weapon_ejectionseat();
-			void shoot() override;
+			Weapon_duster(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_electro : public Weapon {
 		public:
-			Weapon_electro();
-			void shoot() override;
+			Weapon_electro(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_emp : public Weapon {
 		public:
-			Weapon_emp();
-			void shoot() override;
+			Weapon_emp(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
-	class Weapon_flashgrenade : public Weapon {
+	class Weapon_flashbomb : public Weapon {
 		public:
-			Weapon_flashgrenade();
-			void shoot() override;
+			Weapon_flashbomb(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_freezer : public Weapon {
 		public:
-			Weapon_freezer();
-			void shoot() override;
+			Weapon_freezer(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_gravity : public Weapon {
 		public:
-			Weapon_gravity();
-			void shoot() override;
+			Weapon_gravity(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_grenade : public Weapon {
 		public:
-			unsigned short timer;
-			Weapon_grenade();
-			void shoot() override;
+			uint16_t timer;
+			Weapon_grenade(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_grinder : public Weapon {
 		public:
-			Weapon_grinder();
-			void shoot() override;
+			Weapon_grinder(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_hologram : public Weapon {
 		public:
-			Weapon_hologram();
-			void shoot() override;
+			Weapon_hologram(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_invisibility : public Weapon {
 		public:
-			Weapon_invisibility();
-			void shoot() override;
+			Weapon_invisibility(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_jammer : public Weapon {
 		public:
-			Weapon_jammer();
-			void shoot() override;
+			Weapon_jammer(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_laser : public Weapon {
 		public:
-			Weapon_laser();
-			void shoot() override;
+			//Beam* laser;
+			Weapon_laser(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_lifestealer : public Weapon {
 		public:
-			Weapon_lifestealer();
-			void shoot() override;
+			Weapon_lifestealer(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
-	class Weapon_mine : public Weapon {
+	class Weapon_floatmine : public Weapon {
 		public:
-			Weapon_mine();
-			void shoot() override;
+			Weapon_floatmine(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
+	};
+
+	class Weapon_sinkmine : public Weapon {
+		public:
+			Weapon_sinkmine(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_minimissile : public Weapon {
 		public:
-			Weapon_minimissile();
-			void shoot() override;
+			Weapon_minimissile(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_minitorpedo : public Weapon {
 		public:
-			Weapon_minitorpedo();
-			void shoot() override;
+			Weapon_minitorpedo(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_missile : public Weapon {
 		public:
-			Weapon_missile();
-			void shoot() override;
+			Weapon_missile(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_moebius : public Weapon {
 		public:
-			Weapon_moebius();
-			void shoot() override;
+			Weapon_moebius(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_napalm : public Weapon {
 		public:
-			Weapon_napalm();
-			void shoot() override;
+			Weapon_napalm(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_painter : public Weapon {
 		public:
-			Weapon_painter();
-			void shoot() override;
+			Weapon_painter(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_phaser : public Weapon {
 		public:
-			Weapon_phaser();
-			void shoot() override;
+			Weapon_phaser(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_radialgun : public Weapon {
 		public:
-			Weapon_radialgun();
-			void shoot() override;
+			Weapon_radialgun(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_radiationbomb : public Weapon {
 		public:
-			Weapon_radiationbomb();
-			void shoot() override;
+			Weapon_radiationbomb(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_random : public Weapon {
 		public:
-			Weapon_random();
-			void shoot() override;
+			std::vector<Weapon*> weapons;
+			Weapon_random(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power, std::vector<Weapon*> weaponlist);
 	};
 
 	class Weapon_rubberband : public Weapon {
 		public:
-			Weapon_rubberband();
-			void shoot() override;
+			Weapon_rubberband(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_selfdestruct : public Weapon {
 		public:
-			unsigned int timer;
-			Weapon_selfdestruct();
-			void shoot() override;
+			uint32_t timer;
+			Weapon_selfdestruct(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_sizer : public Weapon {
 		public:
-			Weapon_sizer();
-			void shoot() override;
+			Weapon_sizer(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_smokegrenade : public Weapon {
 		public:
-			Weapon_smokegrenade();
-			void shoot() override;
+			Weapon_smokegrenade(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_smokescreen : public Weapon {
 		public:
-			Weapon_smokescreen();
-			void shoot() override;
+			Weapon_smokescreen(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_soldier : public Weapon {
 		public:
-			Weapon_soldier();
-			void shoot() override;
+			Weapon_soldier(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
+	};
+
+	class Weapon_spinner : public Weapon {
+		public:
+			Weapon_spinner(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_spraygun : public Weapon {
 		public:
-			Weapon_spraygun();
-			void shoot() override;
+			Weapon_spraygun(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_spycam : public Weapon {
 		public:
-			Weapon_spycam();
-			void shoot() override;
+			Weapon_spycam(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
-	class Weapon_station : public Weapon {
+	class Weapon_stationmaker : public Weapon {
 		public:
 			Weapon weapon;
-			Weapon_station();
-			void shoot() override;
+			Weapon_stationmaker(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_stinger : public Weapon {
 		public:
-			Weapon_stinger();
-			void shoot() override;
+			Weapon_stinger(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
+	};
+
+	class Weapon_stopper : public Weapon {
+		public:
+			Weapon_stopper(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_tangler : public Weapon {
 		public:
-			Weapon_tangler();
-			void shoot() override;
+			Weapon_tangler(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_teleport : public Weapon {
 		public:
-			Weapon_teleport();
-			void shoot() override;
+			Weapon_teleport(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_termite : public Weapon {
 		public:
-			Weapon_termite();
-			void shoot() override;
+			Weapon_termite(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_torch : public Weapon {
 		public:
-			Weapon_torch();
-			void shoot() override;
+			Weapon_torch(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_torpedo : public Weapon {
 		public:
-			Weapon_torpedo();
-			void shoot() override;
+			Weapon_torpedo(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_tracer : public Weapon {
 		// TODO: different weapons have different trajectories
 		public:
-			Weapon_tracer();
-			void shoot() override;
+			Weapon_tracer(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_tractorbeam : public Weapon {
 		public:
-			Weapon_tractorbeam();
-			void shoot() override;
+			Weapon_tractorbeam(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_trajectories : public Weapon {
 		public:
-			Weapon_trajectories();
-			void shoot() override;
+			Weapon_trajectories(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_turbo : public Weapon {
 		public:
-			Weapon_turbo();
-			void shoot() override;
+			Weapon_turbo(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_watergun : public Weapon {
 		public:
-			Weapon_watergun();
-			void shoot() override;
+			Weapon_watergun(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_wormhole : public Weapon {
 		public:
-			Weapon_wormhole();
-			void shoot() override;
+			Weapon_wormhole(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
+	};
+
+	class Weapon_zapper : public Weapon {
+		public:
+			Weapon_zapper(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 	class Weapon_zoom : public Weapon {
 		public:
-			Weapon_zoom();
-			void shoot() override;
+			Weapon_zoom(Gameplay* gameplay);
+			void shoot(Point location, Vector heading, float angle, float power) override;
 	};
 
 #endif // WEAPON_HPP

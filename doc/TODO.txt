@@ -1,0 +1,52 @@
+TODO:
+- Documentation
+- Make library (sfe.dll / libsfe.so)
+- Makefile / configure script
+- Merge MinGW and UNIX projects together as targets in Code::Blocks?
+- Compatibility for various compilers/IDEs (GNU GCC/G++, Dev-C++, MS Visual Studio, Android Studio, Open Watcom)
+- When paused, don't run mainloop but sleep until event (no CPU load while paused)
+- Threading
+- Support (not mandatory) for DirectX and OpenGL/GLES routines (polygon drawing, 3D acceleration etc.)
+- Support for Android operating system
+- Support for some gaming consoles (PlayStation, Xbox etc.)
+- Render demo/game into video file
+- Separate graphics engine and control client programs
+- Video editor style demo/game tool
+- Realtime video/audio input (camera, microphone, TV receiver, video file etc.)
+- Support for augmented reality and VR goggles
+- Simplify / re-design relation between Grapher, Display and SDL
+- Support for multiple displays (like, demo running on big screen and settings panel on monitor)
+- Polar coordinate plane (angle and radius)
+- Camera
+- Vector graphics file support (.SVG)
+- Exception handling
+- Networking (TCP/IP and serial port cable)
+- Save and load state (for games) with recording and replay, rewind, fast forward
+- Separate time resolution for game states and fps (network play)
+- Command line parameters, configuration file and launcher GUI for program options
+- Enum vs. #define vs. const
+- Streaming textures
+- React to events (quit) immediately, don't wait for mainloop / screen refresh
+- Make program a screen saver (xscreensaver, MS-Windows)
+- Transition effects:
+	- fade in/out
+	- pixelize
+	- bar sweep
+	- frame sweep
+	- circle window
+	- pixel explode/implode
+	- burn away
+	- roll away like paper
+	- break to shards like a glass window
+
+FIX BUGS:
+- Memory leaks
+- Deleting some objects gives a segfault
+- FPS counter and limiter is inaccurate (milliseconds and integers)
+- SDL textures cannot clip over upper screen/window edge on ARM (tested with Orangepi Plus2 & Armbian)
+(for example, text scrollers from bottom to top stop scrolling when the upper textline reaches window's upper edge / Y cannot be lower than 0)
+
+OPTIMIZE / FINETUNE:
+- Get rid of unneccessary pointers and use them when unneccessary object copying happening
+- Check that all non-streamable files are closed after reading
+- Better font/text drawing

@@ -1,5 +1,6 @@
 /*
 TODO:
+- One vector for all goods for sale
 - Should a Shop also be a Building?
 */
 
@@ -17,11 +18,12 @@ TODO:
 
 	class Shop {
 		public:
-			std::vector<Vehicle> vehicles_available;
-			std::vector<Weapon> weapons_available;
-			std::vector<Shield> shields_available;
-			std::vector<Gadget> gadgets_available;
-			std::vector<Item> items_available;
+			std::vector<Vehicle*> vehicles;
+			std::vector<Weapon*> weapons;
+			std::vector<Shield*> shields;
+			std::vector<Gadget*> gadgets;
+			std::vector<Item*> items;
+			void randomize();
 			void list_vehicles();
 			void list_wapons();
 			void list_shields();
@@ -29,6 +31,7 @@ TODO:
 			void list_items();
 			void buy();
 			void sell();
+			bool execute();
 	};
 
 #endif // SHOP_HPP

@@ -9,19 +9,22 @@ Faucet::Faucet() {
 
 Faucet::~Faucet() {
 	// free faucet picture
-	//SDL_DestroyTexture(this->texture->sdltexture);
+	//SDL_DestroyTexture(this->texture->texture);
 }
 
 void Faucet::drip() {
+	// Make dropplet
+	// Play drip sound
 }
 
 void Faucet::plumps() {
+	// Play plumps sound
 }
 
-PubLiippari::PubLiippari() {
+PubLiippari::PubLiippari(int argc, char** argv) : Program(argc, argv) {
 	// SET PROGRAM ATTRIBUTES:
-		this->name = "Pub Liippari Screensaver";
-		this->version = "0.0002";
+		name = "Pub Liippari Screensaver";
+		version = "0.0002";
 }
 
 PubLiippari::~PubLiippari() {
@@ -29,25 +32,25 @@ PubLiippari::~PubLiippari() {
 
 bool PubLiippari::init() {
 	// SET UP DISPLAY DEVICE:
-		this->display->set_width(640);
-		this->display->set_height(480);
-		this->display->set_desiredfps(50);
-		this->display->resizable_window = false;
-		//this->display->vsync = true;
-		//this->display->mousecursor_visible = false;
-		//this->display->set_fullscreen(true);
+		display->set_width(640);
+		display->set_height(480);
+		display->set_desiredfps(50);
+		display->resizable_window = false;
+		//display->vsync = true;
+		//display->mousecursor_visible = false;
+		//display->set_fullscreen(true);
 	Program::init();
 
 	// INIT OBJECTS:
-		this->logo.sdltexture = this->display->load_texture(FILENAME_TEXTURE_LOGO);
-		this->faucet = new Faucet();
+		//logo.texture = this->display->load_texture(FILENAME_TEXTURE_LOGO);
 
 	return this->works;
 }
 
 bool PubLiippari::mainloop() {
-	while (!this->mainloop_done and this->works) {
-		this->faucet->drip();
+	while (!mainloop_done and this->works) {
+		faucet.drip();
+		faucet.plumps();
 		// check if bucket full
 		// draw faucet
 		// draw beer
@@ -56,7 +59,7 @@ bool PubLiippari::mainloop() {
 		// move and rotate drunken fish
 		// draw drunken fish
 		get_events();
-		this->display->refresh();
+		display->refresh();
 	}
 	return this->works;
 }

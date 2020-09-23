@@ -1,0 +1,67 @@
+Global:
+	F1 = gameplay
+	F2 = demoplay
+	F5 = title screen
+	F11 = fullscreen toggle (change resolution)
+	F12 = fullsreen toggle (keep desktop resolution)
+	H = help
+	P, Pause = toggle pause
+	PrintScreen = save screenshot
+
+Title screen:
+	Esc = quit program
+
+Gameplay & Demoplay:
+	PageUp = next tune
+	PageDown = previous tune
+	Home = first tune
+	End = last tune
+	Insert = restart current tune
+	Delete = random tune
+	Numpad + = zoom in
+	Numpad - = zoom out
+	Tab = toggle info/stats/grid
+	M = toggle music on/off
+	S = toggle sound on/off
+	Esc = game over (or skip delay during game over text)
+
+Gameplay:
+	Left = rotate vehicle counter clockwise, move human left
+	Right = rotate vehicle clockwise, move human right
+	Enter = human get in/out vehicle
+	Ctrl, Shift, Alt = shoot weapon 0
+	1..0 = shoot weapon 1..10
+	Space = toggle vehicle slowdown mode, human jump
+
+Joystick with 2 buttons:
+	up = accelerate
+	button 0 = shoot active weapon
+	button 1 = cycle active weapon
+	NOTE: requires keyboard Space and Enter
+
+Joystick with 3 buttons:
+	button 2 = Space
+	NOTE: requires keyboard Enter
+
+Joystick with 4 buttons:
+	button 3 = Enter
+	NOTE: this should be enough to play
+
+----------------
+
+Joystick with 5 buttons:
+	button 0 = shoot weapon 0
+	button 1 = shoot active weapon
+	button 2 = cycle active weapon
+	button 3 = Space
+	button 4 = Enter
+
+Joystick with 6 buttons:
+	button 5 = accelerate
+
+Joystick with at least 8 buttons:
+	button 6 = zoom in
+	button 7 = zoom out
+
+Joystick with at least 9 buttons:
+	button 8... = shoot weapon 1...

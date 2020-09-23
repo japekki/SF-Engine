@@ -3,9 +3,12 @@
 
 	#define FILEPATH "data/"
 
+	// Fonts:
+		#define FILENAME_FONT_LCD			FILEPATH "triple_dot_digital-7.ttf"
+
 	// Sound effects:
-		#define FILENAME_SOUND_BUMBER1		FILEPATH "bumper1.wav"
-		#define FILENAME_SOUND_BUMBER2		FILEPATH "bumper2.wav"
+		#define FILENAME_SOUND_BUMPER1		FILEPATH "bumper1.wav"
+		#define FILENAME_SOUND_BUMPER2		FILEPATH "bumper2.wav"
 		#define FILENAME_SOUND_DRAIN		FILEPATH "drain.wav"
 		#define FILENAME_SOUND_EXTRABALL	FILEPATH "extraball.wav"
 		#define FILENAME_SOUND_FIRMWARE		FILEPATH "firmware.wav"
@@ -31,9 +34,13 @@
 		#define FILENAME_SOUND_RANDOMIZER	FILEPATH "randomizer.wav"
 		#define FILENAME_SOUND_SUPERCHARGE	FILEPATH "supercharge.wav"
 		#define FILENAME_SOUND_TILT			FILEPATH "tilt.wav"
+		#define FILENAME_SOUND_TRYAGAIN		FILEPATH "tryagain.wav"
 
 	// Music:
-		#define FILENAME_MUSIC_LEVEL1		FILEPATH "level1.ogg"
+		#define FILENAME_MUSIC_LEVEL1		FILEPATH "kummitustalo.ogg"
 		#define FILENAME_MUSIC_LEVEL2		FILEPATH "level2.ogg"
+
+	// Test:
+		#define FILENAME_TABLE_LEVEL1		FILEPATH "table1.png"
 
 #endif // FILENAMES_HPP

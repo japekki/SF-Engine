@@ -20,7 +20,7 @@ TODO:
 	#include "grapher.hpp"
 
 	// Forward declarations:
-		//class Simplesprite;
+		//
 
 	class Faucet {
 		public:
@@ -33,10 +33,10 @@ TODO:
 
 	class PubLiippari : public Program {
 		public:
-			Faucet* faucet;
+			Faucet faucet;
 			Simplesprite logo;
 			std::vector<Simplesprite*> fishes;
-			PubLiippari();
+			PubLiippari(int argc, char** argv);
 			~PubLiippari();
 			bool init() override;
 			bool mainloop() override;

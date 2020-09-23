@@ -6,17 +6,31 @@
 	This one is supposed to be a pinball game.
 */
 
+/*
+TODO:
+	- LCD FONT
+*/
+
 #ifndef PINBALL_HPP
 	#define PINBALL_HPP
 
-	#include "program.hpp"
+	#include <SDL_ttf.h>
 	#include <SDL_mixer.h>
-	#include "geom.hpp"
-	#include "projectile.hpp"
+	#include "program.hpp"
+	#include "geometry.hpp"
+	#include "space.hpp"
+	#include "audio.hpp"
 
 	// Forward declarations:
+		class Gameplay;
 
-	// TODO: LCD FONT
+	class Gameblob : public Blob {
+		public:
+			Gameplay* gameplay;
+			Gameblob(Gameplay* gameplay);
+			~Gameblob();
+			void draw() = 0;
+	};
 
 	class LcdPixel {
 	};
@@ -26,21 +40,60 @@
 		// TODO: blink, scroll horizontally, scroll vertically, twinkle, transition effects
 	};
 
-	class Bumber {
+	class Bumper {
 	};
 
-	class Flipper : public Polygon {
+	class Flipper {
 	};
 
-	class Ball : public Projectile {
+	class Tube {
+	};
+
+	class Trigger {
+	};
+
+	class Launcherspring {
+	};
+
+	class Ball : public Gameblob {
+		public:
+			SDL_Texture* sdltexture;
+			Ball(Gameplay* gameplay);
+			virtual ~Ball();
+			void create_texture(uint32_t width, uint32_t height);
+			void draw();
 	};
 
 	class Player {
-		unsigned int score = 0;
-		unsigned short balls_left = 5;	// balls left to launch
+		public:
+			std::string name;
+			uint32_t score = 0;
+			uint8_t balls_left = 5;	// balls left to launch
+	};
+
+	class Highscore {
+		public:
+			char* player_name;
+			uint32_t player_score;
+			std::string filename = "highscore.dat";
+			bool load();
+			bool save();
 	};
 
 	class Level {
+		public:
+			Gameplay* gameplay;
+			std::vector<Highscore> halloffame;
+			std::vector<Flipper*> flippers;
+			std::vector<Bumper*> bumpers;
+			std::vector<Tube*> tubes;
+			std::vector<Trigger*> triggers;
+			SDL_Texture* background;
+			Launcherspring spring;
+			Level(Gameplay* gameplay);
+			~Level();
+			void execute();
+			void draw();
 		/*
 		Texts in LCD:
 			"Winners don't use drugs."
@@ -83,16 +136,27 @@
 
 	class Gameplay {
 		public:
-			std::vector<Player> players;
-			std::vector<Ball> balls_in_play;	// balls moving on screen (many balls simultaneously if in multiball mode)
-			Uint8 balls_left;					// Relaunches
+			Level* level;
+			std::vector<Player*> players;
+			std::vector<Ball*> balls_in_play;	// balls moving on screen (many balls simultaneously if in multiball mode)
+			Display* display;
+			Audio* audio;
+			Mix_Music *music_gameplay = nullptr;
+			// FONTS:
+				TTF_Font *font_lcd_huge = nullptr;
+			Space* space;
+			Gameplay(Display* display, Audio *audio);
+			~Gameplay();
 			bool gameover = false;
 			void run();
 	};
 
 	class Pinball : public Program {
 		public:
-			Pinball();
+			// FONTS:
+				//TTF_Font *font_lcd_huge = nullptr;
+			Gameplay* gameplay;
+			Pinball(int argc, char** argv);
 			~Pinball();
 			bool init() override;
 			bool mainloop() override;

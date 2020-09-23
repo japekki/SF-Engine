@@ -1,6 +1,5 @@
 #include <SDL.h>
 #include "misc.hpp"
-#include "display.hpp"
 
 #include "cavebombers.hpp"	// Program to execute
 
@@ -8,7 +7,7 @@ int main (int argc, char** argv) {
 	int exitcode = EXIT_SUCCESS;
 
 	// CREATE PROGRAM:
-		Program *program = new Cavebombers();
+		Program *program = new Cavebombers(argc, argv);
 
 	// INITIALIZATIONS
 		if (!program->init()) {

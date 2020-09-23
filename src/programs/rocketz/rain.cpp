@@ -1,8 +1,15 @@
 #include "rain.hpp"
 
+Rain::Rain(Gameplay* gameplay) {
+	this->gameplay = gameplay;
+}
+
+Rain::~Rain() {
+}
+
 void Rain::makerain() {
 	// Create new drop(s):
-		switch (this->type) {
+		switch (type) {
 			case RAIN_WATER:
 				break;
 			case RAIN_SNOW:
@@ -16,4 +23,7 @@ void Rain::makerain() {
 			case RAIN_ITEM:
 				break;
 		}
+}
+
+void Rain::execute() {
 }

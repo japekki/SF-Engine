@@ -19,12 +19,11 @@ Game modes / goals:
 	#include <vector>
 
 	class Tile {
-		// Can we wall, floor, water etc.
-		bool can_break;
+		// Can be wall, floor, water etc.
+		bool can_break = true;
 	};
 
 	class Wall : public Tile {
-		bool can_break = true;
 		unsigned char treasure;
 	};
 
@@ -33,26 +32,49 @@ Game modes / goals:
 	};
 
 	class Level {
-		Map map;
-		void generate();	// generate random map for level
+		public:
+			uint16_t width = 0;
+			uint16_t height = 0;
+			Map map;
+			void generate();	// generate random map for level
+	};
+
+	class Weapon {
+	};
+
+	class Item {
+	};
+
+	class Treasure : public Item {
+	};
+
+	class Trap {
 	};
 
 	class Player {
 		public:
 			unsigned char lives;
-			unsigned int score;
+			uint32_t score;
 			Player();
 			~Player();
 	};
 
+	class Computerplayer : public Player {
+		public:
+			void execute();
+	};
+
 	class Gameplay {
-		std::vector<Player*> players;	// 1-4 players
+		Level* level;
+		std::vector<Player> players;	// 1-4 players
+		void init();
 	};
 
 	class Cavebombers : public Program {
 		public:
-			Cavebombers();
+			Cavebombers(int argc, char** argv);
 			~Cavebombers();
+			Level level;
 			bool init() override;
 			bool mainloop() override;
 	};

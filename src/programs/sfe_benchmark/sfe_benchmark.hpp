@@ -13,29 +13,35 @@ TODO:
 - Windowed and windowless (renderer only) mode
 */
 
+/*
+TESTS:
+- Alpha enabled/disabled
+- Pixel formats
+*/
+
 #ifndef SFE_BENCHMARK_HPP
 	#define SFE_BENCHMARK_HPP
 
 	#include "program.hpp"
 
 	struct benchmark_result {
-		unsigned int loopcount;
-		unsigned int time;
+		uint32_t loopcount = 0;
+		uint32_t time = 0;
 	};
 
 	class SFE_Benchmark : public Program {
 		public:
-			SFE_Benchmark();
+			SFE_Benchmark(int argc, char** argv);
 			~SFE_Benchmark();
 			bool init() override;
 			bool mainloop() override;
-			benchmark_result measure_color(unsigned int loopcount);
-			benchmark_result measure_pixeldraw(unsigned int loopcount);
-			benchmark_result measure_linedraw(unsigned int loopcount);
-			benchmark_result measure_squaredraw(unsigned int loopcount);
-			benchmark_result measure_texturedraw(unsigned int loopcount);
-			benchmark_result measure_triangledraw(unsigned int loopcount);
-			//benchmark_result measure_effux(Uint32 loopcount);
+			benchmark_result measure_color(uint32_t loopcount);
+			benchmark_result measure_pixeldraw(uint32_t loopcount);
+			benchmark_result measure_linedraw(uint32_t loopcount);
+			benchmark_result measure_squaredraw(uint32_t loopcount);
+			benchmark_result measure_texturedraw(uint32_t loopcount);
+			benchmark_result measure_triangledraw(uint32_t loopcount);
+			//benchmark_result measure_effux(uint32_t loopcount);
 	};
 
 #endif // SFE_BENCHMARK_HPP

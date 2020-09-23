@@ -5,14 +5,18 @@
 	#include "building.hpp"
 
 	// Forward declarations:
-		//class Point;
+		class Player;
+		class Team;
 
 	class Base : public Building {
-		// Player's base
+		// Team's base
 		public:
-			Base();
+			Team* owner_team = nullptr;
+			Base(Gameplay* gameplay);
+			Base(Gameplay* gameplay, Team* owner_team);
 			~Base();
-		// TODO: Many bases or just one, should player select where to (re-)spawn?
+			void draw();
+			void get_invaded(Team* new_team);
 	};
 
 #endif // BASE_HPP

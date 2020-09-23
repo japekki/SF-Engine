@@ -27,12 +27,12 @@
 			EffuxTwister *effux_twister;
 			World* world_room;
 		public:
-			SFE_Demo();
+			SFE_Demo(int argc, char** argv);
 			~SFE_Demo();
 			bool init() override;
 			bool world_room_init();
 			bool mainloop() override;
-			std::string text_intro =
+			const std::string text_intro =
 				"SFE Demo\n"
 				"By JaPeK";
 	};

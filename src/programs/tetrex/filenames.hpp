@@ -4,7 +4,7 @@
 	#define FILEPATH "data/"
 
 	// Data:
-		#define FILENAME_HIGHSCORES FILEPATH "highscores.txt"
+		#define FILENAME_HIGHSCORES			FILEPATH "highscores.txt"
 
 	// Sound effects:
 		#define FILENAME_SOUND_BLOCKDOWN	FILEPATH "blockdown.wav"
@@ -16,7 +16,7 @@
 		#define FILENAME_SOUND_PAUSE		FILEPATH "pause.wav"
 
 	// Music:
-		#define FILENAME_MUSIC_GAMEPLAY	FILEPATH "gameplay.xm"
-		#define FILENAME_MUSIC_TITLE	FILEPATH "title.xm"
+		#define FILENAME_MUSIC_GAMEPLAY		FILEPATH "gameplay.xm"
+		#define FILENAME_MUSIC_TITLE		FILEPATH "title.xm"
 
 #endif // FILENAMES_HPP
